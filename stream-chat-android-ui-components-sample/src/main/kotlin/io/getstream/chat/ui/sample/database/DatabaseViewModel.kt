@@ -3,11 +3,17 @@ package io.getstream.chat.ui.sample.database
 import android.app.Application
 import android.database.Cursor
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.CursorUtil
+import io.getstream.chat.android.client.call.await
+import io.getstream.chat.android.client.logger.ChatLogger
+import io.getstream.chat.android.client.models.Channel
+import io.getstream.chat.android.client.models.UserEntity
+import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.client.utils.SyncStatus
+import io.getstream.chat.android.offline.extensions.isPermanent
 import io.getstream.chat.android.offline.repository.database.ChatDatabase
 import io.getstream.chat.android.offline.repository.database.converter.DateConverter
 import io.getstream.chat.android.offline.repository.database.converter.ExtraDataConverter
@@ -18,12 +24,14 @@ import io.getstream.chat.android.offline.repository.database.converter.SyncStatu
 import io.getstream.chat.android.offline.repository.domain.channel.ChannelEntity
 import io.getstream.chat.android.offline.repository.domain.channel.member.MemberEntity
 import io.getstream.chat.android.offline.repository.domain.channel.userread.ChannelUserReadEntity
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Date
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
 
 private const val TAG = "DatabaseViewModel"
@@ -35,26 +43,27 @@ class DatabaseViewModelFactory(
         return DatabaseViewModel(application) as T
     }
 }
+enum class Database {
+    TEST_1, TEST_2
+}
 
 class DatabaseViewModel(
     private val application: Application,
 ) : ViewModel() {
 
 
-    private val database by lazy { ChatDatabase.getDatabase(application, userId = "test") }
+    private val database1 by lazy { ChatDatabase.getDatabase(application, userId = "test1") }
+    private val database2 by lazy { ChatDatabase.getDatabase(application, userId = "test2") }
     private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
     private val __dateConverter = DateConverter()
-
     private val __mapConverter = MapConverter()
-
     private val __listConverter = ListConverter()
-
     private val __extraDataConverter = ExtraDataConverter()
-
     private val __syncStatusConverter = SyncStatusConverter()
-
     private val __setConverter = SetConverter()
+
+    private fun Database.select() = if (this == Database.TEST_1) database1 else database2
 
     private fun generateString(length: Int): String {
         return (1..length)
@@ -63,67 +72,128 @@ class DatabaseViewModel(
             .joinToString("")
     }
 
-    fun onDeleteClick() {
-        viewModelScope.launch {
+    fun onOpen(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
             val traceId = Random.nextInt(100)
-            logD("[onDeleteClick] no args ($traceId)")
-            withContext(Dispatchers.IO) {
-                logV("[onDeleteClick] switched to IO ($traceId)")
-                val count = database.channelStateDao().deleteAll()
-                logV("[onDeleteClick] deleted($traceId): $count")
-            }
-            logV("[onDeleteClick] completed($traceId)")
+            logD("[onOpen-$traceId] no args")
+            val database = type.select()
+
         }
     }
 
-    fun onGenerateClick() {
-        viewModelScope.launch {
+    fun onClose(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
             val traceId = Random.nextInt(100)
-            logD("[onGenerateClick] no args ($traceId)")
-            withContext(Dispatchers.IO) {
-                logV("[onGenerateClick] switched to IO ($traceId)")
-                val channels = generateChannels(count = 500, memberCount = 100)
-                logV("[onGenerateClick] generated($traceId)")
-                database.channelStateDao().insertMany(channels)
-                logV("[onGenerateClick] inserted($traceId): ${channels.size}")
-            }
-            logV("[onGenerateClick] completed($traceId)")
+            logD("[onClose-$traceId] no args")
+            val database = type.select()
+            val count = database.close()
+            logV("[onClose-$traceId] deleted: $count")
         }
     }
 
-    fun onReadClick() {
-        viewModelScope.launch {
+    fun onDeleteClick(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
             val traceId = Random.nextInt(100)
-            logD("[onReadClick] no args ($traceId)")
-            withContext(Dispatchers.IO) {
-                logV("[onReadClick] switched to IO ($traceId)")
-                val result = database.channelStateDao().selectSyncNeeded(SyncStatus.SYNC_NEEDED)
-                logV("[onReadClick] received($traceId): ${result.size}")
-            }
-            logV("[onReadClick] completed($traceId)")
+            logD("[onDeleteClick-$traceId] no args")
+            val database = type.select()
+            val count = database.channelStateDao().deleteAll()
+            logV("[onDeleteClick-$traceId] deleted: $count")
         }
     }
 
-    fun onReadManyClick() {
-        viewModelScope.launch {
+    fun onGenerateClick(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
             val traceId = Random.nextInt(100)
-            logD("[onReadClick] no args ($traceId)")
+            logD("[onGenerateClick-$traceId] no args")
+            val channels = generateChannels(count = 500, memberCount = 100)
+            logV("[onGenerateClick-$traceId] generated")
+            val database = type.select()
+            database.channelStateDao().insertMany(channels)
+            logV("[onGenerateClick-$traceId] inserted: ${channels.size}")
+        }
+    }
+
+    fun onReadClick(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val traceId = Random.nextInt(100)
+            logD("[onReadClick-$traceId] no args")
+            val database = type.select()
+            val result = database.channelStateDao().selectSyncNeeded(SyncStatus.SYNC_NEEDED)
+            logV("[onReadClick-$traceId] completed: ${result.size}")
+        }
+    }
+
+    fun onReadCidsClick(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val traceId = Random.nextInt(100)
+            logD("[onReadCidsClick-$traceId] no args")
+            val database = type.select()
+            val result = database.channelStateDao().selectCidsSyncsNeeded(SyncStatus.SYNC_NEEDED)
+            logV("[onReadCidsClick-$traceId] completed: ${result.size}")
+        }
+    }
+
+    fun onReadManyClick(type: Database) {
+        viewModelScope.launch(Dispatchers.IO) {
+            retryChannels(type)
+
+            /*
+            val traceId = Random.nextInt(100)
+            logD("[onReadManyClick-$traceId] no args")
             val result = (0..10_000).map { index ->
-                async(Dispatchers.IO) {
-                    logV("[onReadClick] switched to IO ($traceId-$index)")
-                    database.query("SELECT * FROM stream_chat_channel_state WHERE stream_chat_channel_state.syncStatus IN (-1)", null).also { cursor ->
-                        logV("[onReadClick] received ($traceId-$index): ${cursor.count}")
+                launch(Dispatchers.IO) {
+                    logV("[onReadManyClick-$traceId:$index] switched to IO")
+                    val database = type.select()
+                    database.query("SELECT * FROM stream_chat_channel_state WHERE stream_chat_channel_state.syncStatus IN (-1)", null).also {
+                        CursorLeakObject.cursors["$index"] = it
+                        val cursor = TestCursor(it)
+                        logV("[onReadManyClick--$traceId:$index] received: ${cursor.count}")
                         simulateChannelDaoImpl(cursor)
-                        logV("[onReadClick] simulation finished ($traceId-$index)")
+                        logV("[onReadManyClick-$traceId:$index] simulation finished")
                     }
-                    /*
-                    database.channelStateDao().selectSyncNeeded(SyncStatus.SYNC_NEEDED).also {
-                        logV("[onReadClick] received($traceId-$index): ${it.size}")
+                    /*database.channelStateDao().selectSyncNeeded(SyncStatus.SYNC_NEEDED).also {
+                        logV("[onReadClick-$traceId:$index] received: ${it.size}")
+                    }*/
+                }
+            }
+            logV("[onReadManyClick] completed($traceId): ${result.size}")
+             */
+        }
+    }
+
+    public suspend fun retryChannels(type: Database) {
+        val database = type.select()
+        logD("[retryChannels] no args")
+        val channelLimit = 50
+        while (true) {
+            val channels = database.channelStateDao().selectSyncNeeded(limit = channelLimit)
+            logV("[retryChannels] found: ${channels.size}")
+            if (channels.isEmpty()) {
+                logW("[retryChannels] completed: ${channels.size}")
+                return
+            }
+            val results = channels.map { channel ->
+                viewModelScope.async(Dispatchers.IO) {
+                    channel to delay(200L).let {
+                        Result.success(channel)
                     }
-                    */
                 }
             }.awaitAll()
-            logV("[onReadClick] completed($traceId): ${result.size}")
+            logV("[retryChannels] sent to BE: ${results.size}")
+
+            val toInsert = results.map { (channel, result) ->
+                if (result.isSuccess) {
+                    channel.copy(syncStatus = SyncStatus.COMPLETED)
+                } else if (result.isError && result.error().isPermanent()) {
+                    channel.copy(syncStatus = SyncStatus.FAILED_PERMANENTLY)
+                } else channel
+            }
+            database.channelStateDao().insertMany(toInsert)
+            logV("[retryChannels] inserted: ${channels.size}")
+            if (channels.size < channelLimit) {
+                logW("[retryChannels] completed: ${channels.size}")
+                return
+            }
         }
     }
 
@@ -225,29 +295,34 @@ class DatabaseViewModel(
         Log.v(TAG, "($thread) $message")
     }
 
+    private fun logW(message: String) {
+        val thread = Thread.currentThread().run { "${id}:${name}" }
+        Log.w(TAG, "($thread) $message")
+    }
+
     private fun simulateChannelDaoImpl(_cursor: Cursor) {
-        val _cursorIndexOfType = CursorUtil.getColumnIndexOrThrow(_cursor, "type")
-        val _cursorIndexOfChannelId = CursorUtil.getColumnIndexOrThrow(_cursor, "channelId")
-        val _cursorIndexOfCooldown = CursorUtil.getColumnIndexOrThrow(_cursor, "cooldown")
-        val _cursorIndexOfCreatedByUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "createdByUserId")
-        val _cursorIndexOfFrozen = CursorUtil.getColumnIndexOrThrow(_cursor, "frozen")
-        val _cursorIndexOfHidden = CursorUtil.getColumnIndexOrThrow(_cursor, "hidden")
-        val _cursorIndexOfHideMessagesBefore = CursorUtil.getColumnIndexOrThrow(_cursor, "hideMessagesBefore")
-        val _cursorIndexOfMembers = CursorUtil.getColumnIndexOrThrow(_cursor, "members")
-        val _cursorIndexOfMemberCount = CursorUtil.getColumnIndexOrThrow(_cursor, "memberCount")
-        val _cursorIndexOfWatcherIds = CursorUtil.getColumnIndexOrThrow(_cursor, "watcherIds")
-        val _cursorIndexOfWatcherCount = CursorUtil.getColumnIndexOrThrow(_cursor, "watcherCount")
-        val _cursorIndexOfReads = CursorUtil.getColumnIndexOrThrow(_cursor, "reads")
-        val _cursorIndexOfLastMessageAt = CursorUtil.getColumnIndexOrThrow(_cursor, "lastMessageAt")
-        val _cursorIndexOfLastMessageId = CursorUtil.getColumnIndexOrThrow(_cursor, "lastMessageId")
-        val _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt")
-        val _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt")
-        val _cursorIndexOfDeletedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "deletedAt")
-        val _cursorIndexOfExtraData = CursorUtil.getColumnIndexOrThrow(_cursor, "extraData")
-        val _cursorIndexOfSyncStatus = CursorUtil.getColumnIndexOrThrow(_cursor, "syncStatus")
-        val _cursorIndexOfTeam = CursorUtil.getColumnIndexOrThrow(_cursor, "team")
-        val _cursorIndexOfOwnCapabilities = CursorUtil.getColumnIndexOrThrow(_cursor, "ownCapabilities")
-        val _cursorIndexOfCid = CursorUtil.getColumnIndexOrThrow(_cursor, "cid")
+        val _cursorIndexOfType = _cursor.getColumnIndexOrThrow("type")
+        val _cursorIndexOfChannelId = _cursor.getColumnIndexOrThrow("channelId")
+        val _cursorIndexOfCooldown = _cursor.getColumnIndexOrThrow("cooldown")
+        val _cursorIndexOfCreatedByUserId = _cursor.getColumnIndexOrThrow("createdByUserId")
+        val _cursorIndexOfFrozen = _cursor.getColumnIndexOrThrow("frozen")
+        val _cursorIndexOfHidden = _cursor.getColumnIndexOrThrow("hidden")
+        val _cursorIndexOfHideMessagesBefore = _cursor.getColumnIndexOrThrow("hideMessagesBefore")
+        val _cursorIndexOfMembers = _cursor.getColumnIndexOrThrow("members")
+        val _cursorIndexOfMemberCount = _cursor.getColumnIndexOrThrow("memberCount")
+        val _cursorIndexOfWatcherIds = _cursor.getColumnIndexOrThrow("watcherIds")
+        val _cursorIndexOfWatcherCount = _cursor.getColumnIndexOrThrow("watcherCount")
+        val _cursorIndexOfReads = _cursor.getColumnIndexOrThrow("reads")
+        val _cursorIndexOfLastMessageAt = _cursor.getColumnIndexOrThrow("lastMessageAt")
+        val _cursorIndexOfLastMessageId = _cursor.getColumnIndexOrThrow("lastMessageId")
+        val _cursorIndexOfCreatedAt = _cursor.getColumnIndexOrThrow("createdAt")
+        val _cursorIndexOfUpdatedAt = _cursor.getColumnIndexOrThrow("updatedAt")
+        val _cursorIndexOfDeletedAt = _cursor.getColumnIndexOrThrow("deletedAt")
+        val _cursorIndexOfExtraData = _cursor.getColumnIndexOrThrow("extraData")
+        val _cursorIndexOfSyncStatus = _cursor.getColumnIndexOrThrow("syncStatus")
+        val _cursorIndexOfTeam = _cursor.getColumnIndexOrThrow("team")
+        val _cursorIndexOfOwnCapabilities = _cursor.getColumnIndexOrThrow("ownCapabilities")
+        val _cursorIndexOfCid = _cursor.getColumnIndexOrThrow("cid")
         val _result: ArrayList<ChannelEntity> = ArrayList(_cursor.count)
 
         while (_cursor.moveToNext()) {
@@ -415,4 +490,8 @@ class DatabaseViewModel(
             _result.add(_item)
         }
     }
+}
+
+object CursorLeakObject {
+    val cursors = ConcurrentHashMap<String, Cursor>()
 }

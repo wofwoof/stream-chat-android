@@ -19,20 +19,32 @@ class DatabaseActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.openBtn.setOnClickListener {
+            viewModel.onOpen(Database.TEST_1)
+        }
+
+        binding.closeBtn.setOnClickListener {
+            viewModel.onClose(Database.TEST_1)
+        }
+
         binding.deleteBtn.setOnClickListener {
-            viewModel.onDeleteClick()
+            viewModel.onDeleteClick(Database.TEST_1)
         }
 
         binding.generateBtn.setOnClickListener {
-            viewModel.onGenerateClick()
+            viewModel.onGenerateClick(Database.TEST_1)
         }
 
         binding.readBtn.setOnClickListener {
-            viewModel.onReadClick()
+            viewModel.onReadClick(Database.TEST_1)
+        }
+
+        binding.readCidsBtn.setOnClickListener {
+            viewModel.onReadCidsClick(Database.TEST_1)
         }
 
         binding.readManyBtn.setOnClickListener {
-            viewModel.onReadManyClick()
+            viewModel.onReadManyClick(Database.TEST_1)
         }
 
     }

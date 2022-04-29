@@ -51,7 +51,6 @@ import io.getstream.chat.android.offline.extensions.applyPagination
 import io.getstream.chat.android.offline.extensions.cancelMessage
 import io.getstream.chat.android.offline.extensions.createChannel
 import io.getstream.chat.android.offline.extensions.isPermanent
-import io.getstream.chat.android.offline.extensions.loadMessageById
 import io.getstream.chat.android.offline.extensions.loadOlderMessages
 import io.getstream.chat.android.offline.extensions.sendGiphy
 import io.getstream.chat.android.offline.extensions.shuffleGiphy
@@ -96,6 +95,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -693,26 +693,40 @@ internal class ChatDomainImpl internal constructor(
     }
 
     @VisibleForTesting
-    internal suspend fun retryChannels(): List<Channel> {
-        return repos.selectChannelsSyncNeeded().onEach { channel ->
-            val result = client.createChannel(
-                channel.type,
-                channel.id,
-                channel.members.map(UserEntity::getUserId),
-                channel.extraData
-            ).await()
-
-            when {
-                result.isSuccess -> {
-                    channel.syncStatus = SyncStatus.COMPLETED
-                    repos.insertChannel(channel)
+    public suspend fun retryChannels(): List<Channel> {
+        val tag = "ChatDomain"
+        ChatLogger.instance.logD(tag, "[retryChannels] no args")
+        val channelLimit = 50
+        val result: MutableList<Channel>? = null
+        while (true) {
+            val channels = repos.selectChannelsSyncNeeded(channelLimit)
+            ChatLogger.instance.logD(tag, "[retryChannels] found: ${channels.size}")
+            if (channels.isEmpty()) return emptyList()
+            val results = channels.map { channel ->
+                scope.async {
+                    channel to client.createChannel(
+                        channel.type,
+                        channel.id,
+                        channel.members.map(UserEntity::getUserId),
+                        channel.extraData
+                    ).await()
                 }
-                result.isError && result.error().isPermanent() -> {
+            }.awaitAll()
+
+            results.forEach { (channel, result) ->
+                if (result.isSuccess) {
+                    channel.syncStatus = SyncStatus.COMPLETED
+                } else if (result.isError && result.error().isPermanent()) {
                     channel.syncStatus = SyncStatus.FAILED_PERMANENTLY
-                    repos.insertChannel(channel)
                 }
             }
+            repos.insertChannels(channels)
+            val out = result ?: arrayListOf()
+            out.addAll(channels)
+            if (channels.size < channelLimit) break
         }
+        ChatLogger.instance.logV(tag, "[retryChannels] updated: ${result?.size}")
+        return result ?: emptyList()
     }
 
     @VisibleForTesting

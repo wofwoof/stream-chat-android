@@ -20,11 +20,24 @@ public interface ChannelDao {
     @Query("SELECT cid FROM stream_chat_channel_state")
     public suspend fun selectAllCids(): List<String>
 
-    @Query(
-        "SELECT * FROM stream_chat_channel_state " +
-            "WHERE stream_chat_channel_state.syncStatus IN (:syncStatus)"
-    )
-    public suspend fun selectSyncNeeded(syncStatus: SyncStatus = SyncStatus.SYNC_NEEDED): List<ChannelEntity>
+    @Query("""
+            SELECT cid FROM stream_chat_channel_state 
+                WHERE syncStatus = :syncStatus ORDER BY syncStatus ASC LIMIT :limit
+        """)
+    public suspend fun selectCidsSyncsNeeded(
+        syncStatus: SyncStatus = SyncStatus.SYNC_NEEDED,
+        limit: Int = -1,
+    ): List<String>
+
+    @Transaction
+    @Query("""
+            SELECT * FROM stream_chat_channel_state 
+                WHERE syncStatus = :syncStatus ORDER BY syncStatus ASC LIMIT :limit
+        """)
+    public suspend fun selectSyncNeeded(
+        syncStatus: SyncStatus = SyncStatus.SYNC_NEEDED,
+        limit: Int = -1,
+    ): List<ChannelEntity>
 
     @Query(
         "SELECT * FROM stream_chat_channel_state " +

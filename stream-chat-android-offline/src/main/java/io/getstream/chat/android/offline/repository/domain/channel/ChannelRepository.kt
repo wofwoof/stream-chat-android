@@ -33,7 +33,7 @@ internal interface ChannelRepository {
      * @return A list of channels found in repository.
      */
     suspend fun selectChannels(channelCIDs: List<String>, forceCache: Boolean = false): List<Channel>
-    suspend fun selectChannelsSyncNeeded(): List<Channel>
+    suspend fun selectChannelsSyncNeeded(limit: Int = -1): List<Channel>
     suspend fun setChannelDeletedAt(cid: String, deletedAt: Date)
     suspend fun setHiddenForChannel(cid: String, hidden: Boolean, hideMessagesBefore: Date)
     suspend fun setHiddenForChannel(cid: String, hidden: Boolean)
@@ -95,8 +95,8 @@ internal class ChannelRepositoryImpl(
         return channelDao.select(channelCIDs).map { it.toModel(getUser, getMessage) }.also(::updateCache)
     }
 
-    override suspend fun selectChannelsSyncNeeded(): List<Channel> {
-        return channelDao.selectSyncNeeded().map { it.toModel(getUser, getMessage) }
+    override suspend fun selectChannelsSyncNeeded(limit: Int): List<Channel> {
+        return channelDao.selectSyncNeeded(limit = limit).map { it.toModel(getUser, getMessage) }
     }
 
     override suspend fun setChannelDeletedAt(cid: String, deletedAt: Date) {

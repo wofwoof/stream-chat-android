@@ -32,6 +32,10 @@ internal class ChatSilentLogger : ChatLogger {
         // silent
     }
 
+    override fun logV(tag: Any, message: String) {
+        // silent
+    }
+
     override fun logW(tag: Any, message: String) {
         // silent
     }
