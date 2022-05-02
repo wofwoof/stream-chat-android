@@ -1,0 +1,101 @@
+# Performance
+
+There are many important aspects to what makes a certain technology a good candidate for your project, and performance
+is one of them.
+Having that in mind we tested the building blocks of our SDK using
+Google's [Macrobenchmark](https://developer.android.com/studio/profile/macrobenchmark-overview).
+
+The tests run on fully functional chat applications connected to real life servers and are indicative of real world
+performance. Each one is run multiple times in order to get more reliable metrics.
+
+## Device information
+
+Performance benchmarks should always be run on physical phones in order to measure real world performance.
+
+| Device         | API             |
+|----------------|-----------------|
+| Google Pixel 5 | 31 (Android 12) |
+
+## Startup Time
+
+These tests measure startup time for both our SDKs. In the following cases, by the time the reported time has elapsed
+the app has connected logged the user in, fetched a set of channels and displayed them on-screen.
+
+# Cold Startup
+
+This type of startup means that the app's process was not alive, and has to be started. Once the process has been
+started the app will be launched and the Activity created.
+
+| UI SDK        | Number of Runs | Minimum Time | Median Time | Maximum Time |
+|---------------|----------------|--------------|-------------|--------------|
+| UI Components | 5              |--------------|-------------|--------------|
+| Compose       | 5              |--------------|-------------|--------------|
+
+# Warm Startup
+
+In this scenario the app's process is alive and a new Activity will be created and displayed in it.
+
+| UI SDK        | Number of Runs | Minimum Time | Median Time | Maximum Time |
+|---------------|----------------|--------------|-------------|--------------|
+| UI Components | 5              |--------------|-------------|--------------|
+| Compose       | 5              |--------------|-------------|--------------|
+
+# Hot Startup
+
+Both the process and Activity exist from previous launch and are brought into foreground
+
+| UI SDK        | Number of Runs | Minimum Time | Median Time | Maximum Time |
+|---------------|----------------|--------------|-------------|--------------|
+| UI Components | 5              |--------------|-------------|--------------|
+| Compose       | 5              |--------------|-------------|--------------|
+
+## Channel List Scrolling UI Performance
+
+In this scenario, the channel list is flung to the end and then back to the beginning. Flinging is the act of a brief
+but a very fast scrolling movement and is meant to torture test the respective channel list components.
+Because the movement is so fast, it is effectively a torture test for scrollable components.
+
+All the channels in this test have titles, avatars, preview messages, timestamps and in certain cases unread messages
+counts.
+
+:::note
+A guide on how to read the following reports can be found [here] in the official Macrobenchmark documentation.
+:::
+
+#Compose
+
+| Frame Timing Metric | P50 | P90 | 95 | 99  |
+|---------------------|-----|-----|-----|-----|
+| frameDurationCpuMs | | | |     |
+| frameOverrunMs | | | |     |
+
+#Compose
+
+| Frame Timing Metric | P50 | P90 | 95 | 99  |
+|---------------------|-----|-----|-----|-----|
+| frameDurationCpuMs | | | |     |
+| frameOverrunMs | | | |     |
+
+## Message List Scrolling UI Performance
+
+This test uses the same act of flinging the list to the end and the back to the beginning in order to torture test it.
+
+The channels contain mixed types of messages, containing plain text messages, links, images and groups of images.
+
+:::note
+A guide on how to read the following reports can be found [here] in the official Macrobenchmark documentation.
+:::
+
+#Compose
+
+| Frame Timing Metric | P50 | P90 | 95 | 99  |
+|---------------------|-----|-----|-----|-----|
+| frameDurationCpuMs | | | |     |
+| frameOverrunMs | | | |     |
+
+#Compose
+
+| Frame Timing Metric | P50 | P90 | 95 | 99  |
+|---------------------|-----|-----|-----|-----|
+| frameDurationCpuMs | | | |     |
+| frameOverrunMs | | | |     |
