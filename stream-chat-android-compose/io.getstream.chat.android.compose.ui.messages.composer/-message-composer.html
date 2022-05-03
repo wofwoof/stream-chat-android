@@ -14,7 +14,7 @@
       <div id="main">
         <script type="text/javascript" src="../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
 
-        <div class="main-content" id="content" pageids="stream-chat-android-compose::io.getstream.chat.android.compose.ui.messages.composer//MessageComposer/#io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel#androidx.compose.ui.Modifier#kotlin.Function1[io.getstream.chat.android.client.models.Message,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.Attachment,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.User,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.Command,kotlin.Unit]#kotlin.Function1[kotlin.Boolean,kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.ColumnScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.ColumnScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function1[kotlin.collections.List[io.getstream.chat.android.client.models.User],kotlin.Unit]#kotlin.Function1[kotlin.collections.List[io.getstream.chat.android.client.models.Command],kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.RowScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.RowScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]/PointingToDeclaration//29477497">
+        <div class="main-content" id="content" pageids="stream-chat-android-compose::io.getstream.chat.android.compose.ui.messages.composer//MessageComposer/#io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel#androidx.compose.ui.Modifier#kotlin.Function1[io.getstream.chat.android.client.models.Message,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.Attachment,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.User,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.client.models.Command,kotlin.Unit]#kotlin.Function1[kotlin.Boolean,kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.ColumnScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.ColumnScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function1[kotlin.collections.List[io.getstream.chat.android.client.models.User],kotlin.Unit]#kotlin.Function1[kotlin.collections.List[io.getstream.chat.android.client.models.Command],kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.RowScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function2[androidx.compose.foundation.layout.RowScope,io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]#kotlin.Function1[io.getstream.chat.android.common.composer.MessageComposerState,kotlin.Unit]/PointingToDeclaration//29477497">
           <div class="navigation-wrapper" id="navigation-wrapper">
             <div class="breadcrumbs"><a href="../index.html">stream-chat-android-compose</a>/<a href="index.html">io.getstream.chat.android.compose.ui.messages.composer</a>/<a href="-message-composer.html">MessageComposer</a></div>
             <div class="pull-right d-flex">
@@ -51,14 +51,15 @@
         DefaultComposerIntegrations(
             messageInputState = it,
             onAttachmentsClick = onAttachmentsClick,
-            onCommandsClick = onCommandsClick
+            onCommandsClick = onCommandsClick,
+            ownCapabilities = it.ownCapabilities
         )
-    }, label: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span>() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { DefaultComposerLabel() }, input: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span><span data-unresolved-link="androidx.compose.foundation.layout/RowScope///PointingToDeclaration/">RowScope</span>.(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
+    }, label: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span>(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { DefaultComposerLabel(it.ownCapabilities) }, input: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span><span data-unresolved-link="androidx.compose.foundation.layout/RowScope///PointingToDeclaration/">RowScope</span>.(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
         DefaultComposerInputContent(
             messageComposerState = it,
             onValueChange = onValueChange,
             onAttachmentRemoved = onAttachmentRemoved,
-            label = label
+            label = label,
         )
     }, trailingContent: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span>(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
         DefaultMessageComposerTrailingContent(
@@ -66,6 +67,7 @@
             coolDownTime = it.coolDownTime,
             validationErrors = it.validationErrors,
             attachments = it.attachments,
+            ownCapabilities = it.ownCapabilities,
             onSendMessage = { input, attachments -&gt;
                 val message = viewModel.buildNewMessage(input, attachments)
 
@@ -102,9 +104,10 @@
         DefaultComposerIntegrations(
             messageInputState = it,
             onAttachmentsClick = onAttachmentsClick,
-            onCommandsClick = onCommandsClick
+            onCommandsClick = onCommandsClick,
+            ownCapabilities = messageComposerState.ownCapabilities
         )
-    }, label: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span>() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { DefaultComposerLabel() }, input: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span><span data-unresolved-link="androidx.compose.foundation.layout/RowScope///PointingToDeclaration/">RowScope</span>.(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
+    }, label: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span>(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { DefaultComposerLabel(messageComposerState.ownCapabilities) }, input: <span>@<span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/">Composable</span>()&nbsp;</span><span data-unresolved-link="androidx.compose.foundation.layout/RowScope///PointingToDeclaration/">RowScope</span>.(<a href="../../stream-chat-android-ui-common/io.getstream.chat.android.common.composer/-message-composer-state/index.html">MessageComposerState</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
         DefaultComposerInputContent(
             messageComposerState = messageComposerState,
             onValueChange = onValueChange,
@@ -117,7 +120,8 @@
             coolDownTime = it.coolDownTime,
             validationErrors = it.validationErrors,
             attachments = it.attachments,
-            onSendMessage = onSendMessage
+            onSendMessage = onSendMessage,
+            ownCapabilities = messageComposerState.ownCapabilities
         )
     })<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>

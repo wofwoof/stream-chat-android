@@ -24,8 +24,13 @@ io.getstream.chat.android.client.models
 io.getstream.chat.android.client.notifications
 io.getstream.chat.android.client.notifications.handler
 io.getstream.chat.android.client.parser2.adapters
+io.getstream.chat.android.client.persistance.repository
+io.getstream.chat.android.client.persistance.repository.factory
+io.getstream.chat.android.client.query
+io.getstream.chat.android.client.query.pagination
 io.getstream.chat.android.client.setup
 io.getstream.chat.android.client.socket
+io.getstream.chat.android.client.sync
 io.getstream.chat.android.client.token
 io.getstream.chat.android.client.uploader
 io.getstream.chat.android.client.user
