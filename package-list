@@ -199,3 +199,12 @@ io.getstream.chat.android.ui.typing
 io.getstream.chat.android.ui.typing.viewmodel
 io.getstream.chat.android.ui.typing.viewmodel.factory
 io.getstream.chat.android.ui.utils
+module:stream-logger
+io.getstream.logging
+io.getstream.logging.helper
+io.getstream.logging.kotlin
+module:stream-logger-android
+io.getstream.logging.android
+io.getstream.logging.android.file
+module:stream-logger-file
+io.getstream.logging.file
