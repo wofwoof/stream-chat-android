@@ -67,6 +67,7 @@ import io.getstream.chat.android.client.api2.model.response.ChannelResponse
 import io.getstream.chat.android.client.api2.model.response.TranslateMessageRequest
 import io.getstream.chat.android.client.call.Call
 import io.getstream.chat.android.client.call.CoroutineCall
+import io.getstream.chat.android.client.call.RetrofitCall
 import io.getstream.chat.android.client.call.map
 import io.getstream.chat.android.client.call.toUnitCall
 import io.getstream.chat.android.client.errors.ChatError
@@ -90,6 +91,7 @@ import io.getstream.chat.android.client.parser.toMap
 import io.getstream.chat.android.client.uploader.FileUploader
 import io.getstream.chat.android.client.utils.ProgressCallback
 import io.getstream.chat.android.client.utils.Result
+import io.getstream.logging.StreamLog
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.util.Date
@@ -821,7 +823,27 @@ constructor(
         ).map { response -> response.channels.map(this::flattenChannel) }
     }
 
+    private class QueryChannelCall(
+        private val delegate: RetrofitCall<ChannelResponse>
+    ) : Call<ChannelResponse> {
+        override fun execute(): Result<ChannelResponse> {
+            StreamLog.d("QueryChannelCall") { "[execute] this: $this" }
+            return delegate.execute()
+        }
+
+        override fun enqueue(callback: Call.Callback<ChannelResponse>) {
+            StreamLog.d("QueryChannelCall") { "[enqueue] this: $this" }
+            delegate.enqueue()
+        }
+
+        override fun cancel() {
+            StreamLog.d("QueryChannelCall") { "[cancel] this: $this" }
+            delegate.cancel()
+        }
+    }
+
     override fun queryChannel(channelType: String, channelId: String, query: QueryChannelRequest): Call<Channel> {
+        StreamLog.d("MoshiChatApi") { "[queryChannel] no args" }
         val request = io.getstream.chat.android.client.api2.model.requests.QueryChannelRequest(
             state = query.state,
             watch = query.watch,
@@ -833,18 +855,18 @@ constructor(
         )
 
         return if (channelId.isEmpty()) {
-            channelApi.queryChannel(
+            QueryChannelCall(channelApi.queryChannel(
                 channelType = channelType,
                 connectionId = connectionId,
                 request = request,
-            )
+            ))
         } else {
-            channelApi.queryChannel(
+            QueryChannelCall(channelApi.queryChannel(
                 channelType = channelType,
                 channelId = channelId,
                 connectionId = connectionId,
                 request = request,
-            )
+            ))
         }.map(::flattenChannel)
     }
 

@@ -62,6 +62,9 @@ object ChatHelper {
             .notifications(notificationConfig, notificationHandler)
             .withPlugin(offlinePlugin)
             .logLevel(logLevel)
+            .apply {
+                apiCacheCallTimeout(300)
+            }
             .build()
     }
 

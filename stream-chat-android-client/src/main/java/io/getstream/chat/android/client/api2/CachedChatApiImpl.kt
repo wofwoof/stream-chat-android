@@ -38,6 +38,7 @@ import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Member
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.Reaction
+import io.getstream.logging.StreamLog
 import java.util.Date
 
 private const val DEFAULT_CACHE_MILLIS = 300
@@ -105,6 +106,7 @@ internal class CachedChatApiImpl(
         forceRefresh: Boolean,
     ): Call<Channel> {
         val hash = QueryChannelsHash(channelType, channelId, query).hashCode()
+        StreamLog.d("CachedChatApi") { "[queryChannel] hash: $hash" }
         return callCacheCoordinator.cachedCall(hash, forceRefresh, queryChannel(channelType, channelId, query))
     }
 

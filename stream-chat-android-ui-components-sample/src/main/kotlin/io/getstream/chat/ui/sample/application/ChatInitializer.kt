@@ -70,6 +70,9 @@ class ChatInitializer(private val context: Context) {
             .notifications(notificationConfig, notificationHandler)
             .logLevel(logLevel)
             .withPlugin(offlinePlugin)
+            .apply {
+                apiCacheCallTimeout(300)
+            }
             .build()
 
         // Using markdown as text transformer

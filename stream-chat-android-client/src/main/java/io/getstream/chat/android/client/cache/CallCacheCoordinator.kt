@@ -17,6 +17,7 @@
 package io.getstream.chat.android.client.cache
 
 import io.getstream.chat.android.client.call.Call
+import io.getstream.logging.StreamLog
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicLong
 
@@ -35,15 +36,19 @@ internal class CallCacheCoordinator(private val cacheTime: Int) : CacheCoordinat
      * Creates a cached [Call] instead of a normal [Call].
      */
     override fun <T : Any> cachedCall(hashCode: Int, forceRefresh: Boolean, call: Call<T>): Call<T> {
+        StreamLog.d("CallCacheCoordinator") { "[cachedCall] hashCode: $hashCode, forceRefresh: $forceRefresh" }
         cachedCalls.clearIfStale()
         val callData = cachedCalls[hashCode]
+        StreamLog.v("CallCacheCoordinator") { "[cachedCall] callData: $callData" }
         return if (forceRefresh || callData == null || callData.isStale()) {
             call.also {
                 val now = System.currentTimeMillis()
                 cachedCalls[hashCode] = CachedCall(now, it)
                 lastRequestTime.set(now)
+                StreamLog.v("CallCacheCoordinator") { "[cachedCall] return cached" }
             }
         } else {
+            StreamLog.v("CallCacheCoordinator") { "[cachedCall] return regular" }
             callData.call as Call<T>
         }
     }
