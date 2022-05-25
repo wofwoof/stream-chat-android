@@ -26,7 +26,7 @@
             <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-compose:dokkaHtmlPartial/release"><div class="symbol monospace">data class <a href="index.html">MessagesState</a>(isLoading: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, isLoadingMore: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, endOfMessages: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, messageItems: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../io.getstream.chat.android.compose.state.messages.list/-message-list-item-state/index.html">MessageListItemState</a>&gt;, selectedMessageState: <a href="../-selected-message-state/index.html">SelectedMessageState</a>?, currentUser: <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.models/-user/index.html">User</a>?, newMessageState: <a href="../-new-message-state/index.html">NewMessageState</a>?, parentMessageId: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?, unreadCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">UI representation of the Conversation/Messages screen. Holds all the data required to show messages.</p></div></div>
           </div>
           <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
             <div class="tabs-section-body">
               <h2 class="">Parameters</h2>
               <div data-togglable="Parameters">
@@ -70,6 +70,19 @@
                     <div>
                       <div class="title">
                         <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-compose:dokkaHtmlPartial/release"><a data-name="2060613758%2FProperties%2F29477497" anchor-label="endOfMessages" id="2060613758%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a><div class="symbol monospace">val <a href="end-of-messages.html">endOfMessages</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="2060613758%2FProperties%2F29477497" anchor-label="endOfMessages" id="2060613758%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>If we're at the end of messages (to stop pagination).</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="640996475%2FProperties%2F29477497" anchor-label="focusedMessageOffset" id="640996475%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="focused-message-offset.html">focusedMessageOffset</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="640996475%2FProperties%2F29477497"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-compose:dokkaHtmlPartial/release"><a data-name="640996475%2FProperties%2F29477497" anchor-label="focusedMessageOffset" id="640996475%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a><div class="symbol monospace">val <a href="focused-message-offset.html">focusedMessageOffset</a>: <span data-unresolved-link="kotlinx.coroutines.flow/StateFlow///PointingToDeclaration/">StateFlow</span>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
                       </div>
                     </div>
                   </div>
@@ -162,6 +175,25 @@
                       <div class="title">
                         <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-compose:dokkaHtmlPartial/release"><a data-name="-597749924%2FProperties%2F29477497" anchor-label="unreadCount" id="-597749924%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a><div class="symbol monospace">val <a href="unread-count.html">unreadCount</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-597749924%2FProperties%2F29477497" anchor-label="unreadCount" id="-597749924%2FProperties%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>The count of messages we haven't read yet.</div></div></div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="-1228547339%2FFunctions%2F29477497" anchor-label="calculateMessageOffset" id="-1228547339%2FFunctions%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="calculate-message-offset.html">calculateMessageOffset</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1228547339%2FFunctions%2F29477497"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-compose:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="calculate-message-offset.html">calculateMessageOffset</a>(parentSize: <span data-unresolved-link="androidx.compose.ui.unit/IntSize///PointingToDeclaration/">IntSize</span>, focusedMessageSize: <span data-unresolved-link="androidx.compose.ui.unit/IntSize///PointingToDeclaration/">IntSize</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="-1228547339%2FFunctions%2F29477497" anchor-label="calculateMessageOffset" id="-1228547339%2FFunctions%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a><div class="brief "><a data-name="-1228547339%2FFunctions%2F29477497" anchor-label="calculateMessageOffset" id="-1228547339%2FFunctions%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>Calculates the message offset needed for the message to center inside the list on scroll.</div></div>
+</div>
                     </div>
                   </div>
                 </div>
