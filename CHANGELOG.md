@@ -27,18 +27,18 @@
 
 ## stream-chat-android-offline
 ### 🐞 Fixed
-- Fix the stale Channel data being stored into database. [3650](https://github.com/GetStream/stream-chat-android/pull/3650)
-- Fix race condition problem that allowed multiple threads to increment unread count, which could cause a mistake in the number of unread messages. [3656](https://github.com/GetStream/stream-chat-android/pull/3656)
-- A new optional argument `useSequentialEventHandler` has been added to `Config` class of offline plugin to enable a sequential event handling mechanism. [3659](https://github.com/GetStream/stream-chat-android/pull/3659)
+- Fix the stale Channel data being stored into database. [#3650](https://github.com/GetStream/stream-chat-android/pull/3650)
+- Fix race condition problem that allowed multiple threads to increment unread count, which could cause a mistake in the number of unread messages. [#3656](https://github.com/GetStream/stream-chat-android/pull/3656)
+- A new optional argument `useSequentialEventHandler` has been added to `Config` class of offline plugin to enable a sequential event handling mechanism. [#3659](https://github.com/GetStream/stream-chat-android/pull/3659)
 
 ### ⬆️ Improved
-- Added logs of all properties available in a class and which one was searched for then QuerySort fails to find a field. [3597](https://github.com/GetStream/stream-chat-android/pull/3597)
+- Added logs of all properties available in a class and which one was searched for then QuerySort fails to find a field. [#3597](https://github.com/GetStream/stream-chat-android/pull/3597)
 
 ### ✅ Added
-- Added `EventHandlerSequential` to support a sequential event processing. [3604](https://github.com/GetStream/stream-chat-android/pull/3604)
-- Logging when unread count is updated. [3642](https://github.com/GetStream/stream-chat-android/pull/3642)
+- Added `EventHandlerSequential` to support a sequential event processing. [#3604](https://github.com/GetStream/stream-chat-android/pull/3604)
+- Logging when unread count is updated. [#3642](https://github.com/GetStream/stream-chat-android/pull/3642)
 ### ⚠️ Changed
--  Added interface `QuerySorter` and new implementation of query sort `QuerySortByField` so users can choose between implementations that use reflection or not. [3624](https://github.com/GetStream/stream-chat-android/pull/3624)
+-  Added interface `QuerySorter` and new implementation of query sort `QuerySortByField` so users can choose between implementations that use reflection or not. [#3624](https://github.com/GetStream/stream-chat-android/pull/3624)
 ### ❌ Removed
 
 ## stream-chat-android-ui-common
@@ -66,17 +66,17 @@
 - Added `MessageListViewModelFactory.Builder` for Java users. [#3617](https://github.com/GetStream/stream-chat-android/pull/3617)
 - Added `PinnedMessageListViewModelFactory.Builder` for Java users. [#3617](https://github.com/GetStream/stream-chat-android/pull/3617)
 - Added `TypingIndicatorViewModelFactory.Builder` for Java users. [#3617](https://github.com/GetStream/stream-chat-android/pull/3617)
-- Added new attributes to `MessageListView` that are designed to customize the scroll to bottom button. They are listed in the linked PR. [3634](https://github.com/GetStream/stream-chat-android/pull/3634)
+- Added new attributes to `MessageListView` that are designed to customize the scroll to bottom button. They are listed in the linked PR. [#3634](https://github.com/GetStream/stream-chat-android/pull/3634)
 
 ### ⚠️ Changed
 - Dimens `stream_ui_spacing_small` no longer has an effect on the internal margins of `ScrollButtonView`, instead use the `MessageListView` attribute `streamUIScrollButtonInternalMargin` to set internal margins. [3634](https://github.com/GetStream/stream-chat-android/pull/3634)
-- The default elevation of the unread count badge inside `ScrollButtonView` was changed from `10dp` to `3dp`. [3634](https://github.com/GetStream/stream-chat-android/pull/3634)
+- The default elevation of the unread count badge inside `ScrollButtonView` was changed from `10dp` to `3dp`. [#3634](https://github.com/GetStream/stream-chat-android/pull/3634)
 
 ### ❌ Removed
 
 ## stream-chat-android-compose
 ### 🐞 Fixed
-- Fixed the display of `ChannelAvatar` for a channel with two members and neither of them is the current user. [3598](https://github.com/GetStream/stream-chat-android/pull/3598)
+- Fixed the display of `ChannelAvatar` for a channel with two members and neither of them is the current user. [#3598](https://github.com/GetStream/stream-chat-android/pull/3598)
 
 ### ⬆️ Improved
 - Improved padding customization options of `InputField`. [#3596](https://github.com/GetStream/stream-chat-android/pull/3596)
