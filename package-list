@@ -5,6 +5,8 @@ module:stream-chat-android-client
 io.getstream.chat.android.client
 io.getstream.chat.android.client.api
 io.getstream.chat.android.client.api.models
+io.getstream.chat.android.client.api.models.querysort
+io.getstream.chat.android.client.api.models.querysort.internal
 io.getstream.chat.android.client.channel
 io.getstream.chat.android.client.clientstate
 io.getstream.chat.android.client.di
@@ -13,6 +15,7 @@ io.getstream.chat.android.client.errorhandler.factory
 io.getstream.chat.android.client.errors
 io.getstream.chat.android.client.events
 io.getstream.chat.android.client.extensions
+io.getstream.chat.android.client.extensions.internal
 io.getstream.chat.android.client.header
 io.getstream.chat.android.client.helpers
 io.getstream.chat.android.client.interceptor
@@ -26,6 +29,7 @@ io.getstream.chat.android.client.persistance.repository.factory
 io.getstream.chat.android.client.plugin
 io.getstream.chat.android.client.plugin.factory
 io.getstream.chat.android.client.plugin.listeners
+io.getstream.chat.android.client.plugins.requests
 io.getstream.chat.android.client.query
 io.getstream.chat.android.client.query.pagination
 io.getstream.chat.android.client.setup
@@ -36,8 +40,10 @@ io.getstream.chat.android.client.uploader
 io.getstream.chat.android.client.user
 io.getstream.chat.android.client.user.storage
 io.getstream.chat.android.client.utils
+io.getstream.chat.android.client.utils.internal
 io.getstream.chat.android.client.utils.internal.toggle
 io.getstream.chat.android.client.utils.internal.toggle.dialog
+io.getstream.chat.android.client.utils.message
 io.getstream.chat.android.client.utils.observable
 io.getstream.chat.android.client.utils.retry
 module:stream-chat-android-compose
@@ -82,6 +88,7 @@ io.getstream.chat.android.compose.ui.messages.header
 io.getstream.chat.android.compose.ui.messages.list
 io.getstream.chat.android.compose.ui.theme
 io.getstream.chat.android.compose.ui.util
+io.getstream.chat.android.compose.util.extensions
 io.getstream.chat.android.compose.viewmodel.channels
 io.getstream.chat.android.compose.viewmodel.imagepreview
 io.getstream.chat.android.compose.viewmodel.messages
@@ -94,6 +101,7 @@ io.getstream.chat.android.core.internal
 io.getstream.chat.android.core.internal.coroutines
 io.getstream.chat.android.core.internal.fsm
 io.getstream.chat.android.core.internal.fsm.builder
+io.getstream.chat.android.core.utils.date
 module:stream-chat-android-markdown-transformer
 io.getstream.chat.android.markdown
 module:stream-chat-android-offline
@@ -101,7 +109,6 @@ io.getstream.chat.android.livedata.utils
 io.getstream.chat.android.offline.event.handler.chat
 io.getstream.chat.android.offline.event.handler.chat.factory
 io.getstream.chat.android.offline.extensions
-io.getstream.chat.android.offline.extensions.internal
 io.getstream.chat.android.offline.model.channel
 io.getstream.chat.android.offline.model.connection
 io.getstream.chat.android.offline.model.message.attachments
@@ -111,6 +118,7 @@ io.getstream.chat.android.offline.plugin.state
 io.getstream.chat.android.offline.plugin.state.channel
 io.getstream.chat.android.offline.plugin.state.channel.thread
 io.getstream.chat.android.offline.plugin.state.global
+io.getstream.chat.android.offline.plugin.state.global.internal
 io.getstream.chat.android.offline.plugin.state.querychannels
 io.getstream.chat.android.offline.utils
 module:stream-chat-android-pushprovider-firebase
@@ -134,6 +142,7 @@ com.getstream.sdk.chat.utils
 com.getstream.sdk.chat.utils.extensions
 com.getstream.sdk.chat.utils.roundedImageView
 com.getstream.sdk.chat.utils.strings
+com.getstream.sdk.chat.utils.typing
 com.getstream.sdk.chat.view
 com.getstream.sdk.chat.view.activity
 com.getstream.sdk.chat.view.messages
@@ -159,6 +168,7 @@ io.getstream.chat.android.ui.common.navigation
 io.getstream.chat.android.ui.common.navigation.destinations
 io.getstream.chat.android.ui.common.style
 io.getstream.chat.android.ui.gallery
+io.getstream.chat.android.ui.gallery.options
 io.getstream.chat.android.ui.gallery.overview
 io.getstream.chat.android.ui.mention.list
 io.getstream.chat.android.ui.mention.list.viewmodel
