@@ -27,7 +27,6 @@ import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.plugin.listeners.SendReactionListener
 import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.offline.plugin.logic.internal.LogicRegistry
-import io.getstream.chat.android.offline.plugin.state.global.GlobalState
 import io.getstream.chat.android.offline.repository.builder.internal.RepositoryFacade
 import java.util.Date
 
@@ -36,13 +35,13 @@ import java.util.Date
  * Handles adding reaction offline, updates the database and does the optimistic UI update.
  *
  * @param logic [LogicRegistry]
- * @param globalState [GlobalState] provided by the [io.getstream.chat.android.offline.plugin.internal.OfflinePlugin].
  * @param repos [RepositoryFacade] to cache intermediate data and final result.
+ * @param isOnline [Boolean] determines if the user is online or not.
  */
 internal class SendReactionListenerImpl(
     private val logic: LogicRegistry,
-    private val globalState: GlobalState,
     private val repos: RepositoryFacade,
+    private val isOnline: () -> Boolean,
 ) : SendReactionListener {
 
     /**
@@ -63,7 +62,7 @@ internal class SendReactionListenerImpl(
     ) {
         val reactionToSend = reaction.enrichWithDataBeforeSending(
             currentUser = currentUser,
-            isOnline = globalState.isOnline(),
+            isOnline = isOnline(),
             enforceUnique = enforceUnique,
         )
 

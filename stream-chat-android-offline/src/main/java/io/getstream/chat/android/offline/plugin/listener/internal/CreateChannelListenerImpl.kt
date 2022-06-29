@@ -24,7 +24,6 @@ import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.plugin.listeners.CreateChannelListener
 import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.client.utils.SyncStatus
-import io.getstream.chat.android.offline.plugin.state.global.GlobalState
 import io.getstream.chat.android.offline.repository.builder.internal.RepositoryFacade
 import io.getstream.chat.android.offline.utils.internal.generateChannelIdIfNeeded
 import java.util.Date
@@ -34,12 +33,12 @@ import java.util.Date
  * Handles creating the channel offline and updates the database.
  * Does not perform optimistic UI update as it's impossible to determine whether a particular channel should be visible for the current user or not.
  *
- * @param globalState [GlobalState] provided by the [io.getstream.chat.android.offline.plugin.internal.OfflinePlugin].
  * @param repositoryFacade [RepositoryFacade] to cache intermediate data and final result.
+ * @param isOnline [Boolean] determines if the user is online or not.
  */
 internal class CreateChannelListenerImpl(
-    private val globalState: GlobalState,
     private val repositoryFacade: RepositoryFacade,
+    private val isOnline: () -> Boolean,
 ) : CreateChannelListener {
 
     /**
@@ -69,7 +68,7 @@ internal class CreateChannelListenerImpl(
             extraData = extraData.toMutableMap(),
             createdAt = Date(),
             createdBy = currentUser,
-            syncStatus = if (globalState.isOnline()) SyncStatus.IN_PROGRESS else SyncStatus.SYNC_NEEDED,
+            syncStatus = if (isOnline()) SyncStatus.IN_PROGRESS else SyncStatus.SYNC_NEEDED,
         ).apply {
             name = getExtraValue("name", "")
             image = getExtraValue("image", "")

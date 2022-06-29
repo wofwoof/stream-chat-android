@@ -193,6 +193,8 @@ internal class SendReactionsTests {
         }
 
         fun get(): Pair<SendReactionListener, StateRegistry> =
-            SendReactionListenerImpl(logicRegistry, globalState, repos) to stateRegistry
+            SendReactionListenerImpl(logicRegistry, repos) {
+                globalState.isOnline()
+            } to stateRegistry
     }
 }

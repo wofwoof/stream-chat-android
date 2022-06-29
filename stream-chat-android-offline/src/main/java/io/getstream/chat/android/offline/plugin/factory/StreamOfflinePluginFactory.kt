@@ -227,23 +227,24 @@ public class StreamOfflinePluginFactory(
 
         ChatClient.OFFLINE_SUPPORT_ENABLED = true
 
+        val isOnline = { globalState.isOnline() }
         return OfflinePlugin(
             queryChannelsListener = QueryChannelsListenerImpl(logic),
             queryChannelListener = QueryChannelListenerImpl(logic),
             threadQueryListener = ThreadQueryListenerImpl(logic),
             channelMarkReadListener = ChannelMarkReadListenerImpl(channelMarkReadHelper),
-            editMessageListener = EditMessageListenerImpl(logic, globalState),
+            editMessageListener = EditMessageListenerImpl(logic, isOnline),
             hideChannelListener = HideChannelListenerImpl(logic, repos),
             markAllReadListener = MarkAllReadListenerImpl(logic, stateRegistry.scope, channelMarkReadHelper),
-            deleteReactionListener = DeleteReactionListenerImpl(logic, globalState, repos),
-            sendReactionListener = SendReactionListenerImpl(logic, globalState, repos),
-            deleteMessageListener = DeleteMessageListenerImpl(logic, globalState, repos),
+            deleteReactionListener = DeleteReactionListenerImpl(logic, repos, isOnline),
+            sendReactionListener = SendReactionListenerImpl(logic, repos, isOnline),
+            deleteMessageListener = DeleteMessageListenerImpl(logic, repos, isOnline),
             sendMessageListener = SendMessageListenerImpl(logic, repos),
             sendGiphyListener = SendGiphyListenerImpl(logic),
             shuffleGiphyListener = ShuffleGiphyListenerImpl(logic),
             queryMembersListener = QueryMembersListenerImpl(repos),
             typingEventListener = TypingEventListenerImpl(stateRegistry),
-            createChannelListener = CreateChannelListenerImpl(globalState, repos),
+            createChannelListener = CreateChannelListenerImpl(repos, isOnline),
             activeUser = user
         ).also { offlinePlugin -> cachedOfflinePluginInstance = offlinePlugin }
     }

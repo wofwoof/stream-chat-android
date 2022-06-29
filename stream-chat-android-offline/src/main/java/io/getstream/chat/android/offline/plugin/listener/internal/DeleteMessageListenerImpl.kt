@@ -23,7 +23,6 @@ import io.getstream.chat.android.client.plugin.listeners.DeleteMessageListener
 import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.client.utils.SyncStatus
 import io.getstream.chat.android.offline.plugin.logic.internal.LogicRegistry
-import io.getstream.chat.android.offline.plugin.state.global.GlobalState
 import java.util.Date
 
 /**
@@ -31,8 +30,8 @@ import java.util.Date
  */
 internal class DeleteMessageListenerImpl(
     private val logic: LogicRegistry,
-    private val globalState: GlobalState,
     private val messageRepository: MessageRepository,
+    private val isOnline: () -> Boolean,
 ) : DeleteMessageListener {
 
     /**
@@ -42,7 +41,7 @@ internal class DeleteMessageListenerImpl(
      */
     override suspend fun onMessageDeleteRequest(messageId: String) {
         messageRepository.selectMessage(messageId)?.let { message ->
-            val isOnline = globalState.isOnline()
+            val isOnline = isOnline()
 
             val (channelType, channelId) = message.cid.cidToTypeAndId()
             val channelLogic = logic.channel(channelType, channelId)

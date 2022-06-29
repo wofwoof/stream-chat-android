@@ -255,6 +255,8 @@ internal class DeleteReactionsTests {
         }
 
         fun get(): Pair<DeleteReactionListenerImpl, StateRegistry> =
-            DeleteReactionListenerImpl(logicRegistry, globalState, repos) to stateRegistry
+            DeleteReactionListenerImpl(logicRegistry, repos) {
+                globalState.isOnline()
+            } to stateRegistry
     }
 }

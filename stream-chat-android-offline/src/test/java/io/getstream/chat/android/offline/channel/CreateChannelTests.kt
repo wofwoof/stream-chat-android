@@ -286,7 +286,7 @@ internal class CreateChannelTests {
         }
 
         fun get(): CreateChannelListenerImpl {
-            return CreateChannelListenerImpl(globalState, repositoryFacade)
+            return CreateChannelListenerImpl(repositoryFacade) { globalState.isOnline() }
         }
     }
 }
