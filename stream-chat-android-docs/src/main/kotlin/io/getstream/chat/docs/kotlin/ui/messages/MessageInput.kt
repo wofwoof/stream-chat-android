@@ -53,16 +53,7 @@ private class MessageInputViewSnippets : Fragment() {
             // Handle send button click
         }
         messageInputView.setTypingUpdatesBuffer(
-            DefaultTypingUpdatesBuffer(
-                onTypingStarted = {
-                    // Make a keystroke API call
-                    // Implement your custom action
-                },
-                onTypingStopped = {
-                    // Make a typing stopped API call
-                    // Implement your custom action
-                }
-            )
+            // Your own implementation of TypingUpdatesBuffer
         )
         messageInputView.setMaxMessageLengthHandler { messageText, messageLength, maxMessageLength, maxMessageLengthExceeded ->
             if (maxMessageLengthExceeded) {

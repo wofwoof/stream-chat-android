@@ -147,16 +147,7 @@ private object HandlingTypingUpdatesSnippet {
             super.onCreate(savedInstanceState, persistentState)
 
             composerViewModel.setTypingUpdatesBuffer(
-                DefaultTypingUpdatesBuffer(
-                    onTypingStarted = {
-                        // Make a keystroke API call
-                        // Implement your custom action
-                    },
-                    onTypingStopped = {
-                        // Make a typing stopped API call
-                        // Implement your custom action
-                    }
-                )
+                // Your own implementation of TypingUpdatesBuffer
             )
         }
     }

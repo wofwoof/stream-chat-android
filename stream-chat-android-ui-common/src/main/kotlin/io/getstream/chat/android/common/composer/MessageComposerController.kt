@@ -97,6 +97,7 @@ public class MessageComposerController(
      * @see [DefaultTypingUpdatesBuffer]
      */
     public var typingUpdatesBuffer: TypingUpdatesBuffer = DefaultTypingUpdatesBuffer(
+        coroutineScope = scope,
         onTypingStarted = ::sendKeystrokeEvent,
         onTypingStopped = ::sendStopTypingEvent
     )
