@@ -16,12 +16,17 @@
 
 package io.getstream.chat.android.client.api.models
 
+import io.getstream.chat.android.core.internal.InternalStreamChatApi
+
 @Suppress("TooManyFunctions")
 public open class QueryChannelRequest : ChannelRequest<QueryChannelRequest> {
 
     override var state: Boolean = false
     override var watch: Boolean = false
     override var presence: Boolean = false
+
+    @InternalStreamChatApi
+    public var shouldRefresh: Boolean = false
 
     public val messages: MutableMap<String, Any> = mutableMapOf()
     public val watchers: MutableMap<String, Any> = mutableMapOf()
@@ -83,6 +88,22 @@ public open class QueryChannelRequest : ChannelRequest<QueryChannelRequest> {
         val keys = messages.keys
         return keys.contains(Pagination.LESS_THAN.toString()) ||
             keys.contains(Pagination.LESS_THAN_OR_EQUAL.toString())
+    }
+
+    public fun isFilteringAroundIdMessages(): Boolean {
+        if (messages.isEmpty()) {
+            return false
+        }
+        val keys = messages.keys
+        return keys.contains(Pagination.AROUND_ID.toString())
+    }
+
+    /**
+     * @return Whether the request contains any of [Pagination] values or not. If it does the messages are being
+     * filtered.
+     */
+    public fun isFilteringMessages(): Boolean {
+        return Pagination.values().map { it.toString() }.intersect(messages.keys).isNotEmpty()
     }
 
     /**

@@ -27,12 +27,11 @@ import com.getstream.sdk.chat.utils.extensions.defaultChannelListFilter
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.FilterObject
 import io.getstream.chat.android.client.api.models.QueryChannelsRequest
-import io.getstream.chat.android.client.api.models.QuerySort
+import io.getstream.chat.android.client.api.models.querysort.QuerySortByField
+import io.getstream.chat.android.client.api.models.querysort.QuerySorter
 import io.getstream.chat.android.client.call.enqueue
 import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.extensions.cidToTypeAndId
-import io.getstream.chat.android.client.logger.ChatLogger
-import io.getstream.chat.android.client.logger.TaggedLogger
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.ChannelMute
 import io.getstream.chat.android.client.models.Filters
@@ -47,11 +46,17 @@ import io.getstream.chat.android.offline.plugin.state.querychannels.ChannelsStat
 import io.getstream.chat.android.offline.plugin.state.querychannels.QueryChannelsState
 import io.getstream.chat.android.ui.common.extensions.internal.EXTRA_DATA_MUTED
 import io.getstream.chat.android.ui.common.extensions.internal.isMuted
+import io.getstream.logging.StreamLog
+import io.getstream.logging.TaggedLogger
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /**
@@ -71,14 +76,16 @@ import kotlinx.coroutines.launch
  */
 public class ChannelListViewModel(
     private val filter: FilterObject? = null,
-    private val sort: QuerySort<Channel> = DEFAULT_SORT,
+    private val sort: QuerySorter<Channel> = DEFAULT_SORT,
     private val limit: Int = 30,
     private val messageLimit: Int = 1,
     private val memberLimit: Int = 30,
     private val chatEventHandlerFactory: ChatEventHandlerFactory = ChatEventHandlerFactory(),
     private val chatClient: ChatClient = ChatClient.instance(),
-    private val globalState: GlobalState = chatClient.globalState
+    private val globalState: GlobalState = chatClient.globalState,
 ) : ViewModel() {
+
+    private var queryJob: Job? = null
 
     /**
      * Represents the current state containing channel list
@@ -95,6 +102,7 @@ public class ChannelListViewModel(
      * Updates about currently typing users in active channels. See [TypingEvent].
      */
     public val typingEvents: LiveData<TypingEvent>
+        @Suppress("DEPRECATION_ERROR")
         get() = globalState.typingUpdates.asLiveData()
 
     /**
@@ -123,14 +131,12 @@ public class ChannelListViewModel(
     /**
      * The logger used to print information, warnings, errors, etc. to log.
      */
-    private val logger: TaggedLogger = ChatLogger.get("ChannelListViewModel")
+    private val logger: TaggedLogger = StreamLog.getLogger("Chat:ChannelListViewModel")
 
     /**
      * Filters the requested channels.
      */
-    private val filterLiveData: LiveData<FilterObject?> =
-        filter?.let(::MutableLiveData) ?: globalState.user.map(Filters::defaultChannelListFilter)
-            .asLiveData()
+    private val filterLiveData: MutableLiveData<FilterObject?> = MutableLiveData(filter)
 
     /**
      * Represents the current state of the channels query.
@@ -138,11 +144,26 @@ public class ChannelListViewModel(
     private var queryChannelsState: StateFlow<QueryChannelsState?> = MutableStateFlow(null)
 
     init {
+        if (filter == null) {
+            viewModelScope.launch {
+                val filter = buildDefaultFilter().first()
+
+                this@ChannelListViewModel.filterLiveData.value = filter
+            }
+        }
+
         stateMerger.addSource(filterLiveData) { filter ->
             if (filter != null) {
                 initData(filter)
             }
         }
+    }
+
+    /**
+     * Builds the default channel filter, which represents "messaging" channels that the current user is a part of.
+     */
+    private fun buildDefaultFilter(): Flow<FilterObject> {
+        return chatClient.clientState.user.map(Filters::defaultChannelListFilter).filterNotNull()
     }
 
     /**
@@ -167,9 +188,22 @@ public class ChannelListViewModel(
                 memberLimit = memberLimit,
             )
         queryChannelsState = chatClient.queryChannelsAsState(queryChannelsRequest, viewModelScope)
-        viewModelScope.launch {
+
+        /**
+         * We clean up any previous loads to make sure the current one is the only one running.
+         */
+        if (queryJob != null) {
+            queryJob?.cancel()
+        }
+
+        queryJob = viewModelScope.launch {
             queryChannelsState.filterNotNull().collectLatest { queryChannelsState ->
-                queryChannelsState.chatEventHandler = chatEventHandlerFactory.chatEventHandler(queryChannelsState.channels)
+                if (!isActive) {
+                    return@collectLatest
+                }
+
+                queryChannelsState.chatEventHandler =
+                    chatEventHandlerFactory.chatEventHandler(queryChannelsState.channels)
                 stateMerger.addSource(queryChannelsState.channelsStateData.asLiveData()) { channelsState ->
                     stateMerger.value = handleChannelStateNews(channelsState, globalState.channelMutes.value)
                 }
@@ -240,7 +274,10 @@ public class ChannelListViewModel(
         chatClient.getCurrentUser()?.let { user ->
             chatClient.channel(channel.type, channel.id).removeMembers(listOf(user.id)).enqueue(
                 onError = { chatError ->
-                    logger.logE("Could not leave channel with id: ${channel.id}. Error: ${chatError.message}. Cause: ${chatError.cause?.message}")
+                    logger.e {
+                        "Could not leave channel with id: ${channel.id}. " +
+                            "Error: ${chatError.message}. Cause: ${chatError.cause?.message}"
+                    }
                     _errorEvents.postValue(Event(ErrorEvent.LeaveChannelError(chatError)))
                 }
             )
@@ -255,7 +292,10 @@ public class ChannelListViewModel(
     public fun deleteChannel(channel: Channel) {
         chatClient.channel(channel.cid).delete().enqueue(
             onError = { chatError ->
-                logger.logE("Could not delete channel with id: ${channel.id}. Error: ${chatError.message}. Cause: ${chatError.cause?.message}")
+                logger.e {
+                    "Could not delete channel with id: ${channel.id}. " +
+                        "Error: ${chatError.message}. Cause: ${chatError.cause?.message}"
+                }
                 _errorEvents.postValue(Event(ErrorEvent.DeleteChannelError(chatError)))
             }
         )
@@ -272,7 +312,10 @@ public class ChannelListViewModel(
             clearHistory = false
         ).enqueue(
             onError = { chatError ->
-                logger.logE("Could not hide channel with id: ${channel.id}. Error: ${chatError.message}. Cause: ${chatError.cause?.message}")
+                logger.e {
+                    "Could not hide channel with id: ${channel.id}. " +
+                        "Error: ${chatError.message}. Cause: ${chatError.cause?.message}"
+                }
                 _errorEvents.postValue(Event(ErrorEvent.HideChannelError(chatError)))
             }
         )
@@ -284,7 +327,10 @@ public class ChannelListViewModel(
     public fun markAllRead() {
         chatClient.markAllRead().enqueue(
             onError = { chatError ->
-                logger.logE("Could not mark all messages as read. Error: ${chatError.message}. Cause: ${chatError.cause?.message}")
+                logger.e {
+                    "Could not mark all messages as read. " +
+                        "Error: ${chatError.message}. Cause: ${chatError.cause?.message}"
+                }
             }
         )
     }
@@ -294,19 +340,31 @@ public class ChannelListViewModel(
      * Called when scrolling to the end of the list.
      */
     private fun requestMoreChannels() {
-        filterLiveData.value?.let { filter ->
+        filterLiveData.value?.let {
             val queryChannelsState = queryChannelsState.value ?: return
 
             queryChannelsState.nextPageRequest.value?.let {
                 viewModelScope.launch {
                     chatClient.queryChannels(it).enqueue(
                         onError = { chatError ->
-                            logger.logE("Could not load more channels. Error: ${chatError.message}. Cause: ${chatError.cause?.message}")
+                            logger.e {
+                                "Could not load more channels. Error: ${chatError.message}. " +
+                                    "Cause: ${chatError.cause?.message}"
+                            }
                         }
                     )
                 }
             }
         }
+    }
+
+    /**
+     * Allows us to change the filter based on our requirements.
+     *
+     * @param filterObject The new filter to be applied to the query which lets us fetch different data.
+     */
+    public fun setFilters(filterObject: FilterObject) {
+        this.filterLiveData.value = filterObject
     }
 
     /**
@@ -411,7 +469,7 @@ public class ChannelListViewModel(
          * The default sorting option for queries.
          */
         @JvmField
-        public val DEFAULT_SORT: QuerySort<Channel> = QuerySort.desc("last_updated")
+        public val DEFAULT_SORT: QuerySorter<Channel> = QuerySortByField.descByName("last_updated")
 
         /**
          *  The initial state.

@@ -18,7 +18,6 @@ package io.getstream.chat.android.client.chatclient
 
 import io.getstream.chat.android.client.Mother
 import io.getstream.chat.android.client.call.Call
-import io.getstream.chat.android.client.call.await
 import io.getstream.chat.android.client.clientstate.SocketState
 import io.getstream.chat.android.client.clientstate.UserState
 import io.getstream.chat.android.client.errors.ChatError
@@ -63,8 +62,9 @@ internal class WhenConnectUser : BaseChatClientTest() {
         verifyNoMoreInteractions(socket)
         verifyNoMoreInteractions(userStateService)
         verifyNoInteractions(tokenManager)
-        verifyNoInteractions(listener)
-        result `should be equal to` Result.error(ChatError("Failed to connect user. Please check you don't have connected user already."))
+        // Listeners should always be called
+        verify(listener).invoke(any())
+        result `should be equal to` Result.error(ChatError("Failed to connect user. Please check you haven't connected a user already."))
     }
 
     @Test
@@ -92,7 +92,7 @@ internal class WhenConnectUser : BaseChatClientTest() {
 
         sut.connectUser(user, "token").enqueue()
 
-        verify(userStateService).onSetUser(user)
+        verify(userStateService).onSetUser(user, false)
     }
 
     @Test
@@ -184,11 +184,7 @@ internal class WhenConnectUser : BaseChatClientTest() {
         }
 
         fun givenAnonymousUserSetState() = apply {
-            whenever(userStateService.state) doReturn UserState.Anonymous.AnonymousUserSet(Mother.randomUser())
-        }
-
-        fun givenAnonymousPendingState() = apply {
-            whenever(userStateService.state) doReturn UserState.Anonymous.Pending
+            whenever(userStateService.state) doReturn UserState.AnonymousUserSet(Mother.randomUser())
         }
 
         fun givenUserNotSetState() = apply {
@@ -200,7 +196,7 @@ internal class WhenConnectUser : BaseChatClientTest() {
         }
 
         fun givenPreSetUserListener(listener: (User) -> Unit) = apply {
-            initializationCoordinator.addUserConnectedListener(listener)
+            initializationCoordinator.addUserConnectionRequestListener(listener)
         }
 
         fun givenUserAndToken(user: User, token: String) = apply {

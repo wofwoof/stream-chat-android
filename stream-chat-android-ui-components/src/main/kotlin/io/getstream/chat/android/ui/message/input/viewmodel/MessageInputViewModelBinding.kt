@@ -62,9 +62,7 @@ public fun MessageInputViewModel.bindView(
         }
     }
     messageToEdit.observe(lifecycleOwner) { message ->
-        message?.let {
-            view.inputMode = MessageInputView.InputMode.Edit(it)
-        }
+        message?.let { view.inputMode = MessageInputView.InputMode.Edit(it) }
     }
     isDirectMessage.observe(lifecycleOwner) { isDirectMessage ->
         view.chatMode = if (isDirectMessage) DIRECT_CHAT else GROUP_CHAT
@@ -140,12 +138,15 @@ public fun MessageInputViewModel.bindView(
         }
     )
 
+    @Suppress("DEPRECATION_ERROR")
     view.setTypingListener(
         object : MessageInputView.TypingListener {
             override fun onKeystroke() = keystroke()
             override fun onStopTyping() = stopTyping()
         }
     )
+
+    view.setTypingUpdatesBuffer(typingUpdatesBuffer)
 
     repliedMessage.observe(lifecycleOwner) {
         if (it != null) {
