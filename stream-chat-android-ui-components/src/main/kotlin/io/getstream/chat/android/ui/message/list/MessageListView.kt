@@ -124,7 +124,6 @@ import io.getstream.chat.android.ui.message.list.MessageListView.ReactionViewCli
 import io.getstream.chat.android.ui.message.list.MessageListView.ReplyMessageClickListener
 import io.getstream.chat.android.ui.message.list.MessageListView.ThreadClickListener
 import io.getstream.chat.android.ui.message.list.MessageListView.ThreadStartHandler
-import io.getstream.chat.android.ui.message.list.MessageListView.UserBlockHandler
 import io.getstream.chat.android.ui.message.list.MessageListView.UserClickListener
 import io.getstream.chat.android.ui.message.list.MessageListView.UserMuteHandler
 import io.getstream.chat.android.ui.message.list.MessageListView.UserReactionClickListener
@@ -234,9 +233,6 @@ public class MessageListView : ConstraintLayout {
     }
     private var userUnmuteHandler = UserUnmuteHandler {
         throw IllegalStateException("onUnmuteUserHandler must be set.")
-    }
-    private var userBlockHandler = UserBlockHandler { _, _ ->
-        throw IllegalStateException("onBlockUserHandler must be set.")
     }
     private var customActionHandler = CustomActionHandler { _, _ ->
         throw IllegalStateException("onCustomActionHandler must be set.")
@@ -799,13 +795,6 @@ public class MessageListView : ConstraintLayout {
     }
 
     /**
-     * Scrolls the message list to the bottom.sl
-     */
-    public fun scrollToBottom() {
-        scrollHelper.scrollToBottom()
-    }
-
-    /**
      * Set a custom layout manager for MessageListView. This can be used to change orientation of messages.
      *
      * @param layoutManager
@@ -947,6 +936,11 @@ public class MessageListView : ConstraintLayout {
      *
      * @param enabled True if user blocking is enabled, false otherwise.
      */
+    @Deprecated(
+        "The option to block the user inside `MessageListView`" +
+            " has been deprecated and will be removed.",
+        level = DeprecationLevel.WARNING
+    )
     public fun setBlockUserEnabled(enabled: Boolean) {
         messageListViewStyle = requireStyle().copy(blockEnabled = enabled)
     }
@@ -956,6 +950,11 @@ public class MessageListView : ConstraintLayout {
      *
      * @param enabled True if user muting is enabled, false otherwise.
      */
+    @Deprecated(
+        "The option to mute the user inside `MessageListView`" +
+            " has been deprecated and will be removed.",
+        level = DeprecationLevel.WARNING
+    )
     public fun setMuteUserEnabled(enabled: Boolean) {
         messageListViewStyle = requireStyle().copy(muteEnabled = enabled)
     }
@@ -1151,8 +1150,7 @@ public class MessageListView : ConstraintLayout {
                     scrollHelper.onMessageListChanged(
                         isThreadStart = isThreadStart,
                         hasNewMessages = listItem.hasNewMessages,
-                        isInitialList = isOldListEmpty && filteredList.isNotEmpty(),
-                        areNewestMessagesLoaded = listItem.areNewestMessagesLoaded
+                        isInitialList = isOldListEmpty && filteredList.isNotEmpty()
                     )
 
                     buffer.active()
@@ -1444,6 +1442,12 @@ public class MessageListView : ConstraintLayout {
      *
      * @param userMuteHandler The handler to use.
      */
+    @Deprecated(
+        "The option to mute the user inside `MessageListView`" +
+            " has been deprecated and will be removed. `MessageListView.setUserMuteHandler` " +
+            "will be removed with it too.",
+        level = DeprecationLevel.WARNING
+    )
     public fun setUserMuteHandler(userMuteHandler: UserMuteHandler) {
         this.userMuteHandler = userMuteHandler
     }
@@ -1453,23 +1457,14 @@ public class MessageListView : ConstraintLayout {
      *
      * @param userUnmuteHandler The handler to use.
      */
+    @Deprecated(
+        "The option to unmute the user inside `MessageListView`" +
+            " has been deprecated and will be removed. `MessageListView.setUserUnmuteHandler` " +
+            "will be removed with it too.",
+        level = DeprecationLevel.WARNING
+    )
     public fun setUserUnmuteHandler(userUnmuteHandler: UserUnmuteHandler) {
         this.userUnmuteHandler = userUnmuteHandler
-    }
-
-    /**
-     * Sets the handler used when the user is going to be blocked in the channel.
-     *
-     * @param userBlockHandler The handler to use.
-     */
-    @Deprecated(
-        message = "The block action has been removed. Use MessageOptionItemsFactory.setMessageOptionItemsFactory() " +
-            "in conjunction with MessageOptionItemsFactory.setCustomActionHandler() to add support for custom block " +
-            "action.",
-        level = DeprecationLevel.ERROR
-    )
-    public fun setUserBlockHandler(userBlockHandler: UserBlockHandler) {
-        this.userBlockHandler = userBlockHandler
     }
 
     /**
@@ -1591,15 +1586,6 @@ public class MessageListView : ConstraintLayout {
      */
     public fun setModeratedMessageHandler(handler: ModeratedMessageOptionHandler) {
         this.moderatedMessageOptionHandler = handler
-    }
-
-    /**
-     * Sets the handler used when the user interacts with [ScrollButtonView].
-     *
-     * @param handler The handler to use.
-     */
-    public fun setOnScrollToBottomHandler(handler: OnScrollToBottomHandler) {
-        this.scrollHelper.setScrollToBottomHandler(handler)
     }
 
     /**
@@ -1791,14 +1777,31 @@ public class MessageListView : ConstraintLayout {
         public fun onSendGiphy(message: Message, action: GiphyAction)
     }
 
+    @Deprecated(
+        "The option to mute the user inside `MessageListView`" +
+            " has been deprecated and will be removed. `UserMuteHandler` will be removed " +
+            "with it too.",
+        level = DeprecationLevel.WARNING
+    )
     public fun interface UserMuteHandler {
         public fun onUserMute(user: User)
     }
 
+    @Deprecated(
+        "The option to unmute the user inside `MessageListView`" +
+            " has been deprecated and will be removed. `UserUnmuteHandler` will be removed " +
+            "with it too.",
+        level = DeprecationLevel.WARNING
+    )
     public fun interface UserUnmuteHandler {
         public fun onUserUnmute(user: User)
     }
 
+    @Deprecated(
+        "The option to block the user inside `MessageListView`" +
+            " has been deprecated and will be removed. `UserBlockHandler` will be removed " +
+            "with it too."
+    )
     public fun interface UserBlockHandler {
         public fun onUserBlock(user: User, cid: String)
     }
@@ -1817,10 +1820,6 @@ public class MessageListView : ConstraintLayout {
 
     public fun interface ModeratedMessageOptionHandler {
         public fun onModeratedMessageOptionSelected(message: Message, moderatedMessageOption: ModeratedMessageOption)
-    }
-
-    public fun interface OnScrollToBottomHandler {
-        public fun onScrollToBottom()
     }
     //endregion
 

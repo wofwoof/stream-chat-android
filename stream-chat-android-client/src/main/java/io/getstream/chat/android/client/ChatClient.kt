@@ -72,6 +72,7 @@ import io.getstream.chat.android.client.events.UserEvent
 import io.getstream.chat.android.client.extensions.ATTACHMENT_TYPE_FILE
 import io.getstream.chat.android.client.extensions.ATTACHMENT_TYPE_IMAGE
 import io.getstream.chat.android.client.extensions.cidToTypeAndId
+import io.getstream.chat.android.client.extensions.internal.isLaterThanDays
 import io.getstream.chat.android.client.extensions.retry
 import io.getstream.chat.android.client.header.VersionPrefixHeader
 import io.getstream.chat.android.client.helpers.AppSettingManager
@@ -108,6 +109,9 @@ import io.getstream.chat.android.client.notifications.PushNotificationReceivedLi
 import io.getstream.chat.android.client.notifications.handler.NotificationConfig
 import io.getstream.chat.android.client.notifications.handler.NotificationHandler
 import io.getstream.chat.android.client.notifications.handler.NotificationHandlerFactory
+import io.getstream.chat.android.client.persistance.repository.RepositoryFacade
+import io.getstream.chat.android.client.persistance.repository.factory.RepositoryFactory
+import io.getstream.chat.android.client.persistance.repository.noop.NoOpRepositoryFactory
 import io.getstream.chat.android.client.plugin.Plugin
 import io.getstream.chat.android.client.plugin.factory.PluginFactory
 import io.getstream.chat.android.client.plugin.listeners.ChannelMarkReadListener
@@ -128,6 +132,7 @@ import io.getstream.chat.android.client.plugin.listeners.ThreadQueryListener
 import io.getstream.chat.android.client.plugin.listeners.TypingEventListener
 import io.getstream.chat.android.client.setup.InitializationCoordinator
 import io.getstream.chat.android.client.setup.state.ClientState
+import io.getstream.chat.android.client.setup.state.internal.ClientStateImpl
 import io.getstream.chat.android.client.setup.state.internal.toMutableState
 import io.getstream.chat.android.client.socket.ChatSocket
 import io.getstream.chat.android.client.socket.SocketListener
@@ -160,14 +165,17 @@ import io.getstream.logging.SilentStreamLogger
 import io.getstream.logging.StreamLog
 import io.getstream.logging.android.AndroidStreamLogger
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import okhttp3.OkHttpClient
 import java.io.File
 import java.util.Calendar
 import java.util.Date
+import kotlin.time.Duration.Companion.days
 import io.getstream.chat.android.client.experimental.socket.ChatSocket as ChatSocketExperimental
 
 /**
@@ -192,9 +200,12 @@ internal constructor(
     private val initializationCoordinator: InitializationCoordinator = InitializationCoordinator.getOrCreate(),
     private val appSettingsManager: AppSettingManager,
     private val chatSocketExperimental: ChatSocketExperimental,
+    private val pluginFactories: List<PluginFactory>,
+    public val clientState: ClientState,
     lifecycle: Lifecycle,
+    private val repositoryFactoryProvider: RepositoryFactory.Provider,
 ) {
-    private val logger = StreamLog.getLogger("Client")
+    private val logger = StreamLog.getLogger("Chat:Client")
     private val waitConnection = MutableSharedFlow<Result<ConnectionData>>()
     private val eventsObservable = ChatEventsObservable(socket, waitConnection, scope, chatSocketExperimental)
     private val lifecycleObserver = StreamLifecycleObserver(
@@ -207,11 +218,17 @@ internal constructor(
         }
     )
 
-    /**
-     * With clientState allows the user to get the state of the SDK like connection, initialization...
-     */
-    public val clientState: ClientState
-        get() = ClientState.get()
+    @InternalStreamChatApi
+    public val repositoryFacade: RepositoryFacade
+        get() = _repositoryFacade
+            ?: (getCurrentUser() ?: getStoredUser())
+                ?.let {
+                    createRepositoryFacade(createReposotiryFactory(it))
+                        .also { _repositoryFacade = it }
+                }
+            ?: createRepositoryFacade()
+
+    private var _repositoryFacade: RepositoryFacade? = null
 
     private var pushNotificationReceivedListener: PushNotificationReceivedListener =
         PushNotificationReceivedListener { _, _ -> }
@@ -231,14 +248,14 @@ internal constructor(
     private var errorHandlers: List<ErrorHandler> = emptyList()
 
     init {
-        eventsObservable.subscribe { event ->
+        eventsObservable.subscribeSuspend { event ->
             when (event) {
                 is ConnectedEvent -> {
                     val user = event.me
                     val connectionId = event.connectionId
                     if (ToggleService.isSocketExperimental().not()) {
                         socketStateService.onConnected(connectionId)
-                        runBlocking(context = scope.coroutineContext) { lifecycleObserver.observe() }
+                        lifecycleObserver.observe()
                     }
                     api.setConnection(user.id, connectionId)
                     notifications.onSetUser()
@@ -260,9 +277,9 @@ internal constructor(
                             if (ToggleService.isSocketExperimental().not()) {
                                 socketStateService.onSocketUnrecoverableError()
                             }
-                            clientState.toMutableState()?.setConnectionState(ConnectionState.OFFLINE)
                         }
                     }
+                    clientState.toMutableState()?.setConnectionState(ConnectionState.OFFLINE)
                 }
                 is NewMessageEvent -> {
                     notifications.onNewMessageEvent(event)
@@ -297,10 +314,6 @@ internal constructor(
                 ?.mergePartially(user)
             else -> null
         }
-    }
-
-    internal fun addPlugins(plugins: List<Plugin>) {
-        this.plugins = plugins
     }
 
     @InternalStreamChatApi
@@ -358,9 +371,6 @@ internal constructor(
         val cacheableTokenProvider = CacheableTokenProvider(tokenProvider)
         val userState = userStateService.state
 
-        ClientState.get().toMutableState()?.setUser(user)
-        initializationCoordinator.userConnectionRequest(user)
-
         return when {
             tokenUtils.getUserId(cacheableTokenProvider.loadToken()) != user.id -> {
                 logger.e {
@@ -374,7 +384,8 @@ internal constructor(
             }
             userState is UserState.NotSet -> {
                 logger.v { "[setUser] user is NotSet" }
-                initializeClientWithUser(cacheableTokenProvider, isAnonymous)
+                initializeClientWithUser(user, cacheableTokenProvider, isAnonymous)
+                clientState.toMutableState()?.setUser(user)
                 userStateService.onSetUser(user, isAnonymous)
                 if (ToggleService.isSocketExperimental()) {
                     chatSocketExperimental.connectUser(user, isAnonymous)
@@ -422,15 +433,24 @@ internal constructor(
     }
 
     private fun initializeClientWithUser(
+        user: User,
         tokenProvider: CacheableTokenProvider,
         isAnonymous: Boolean,
     ) {
+        _repositoryFacade = createRepositoryFacade(createReposotiryFactory(user))
+        plugins = pluginFactories.map { it.get(user) }
         // fire a handler here that the chatDomain and chatUI can use
         config.isAnonymous = isAnonymous
         tokenManager.setTokenProvider(tokenProvider)
         appSettingsManager.loadAppSettings()
         warmUp()
     }
+
+    private fun createReposotiryFactory(user: User): RepositoryFactory =
+        repositoryFactoryProvider.createRepositoryFactory(user)
+
+    private fun createRepositoryFacade(repositoFactory: RepositoryFactory = NoOpRepositoryFactory): RepositoryFacade =
+        RepositoryFacade.create(repositoFactory, scope)
 
     /**
      * Get the current settings of the app. Check [AppSettings].
@@ -512,9 +532,8 @@ internal constructor(
         }
 
         userCredentialStorage.get()?.let { config ->
-            initializationCoordinator.userConnectionRequest(User(id = config.userId).apply { name = config.userName })
-
             initializeClientWithUser(
+                User(id = config.userId).apply { name = config.userName },
                 tokenProvider = CacheableTokenProvider(ConstantTokenProvider(config.userToken)),
                 isAnonymous = config.isAnonymous,
             )
@@ -1042,10 +1061,13 @@ internal constructor(
                 chatSocketExperimental.disconnect(DisconnectCause.ConnectionReleased)
             }
             if (flushPersistence) {
+                repositoryFacade.clear()
                 userCredentialStorage.clear()
             }
             lifecycleObserver.dispose()
             appSettingsManager.clear()
+            _repositoryFacade = null
+            postponeCancelScope()
             Result.success(Unit)
         }
 
@@ -1062,6 +1084,17 @@ internal constructor(
     @WorkerThread
     public fun disconnect() {
         disconnect(true).execute()
+    }
+
+    /**
+     * Cancel all jobs on the ChatClient Scope.
+     * This method postpone a new coroutine to cancel all children jobs.
+     */
+    private fun postponeCancelScope() {
+        scope.launch {
+            delay(DELAY_TIME_TO_CANCEL_CHILDREN)
+            scope.coroutineContext.cancelChildren()
+        }
     }
 
     //region: api calls
@@ -1364,12 +1397,12 @@ internal constructor(
         isRetrying: Boolean = false,
     ): Call<Message> {
         val relevantPlugins = plugins.filterIsInstance<SendMessageListener>().also(::logPlugins)
-        val relevantInterceptors = interceptors.filterIsInstance<SendMessageInterceptor>()
-        return CoroutineCall(scope) {
+        val sendMessageInterceptors = interceptors.filterIsInstance<SendMessageInterceptor>()
 
+        return CoroutineCall(scope) {
             // Message is first prepared i.e. all its attachments are uploaded and message is updated with
             // these attachments.
-            relevantInterceptors.fold(Result.success(message)) { message, interceptor ->
+            sendMessageInterceptors.fold(Result.success(message)) { message, interceptor ->
                 if (message.isSuccess) {
                     interceptor.interceptMessage(channelType, channelId, message.data(), isRetrying)
                 } else message
@@ -1500,15 +1533,26 @@ internal constructor(
      *
      * @param request The request's parameters combined into [QueryChannelsRequest] class.
      *
+     * @see [queryChannels]
+     *
      * @return Executable async [Call] responsible for querying channels.
      */
     @CheckResult
     @InternalStreamChatApi
     public fun queryChannelsInternal(request: QueryChannelsRequest): Call<List<Channel>> {
-        logger.d { "[queryChannelsInternal] request: $request" }
-        return callPostponeHelper.postponeCall { api.queryChannels(request) }
+        val isConnectionRequired = request.watch || request.presence
+        logger.d { "[queryChannelsInternal] request: $request, isConnectionRequired: $isConnectionRequired" }
+
+        return callPostponeHelper.postponeCallIfNeeded(shouldPostpone = isConnectionRequired) {
+            api.queryChannels(request)
+        }
     }
 
+    /**
+     * Runs [queryChannel] without applying side effects.
+     *
+     * @see [queryChannel]
+     */
     @CheckResult
     @InternalStreamChatApi
     public fun queryChannelInternal(
@@ -1516,14 +1560,23 @@ internal constructor(
         channelId: String,
         request: QueryChannelRequest,
     ): Call<Channel> {
-        logger.d { "[queryChannelInternal] cid: $channelType:$channelId, request: $request" }
-        return api.queryChannel(channelType, channelId, request)
+        val isConnectionRequired = request.watch || request.presence
+        logger.d {
+            "[queryChannelInternal] cid: $channelType:$channelId, request: $request, " +
+                "isConnectionRequired: $isConnectionRequired"
+        }
+
+        return callPostponeHelper.postponeCallIfNeeded(shouldPostpone = isConnectionRequired) {
+            api.queryChannel(channelType, channelId, request)
+        }
     }
 
     /**
      * Gets the channel from the server based on [channelType], [channelId] and parameters from [QueryChannelRequest].
-     * The call requires active socket connection and will be automatically postponed and retried until
-     * the connection is established or the maximum number of attempts is reached.
+     * The call requires active socket connection if [QueryChannelRequest.watch] or [QueryChannelRequest.presence] is
+     * enabled, and will be automatically postponed and retried until the connection is established or the maximum
+     * number of attempts is reached.
+     *
      * @see [CallPostponeHelper]
      *
      * @param request The request's parameters combined into [QueryChannelRequest] class.
@@ -1536,38 +1589,29 @@ internal constructor(
         channelId: String,
         request: QueryChannelRequest,
     ): Call<Channel> {
-        val isConnectionRequired = request.watch || request.presence
-        logger.d {
-            "[queryChannel] channelType: $channelType, channelId: $channelId, " +
-                "isConnectionRequired: $isConnectionRequired"
-        }
-
         val relevantPlugins = plugins.filterIsInstance<QueryChannelListener>().also(::logPlugins)
 
-        val callBuilder = { api.queryChannel(channelType, channelId, request) }
-        val queryChannelCall = when (isConnectionRequired) {
-            true -> callPostponeHelper.postponeCall(callBuilder)
-            else -> callBuilder.invoke()
-        }
-        return queryChannelCall.doOnStart(scope) {
-            relevantPlugins.forEach { plugin ->
-                logger.v { "[queryChannel] #doOnStart; plugin: ${plugin::class.qualifiedName}" }
-                plugin.onQueryChannelRequest(channelType, channelId, request)
+        return queryChannelInternal(channelType = channelType, channelId = channelId, request = request)
+            .doOnStart(scope) {
+                relevantPlugins.forEach { plugin ->
+                    logger.v { "[queryChannel] #doOnStart; plugin: ${plugin::class.qualifiedName}" }
+                    plugin.onQueryChannelRequest(channelType, channelId, request)
+                }
+            }.doOnResult(scope) { result ->
+                relevantPlugins.forEach { plugin ->
+                    logger.v { "[queryChannel] #doOnResult; plugin: ${plugin::class.qualifiedName}" }
+                    plugin.onQueryChannelResult(result, channelType, channelId, request)
+                }
+            }.precondition(relevantPlugins) {
+                onQueryChannelPrecondition(channelType, channelId, request)
             }
-        }.doOnResult(scope) { result ->
-            relevantPlugins.forEach { plugin ->
-                logger.v { "[queryChannel] #doOnResult; plugin: ${plugin::class.qualifiedName}" }
-                plugin.onQueryChannelResult(result, channelType, channelId, request)
-            }
-        }.precondition(relevantPlugins) {
-            onQueryChannelPrecondition(channelType, channelId, request)
-        }
     }
 
     /**
      * Gets the channels from the server based on parameters from [QueryChannelsRequest].
-     * The call requires active socket connection and will be automatically postponed and retried until
-     * the connection is established or the maximum number of attempts is reached.
+     * The call requires active socket connection if [QueryChannelsRequest.watch] or [QueryChannelsRequest.presence] is
+     * enabled, and will be automatically postponed and retried until the connection is established or
+     * the maximum number of attempts is reached.
      * @see [CallPostponeHelper]
      *
      * @param request The request's parameters combined into [QueryChannelsRequest] class.
@@ -1576,14 +1620,10 @@ internal constructor(
      */
     @CheckResult
     public fun queryChannels(request: QueryChannelsRequest): Call<List<Channel>> {
-        logger.d { "[queryChannels] request: $request" }
-
         val relevantPluginsLazy = { plugins.filterIsInstance<QueryChannelsListener>() }
         logPlugins(relevantPluginsLazy())
 
-        return callPostponeHelper.postponeCall {
-            api.queryChannels(request)
-        }.doOnStart(scope) {
+        return queryChannelsInternal(request = request).doOnStart(scope) {
             relevantPluginsLazy().forEach { listener ->
                 logger.v { "[queryChannels] #doOnStart; plugin: ${listener::class.qualifiedName}" }
                 listener.onQueryChannelsRequest(request)
@@ -1674,9 +1714,19 @@ internal constructor(
         )
     }
 
+    /**
+     * Stops watching the channel which means you won't receive more events for the channel.
+     * The call requires active socket connection and will be automatically postponed and
+     * retried until the connection is established.
+     *
+     * @param channelType The channel type. ie messaging.
+     * @param channelId The channel id. ie 123.
+     *
+     * @return Executable async [Call] responsible for stop watching the channel.
+     */
     @CheckResult
     public fun stopWatching(channelType: String, channelId: String): Call<Unit> {
-        return api.stopWatching(channelType, channelId)
+        return callPostponeHelper.postponeCall { api.stopWatching(channelType, channelId) }
     }
 
     /**
@@ -1879,12 +1929,24 @@ internal constructor(
     /**
      * Query users matching [query] request.
      *
+     * The call requires active socket connection if [QueryUsersRequest.presence] is enabled, and will be
+     * automatically postponed and retried until the connection is established.
+     *
      * @param query [QueryUsersRequest] with query parameters like filters, sort to get matching users.
      *
      * @return [Call] with a list of [User].
      */
     @CheckResult
-    public fun queryUsers(query: QueryUsersRequest): Call<List<User>> = api.queryUsers(query)
+    public fun queryUsers(query: QueryUsersRequest): Call<List<User>> {
+        val isConnectionRequired = query.presence
+        logger.d {
+            "[queryUsers]  request: $query, isConnectionRequired: $isConnectionRequired"
+        }
+
+        return callPostponeHelper.postponeCallIfNeeded(shouldPostpone = isConnectionRequired) {
+            api.queryUsers(query)
+        }
+    }
 
     /**
      * Adds members to a given channel.
@@ -2272,8 +2334,8 @@ internal constructor(
      * Returns all events that happened for a list of channels since last sync (while the user was not
      * connected to the web-socket).
      *
-     * @param channelsIds The list of channel CIDs
-     * @param lastSyncAt The last time the user was online and in sync
+     * @param channelsIds The list of channel CIDs. Cannot be empty.
+     * @param lastSyncAt The last time the user was online and in sync. Shouldn't be later than 30 days.
      *
      * @return Executable async [Call] responsible for obtaining missing events.
      */
@@ -2284,11 +2346,27 @@ internal constructor(
     ): Call<List<ChatEvent>> {
         return api.getSyncHistory(channelsIds, lastSyncAt)
             .withPrecondition(scope) {
-                when (channelsIds.isEmpty()) {
-                    true -> Result.error(ChatError("channelsIds must contain at least 1 id."))
-                    else -> Result.success(Unit)
-                }
+                checkSyncHistoryPreconditions(channelsIds, lastSyncAt)
             }
+    }
+
+    /**
+     * Checks if sync history request parameters meet preconditions:
+     * 1. If [channelsIds] is not empty.
+     * 2. If [lastSyncAt] is no later than 30 days
+     */
+    private fun checkSyncHistoryPreconditions(channelsIds: List<String>, lastSyncAt: Date): Result<Unit> {
+        return when {
+            channelsIds.isEmpty() -> {
+                Result.error(ChatError("channelsIds must contain at least 1 id."))
+            }
+            lastSyncAt.isLaterThanDays(THIRTY_DAYS_IN_MILLISECONDS) -> {
+                Result.error(ChatError("lastSyncAt cannot by later than 30 days."))
+            }
+            else -> {
+                Result.success(Unit)
+            }
+        }
     }
 
     /**
@@ -2431,6 +2509,7 @@ internal constructor(
         private var retryPolicy: RetryPolicy = NoRetryPolicy()
         private var distinctApiCalls: Boolean = true
         private var debugRequests: Boolean = false
+        private var repositoryFactoryProvider: RepositoryFactory.Provider? = null
 
         /**
          * Sets the log level to be used by the client.
@@ -2554,6 +2633,13 @@ internal constructor(
         }
 
         /**
+         * Inject a [RepositoryFactory.Provider] to use your own DB Persistence mechanism.
+         */
+        public fun withRepositoryFactoryProvider(provider: RepositoryFactory.Provider): Builder = apply {
+            repositoryFactoryProvider = provider
+        }
+
+        /**
          * Adds a plugin factory to be used by the client.
          * @see [PluginFactory]
          *
@@ -2597,16 +2683,6 @@ internal constructor(
             this.distinctApiCalls = false
         }
 
-        private fun configureInitializer(chatClient: ChatClient) {
-            chatClient.initializationCoordinator.addUserConnectionRequestListener { user ->
-                chatClient.addPlugins(
-                    pluginFactories.map { pluginFactory ->
-                        pluginFactory.get(user)
-                    }
-                )
-            }
-        }
-
         public override fun build(): ChatClient {
             return super.build()
         }
@@ -2617,6 +2693,7 @@ internal constructor(
             replaceWith = ReplaceWith("this.build()"),
             level = DeprecationLevel.ERROR
         )
+        @SuppressWarnings("LongMethod")
         override fun internalBuild(): ChatClient {
             if (apiKey.isEmpty()) {
                 throw IllegalStateException("apiKey is not defined in " + this::class.java.simpleName)
@@ -2679,10 +2756,15 @@ internal constructor(
                 retryPolicy = retryPolicy,
                 appSettingsManager = appSettingsManager,
                 chatSocketExperimental = module.experimentalSocket(),
-                lifecycle = lifecycle
-            ).also {
-                configureInitializer(it)
-            }
+                lifecycle = lifecycle,
+                pluginFactories = pluginFactories,
+                repositoryFactoryProvider = repositoryFactoryProvider
+                    ?: pluginFactories
+                        .filterIsInstance<RepositoryFactory.Provider>()
+                        .firstOrNull()
+                    ?: NoOpRepositoryFactory.Provider,
+                clientState = ClientStateImpl(module.networkLifecyclePublisher())
+            )
         }
 
         private fun setupStreamLog() {
@@ -2736,10 +2818,12 @@ internal constructor(
         @JvmStatic
         public var OFFLINE_SUPPORT_ENABLED: Boolean = false
 
+        private const val DELAY_TIME_TO_CANCEL_CHILDREN = 100L
         private const val MAX_COOLDOWN_TIME_SECONDS = 120
         private const val KEY_MESSAGE_ACTION = "image_action"
         private const val MESSAGE_ACTION_SEND = "send"
         private const val MESSAGE_ACTION_SHUFFLE = "shuffle"
+        private val THIRTY_DAYS_IN_MILLISECONDS = 30.days.inWholeMilliseconds
 
         private const val ARG_TYPING_PARENT_ID = "parent_id"
 

@@ -25,6 +25,7 @@ import com.getstream.sdk.chat.utils.extensions.getCreatedAtOrThrow
 import com.getstream.sdk.chat.utils.extensions.isModerationFailed
 import com.getstream.sdk.chat.utils.extensions.shouldShowMessageFooter
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.call.enqueue
 import io.getstream.chat.android.client.extensions.cidToTypeAndId
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.ChannelUserRead
@@ -74,8 +75,6 @@ import io.getstream.chat.android.offline.extensions.cancelEphemeralMessage
 import io.getstream.chat.android.offline.extensions.getRepliesAsState
 import io.getstream.chat.android.offline.extensions.globalState
 import io.getstream.chat.android.offline.extensions.loadMessageById
-import io.getstream.chat.android.offline.extensions.loadNewerMessages
-import io.getstream.chat.android.offline.extensions.loadNewestMessages
 import io.getstream.chat.android.offline.extensions.loadOlderMessages
 import io.getstream.chat.android.offline.extensions.watchChannelAsState
 import io.getstream.chat.android.offline.plugin.state.channel.ChannelState
@@ -111,7 +110,7 @@ import java.util.concurrent.TimeUnit
  * @param dateSeparatorThresholdMillis The threshold in millis used to generate date separator items, if enabled.
  * @param deletedMessageVisibility The behavior of deleted messages in the list and if they're visible or not.
  */
-@Suppress("TooManyFunctions")
+@Suppress("TooManyFunctions", "LargeClass", "TooManyFunctions")
 public class MessageListViewModel(
     public val chatClient: ChatClient,
     private val channelId: String,
@@ -236,6 +235,11 @@ public class MessageListViewModel(
     private var lastLoadedMessage: Message? = null
 
     /**
+     * Represents the last loaded message in the thread, for comparison when determining the NewMessage
+     */
+    private var lastLoadedThreadMessage: Message? = null
+
+    /**
      * Represents the latest message we've seen in the channel.
      */
     private var lastSeenChannelMessage: Message? by mutableStateOf(null)
@@ -272,13 +276,7 @@ public class MessageListViewModel(
     private fun observeChannel() {
         viewModelScope.launch {
             channelState.filterNotNull().collectLatest { channelState ->
-                combine(
-                    channelState.messagesState,
-                    user,
-                    channelState.reads,
-                    channelState.unreadCount,
-                    channelState.endOfNewerMessages
-                ) { state, user, reads, unreadCount, endOfNewerMessages ->
+                combine(channelState.messagesState, user, channelState.reads) { state, user, reads ->
                     when (state) {
                         is io.getstream.chat.android.offline.plugin.state.channel.MessagesState.NoQueryActive,
                         is io.getstream.chat.android.offline.plugin.state.channel.MessagesState.Loading,
@@ -298,11 +296,7 @@ public class MessageListViewModel(
                                 ),
                                 isLoadingMore = false,
                                 endOfMessages = channelState.endOfOlderMessages.value,
-                                startOfMessages = endOfNewerMessages,
                                 currentUser = user,
-                                isLoadingMoreNewMessages = false,
-                                isLoadingMoreOldMessages = false,
-                                unreadCount = unreadCount ?: messagesState.unreadCount
                             )
                         }
                     }
@@ -320,19 +314,20 @@ public class MessageListViewModel(
                             newLastMessage?.id != lastLoadedMessage?.id
 
                         messagesState = if (hasNewMessage) {
-                            val newMessageState = getNewMessageState(newLastMessage)
+                            val newMessageState = getNewMessageState(newLastMessage, lastLoadedMessage)
 
                             newState.copy(
                                 newMessageState = newMessageState,
+                                unreadCount = getUnreadMessageCount(newMessageState)
                             )
                         } else {
                             newState
                         }
 
-                        if (scrollToMessage != null) {
-                            messagesState.messageItems.firstOrNull {
-                                it is MessageItemState && it.message.id == scrollToMessage?.id
-                            }?.let { focusMessage((it as MessageItemState).message.id) }
+                        messagesState.messageItems.firstOrNull {
+                            it is MessageItemState && it.message.id == scrollToMessage?.id
+                        }?.let {
+                            focusMessage((it as MessageItemState).message.id)
                         }
 
                         lastLoadedMessage = newLastMessage
@@ -396,8 +391,7 @@ public class MessageListViewModel(
      *
      * @param lastMessage Last message in the list, used for comparison.
      */
-    private fun getNewMessageState(lastMessage: Message?): NewMessageState? {
-        val lastLoadedMessage = lastLoadedMessage
+    private fun getNewMessageState(lastMessage: Message?, lastLoadedMessage: Message?): NewMessageState? {
         val currentUser = user.value
 
         return if (lastMessage != null && lastLoadedMessage != null && lastMessage.id != lastLoadedMessage.id) {
@@ -516,14 +510,6 @@ public class MessageListViewModel(
     /**
      * Triggered when the user loads more data by reaching the end of the current messages.
      */
-    @Deprecated(
-        message = "Deprecated after implementing bi directional pagination.",
-        replaceWith = ReplaceWith(
-            "loadOlderMessages(messageId: String)",
-            "io.getstream.chat.android.compose.viewmodel.messages"
-        ),
-        level = DeprecationLevel.WARNING
-    )
     public fun loadMore() {
         if (chatClient.clientState.isOffline) return
         val messageMode = messageMode
@@ -531,38 +517,7 @@ public class MessageListViewModel(
         if (messageMode is MessageMode.MessageThread) {
             threadLoadMore(messageMode)
         } else {
-            messagesState = messagesState.copy(isLoadingMore = true, isLoadingMoreOldMessages = true)
-            chatClient.loadOlderMessages(channelId, messageLimit).enqueue()
-        }
-    }
-
-    /**
-     * Loads newer messages of a channel following the currently newest loaded message. In case of threads this will
-     * do nothing.
-     *
-     * @param messageId The id of the newest [Message] inside the messages list.
-     */
-    public fun loadNewerMessages(messageId: String) {
-        if (chatClient.globalState.isOffline() || messagesState.startOfMessages) return
-
-        if (messageMode is MessageMode.Normal) {
-            messagesState = messagesState.copy(isLoadingMore = true, isLoadingMoreNewMessages = true)
-            chatClient.loadNewerMessages(channelId, messageId, messageLimit).enqueue()
-        }
-    }
-
-    /**
-     * Loads older messages of a channel following the currently oldest loaded message. Also will load older messages
-     * of a thread.
-     */
-    public fun loadOlderMessages() {
-        if (chatClient.globalState.isOffline() || messagesState.endOfMessages) return
-        val messageMode = messageMode
-
-        if (messageMode is MessageMode.MessageThread) {
-            threadLoadMore(messageMode)
-        } else {
-            messagesState = messagesState.copy(isLoadingMore = true, isLoadingMoreOldMessages = true)
+            messagesState = messagesState.copy(isLoadingMore = true)
             chatClient.loadOlderMessages(channelId, messageLimit).enqueue()
         }
     }
@@ -592,7 +547,10 @@ public class MessageListViewModel(
      * @param message The selected message we wish to scroll to.
      */
     private fun loadMessage(message: Message) {
-        chatClient.loadMessageById(channelId, message.id).enqueue()
+        val cid = channelState.value?.cid
+        if (cid == null || chatClient.clientState.isOffline) return
+
+        chatClient.loadMessageById(cid, message.id).enqueue()
     }
 
     /**
@@ -770,11 +728,16 @@ public class MessageListViewModel(
                     isLoadingMore = false,
                     endOfMessages = endOfOlderMessages,
                     currentUser = user,
-                    parentMessageId = threadId,
-                    isLoadingMoreOldMessages = false,
-                    isLoadingMoreNewMessages = false
+                    parentMessageId = threadId
                 )
-            }.collect { newState -> threadMessagesState = newState }
+            }.collect { newState ->
+                val newLastMessage =
+                    (newState.messageItems.firstOrNull { it is MessageItemState } as? MessageItemState)?.message
+                threadMessagesState = newState.copy(
+                    newMessageState = getNewMessageState(newLastMessage, lastLoadedThreadMessage)
+                )
+                lastLoadedThreadMessage = newLastMessage
+            }
         }
     }
 
@@ -944,10 +907,119 @@ public class MessageListViewModel(
         val isUserMuted = chatClient.globalState.muted.value.any { it.target.id == user.id }
 
         if (isUserMuted) {
-            chatClient.unmuteUser(user.id)
+            unmuteUser(user.id)
         } else {
-            chatClient.muteUser(user.id)
-        }.enqueue()
+            muteUser(user.id)
+        }
+    }
+
+    /**
+     * Mutes the given user inside this channel.
+     *
+     * @param userId The ID of the user to be muted.
+     * @param timeout The period of time for which the user will
+     * be muted, expressed in minutes. A null value signifies that
+     * the user will be muted for an indefinite time.
+     */
+    public fun muteUser(
+        userId: String,
+        timeout: Int? = null,
+    ) {
+        chatClient.muteUser(userId, timeout)
+            .enqueue(onError = { chatError ->
+                val errorMessage = chatError.message ?: chatError.cause?.message ?: "Unable to mute the user"
+
+                StreamLog.e("MessageListViewModel.muteUser") { errorMessage }
+            })
+    }
+
+    /**
+     * Unmutes the given user inside this channel.
+     *
+     * @param userId The ID of the user to be unmuted.
+     */
+    public fun unmuteUser(userId: String) {
+        chatClient.unmuteUser(userId)
+            .enqueue(onError = { chatError ->
+                val errorMessage = chatError.message ?: chatError.cause?.message ?: "Unable to unmute the user"
+
+                StreamLog.e("MessageListViewModel.unMuteUser") { errorMessage }
+            })
+    }
+
+    /**
+     * Bans the given user inside this channel.
+     *
+     * @param userId The ID of the user to be banned.
+     * @param reason The reason for banning the user.
+     * @param timeout The period of time for which the user will
+     * be banned, expressed in minutes. A null value signifies that
+     * the user will be banned for an indefinite time.
+     */
+    public fun banUser(
+        userId: String,
+        reason: String? = null,
+        timeout: Int? = null,
+    ) {
+        chatClient.channel(channelId).banUser(userId, reason, timeout)
+            .enqueue(onError = { chatError ->
+                val errorMessage = chatError.message ?: chatError.cause?.message ?: "Unable to ban the user"
+
+                StreamLog.e("MessageListViewModel.banUser") { errorMessage }
+            })
+    }
+
+    /**
+     * Unbans the given user inside this channel.
+     *
+     * @param userId The ID of the user to be unbanned.
+     */
+    public fun unbanUser(userId: String) {
+        chatClient.channel(channelId).unbanUser(userId)
+            .enqueue(onError = { chatError ->
+                val errorMessage = chatError.message ?: chatError.cause?.message ?: "Unable to unban the user"
+
+                StreamLog.e("MessageListViewModel.unban") { errorMessage }
+            })
+    }
+
+    /**
+     * Shadow bans the given user inside this channel.
+     *
+     * @param userId The ID of the user to be shadow banned.
+     * @param reason The reason for shadow banning the user.
+     * @param timeout The period of time for which the user will
+     * be shadow banned, expressed in minutes. A null value signifies that
+     * the user will be shadow banned for an indefinite time.
+     */
+    public fun shadowBanUser(
+        userId: String,
+        reason: String? = null,
+        timeout: Int? = null,
+    ) {
+        chatClient.channel(channelId).shadowBanUser(userId, reason, timeout)
+            .enqueue(onError = { chatError ->
+                val errorMessage = chatError.message ?: chatError.cause?.message ?: "Unable to shadow ban the user"
+
+                StreamLog.e("MessageListViewModel.shadowBanUser") { errorMessage }
+            })
+    }
+
+    /**
+     * Removes the shaddow ban for the given user inside
+     * this channel.
+     *
+     * @param userId The ID of the user for which the shadow
+     * ban is removed.
+     */
+    public fun removeShadowBanFromUser(userId: String) {
+        chatClient.channel(channelId).removeShadowBan(userId)
+            .enqueue(onError = { chatError ->
+                val errorMessage =
+                    chatError.message ?: chatError.cause?.message ?: "Unable to remove the user shadow ban"
+
+                StreamLog.e("MessageListViewModel.removeShadowBanFromUser") { errorMessage }
+            })
     }
 
     /**
@@ -1017,9 +1089,7 @@ public class MessageListViewModel(
      * or "New Message" actions in the list or simply scrolls to the bottom.
      */
     public fun clearNewMessageState() {
-        if (!messagesState.startOfMessages) return
         threadMessagesState = threadMessagesState.copy(newMessageState = null, unreadCount = 0)
-
         messagesState = messagesState.copy(newMessageState = null, unreadCount = 0)
     }
 
@@ -1070,14 +1140,12 @@ public class MessageListViewModel(
      * Updates the current message state with new messages.
      *
      * @param messages The list of new message items.
-     * */
+     */
     private fun updateMessages(messages: List<MessageListItemState>) {
         if (isInThread) {
-            this.threadMessagesState =
-                threadMessagesState.copy(messageItems = messages)
+            this.threadMessagesState = threadMessagesState.copy(messageItems = messages)
         } else {
-            this.messagesState =
-                messagesState.copy(messageItems = messages)
+            this.messagesState = messagesState.copy(messageItems = messages)
         }
     }
 
@@ -1109,47 +1177,20 @@ public class MessageListViewModel(
     }
 
     /**
-     * Scrolls to message if in list otherwise get the message from backend. Does not work for threads.
+     * Scrolls to message if in list otherwise get the message from backend.
      *
      * @param message The message we wish to scroll to.
      */
     public fun scrollToSelectedMessage(message: Message) {
-        if (isInThread) return
-
         val isMessageInList = currentMessagesState.messageItems.firstOrNull {
             it is MessageItemState && it.message.id == message.id
         } != null
-        scrollToMessage = message
 
         if (isMessageInList) {
             focusMessage(message.id)
         } else {
+            scrollToMessage = message
             loadMessage(message = message)
-        }
-    }
-
-    /**
-     * Requests that the list scrolls to the bottom to the newest messages. If the newest messages are loaded will set
-     * scroll the list to the bottom. If they are not loaded will request the newest data and once loaded will scroll
-     * to the bottom of the list.
-     *
-     * @param messageLimit The message count we wish to load from the API when loading new messages.
-     * @param scrollToBottom Notifies the ui to scroll to the bottom if the newest messages are in the list or have been
-     * loaded from the API.
-     */
-    public fun scrollToBottom(messageLimit: Int = DefaultMessageLimit, scrollToBottom: () -> Unit) {
-        if (isInThread) {
-            scrollToBottom()
-        } else {
-            if (currentMessagesState.startOfMessages) {
-                scrollToBottom()
-                return
-            }
-            chatClient.loadNewestMessages(channelId, messageLimit).enqueue {
-                if (it.isSuccess) {
-                    scrollToBottom()
-                }
-            }
         }
     }
 

@@ -44,7 +44,6 @@ public class GlobalMutableState private constructor(
 
     private val _mutedUsers = MutableStateFlow<List<Mute>>(emptyList())
     private val _channelMutes = MutableStateFlow<List<ChannelMute>>(emptyList())
-    private val _typingChannelsOld = MutableStateFlow(TypingEvent("", emptyList()))
     private val _typingChannels = MutableStateFlow(emptyMap<String, TypingEvent>())
 
     @Deprecated(
@@ -94,8 +93,6 @@ public class GlobalMutableState private constructor(
     override val channelMutes: StateFlow<List<ChannelMute>> = _channelMutes
 
     override val banned: StateFlow<Boolean> = _banned
-
-    override val typingUpdates: StateFlow<TypingEvent> = _typingChannelsOld
 
     override val typingChannels: StateFlow<Map<String, TypingEvent>> = _typingChannels
 
@@ -150,34 +147,20 @@ public class GlobalMutableState private constructor(
     public companion object {
         @InternalStreamChatApi
         @VisibleForTesting
+        @Volatile
         public var instance: GlobalMutableState? = null
 
         /**
          * Gets the singleton of [GlobalMutableState] or creates it in the first call.
          */
         @InternalStreamChatApi
-        public fun getOrCreate(): GlobalMutableState {
-            return instance ?: GlobalMutableState(ClientState.get()).also { globalState ->
-                instance = globalState
+        public fun get(clientState: ClientState): GlobalMutableState {
+            return instance ?: synchronized(this) {
+                instance ?: GlobalMutableState(clientState).also { globalState ->
+                    instance = globalState
+                }
             }
         }
-
-        /**
-         * Gets the current Singleton of GlobalState. If the initialization is not done yet, it returns null.
-         */
-        @Throws(IllegalArgumentException::class)
-        internal fun get(): GlobalMutableState = requireNotNull(instance) {
-            "Offline plugin must be configured in ChatClient. You must provide StreamOfflinePluginFactory as a " +
-                "PluginFactory to be able to use GlobalState from the SDK"
-        }
-
-        /**
-         * Creates an instance of [GlobalMutableState] with a fresh state. Please keep in mind that many instances of this class may
-         * cause the SDK to present an inconsistent state.
-         */
-        @VisibleForTesting
-        internal fun create(): GlobalMutableState =
-            GlobalMutableState(ClientState.create())
     }
 
     override fun clearState() {
@@ -214,7 +197,6 @@ public class GlobalMutableState private constructor(
     }
 
     override fun tryEmitTypingEvent(cid: String, typingEvent: TypingEvent) {
-        _typingChannelsOld.tryEmit(typingEvent)
         val typingChannelsCopy = _typingChannels.value.toMutableMap()
         typingChannelsCopy[cid] = typingEvent
         _typingChannels.tryEmit(typingChannelsCopy)

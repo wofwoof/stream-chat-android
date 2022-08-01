@@ -99,7 +99,7 @@ internal class ChannelStateLogicImpl(
                 message.shouldIncrementUnreadCount(
                     currentUserId = currentUserId,
                     lastMessageAtDate = lastMessageSeenDate,
-                    isChannelMuted = isChannelMutedForCurrentUser(mutableState.cid)
+                    isChannelMuted = isChannelMutedForCurrentUser(mutableState.cid, clientState)
                 )
 
             if (shouldIncrementUnreadCount) {
@@ -131,7 +131,7 @@ internal class ChannelStateLogicImpl(
      * @param channel the data of [Channel] to be updated.
      */
     override fun updateChannelData(channel: Channel) {
-        val currentOwnCapabilities = mutableState.channelData.value?.ownCapabilities ?: emptySet()
+        val currentOwnCapabilities = mutableState.channelData.value.ownCapabilities
         mutableState.setChannelData(ChannelData(channel, currentOwnCapabilities))
     }
 
@@ -242,20 +242,18 @@ internal class ChannelStateLogicImpl(
     }
 
     /**
-     * Upsert messages in the channel.
+     * Upsert members in the channel.
      *
      * @param message The message to be added or updated.
      */
     override fun upsertMessage(message: Message) {
-        if (mutableState.rawMessages.containsKey(message.id) || mutableState.endOfNewerMessages.value) {
-            upsertMessages(listOf(message))
-        }
+        upsertMessages(listOf(message))
     }
 
     /**
-     * Upsert messages in the channel.
+     * Upsert members in the channel.
      *
-     * @param messages the list of [Message] to be upserted.
+     * @param messages the list of [Message] to be upserted
      * @param shouldRefreshMessages if the current messages should be removed or not and only
      * new messages should be kept.
      */
@@ -350,7 +348,7 @@ internal class ChannelStateLogicImpl(
      * @param deleteDate The date when the channel was deleted.
      */
     override fun deleteChannel(deleteDate: Date) {
-        mutableState.setChannelData(mutableState.channelData.value?.copy(deletedAt = deleteDate))
+        mutableState.setChannelData(mutableState.channelData.value.copy(deletedAt = deleteDate))
     }
 
     /**
@@ -421,7 +419,7 @@ internal class ChannelStateLogicImpl(
         setMembers(channel.members)
         setWatchers(channel.watchers)
 
-        if (scrollUpdate || shouldRefreshMessages) {
+        if (!mutableState.insideSearch.value || scrollUpdate) {
             upsertMessages(channel.messages, shouldRefreshMessages)
         }
 
@@ -462,36 +460,19 @@ internal class ChannelStateLogicImpl(
         searchLogic.handleMessageBounds(request, noMoreMessages)
         mutableState.recoveryNeeded = false
 
-        determinePaginationEnd(request, noMoreMessages)
-
-        updateDataFromChannel(
-            channel,
-            shouldRefreshMessages = request.shouldRefresh,
-            scrollUpdate = request.isFilteringMessages()
-        )
-    }
-
-    private fun determinePaginationEnd(request: QueryChannelRequest, noMoreMessages: Boolean) {
-        when {
-            /* If we are not filtering the messages in any direction and not providing any message id then
-            * we are requesting the newest messages, only if not inside search so we don't override the
-            * search results */
-            !request.isFilteringMessages() -> {
-                mutableState.setEndOfOlderMessages(false)
-                mutableState.setEndOfNewerMessages(true)
-            }
-            /* If we are filtering around a specific message we are loading both newer and older messages
-            * and can't be sure if there are no older or newer messages left */
-            request.isFilteringAroundIdMessages() -> {
-                mutableState.setEndOfOlderMessages(false)
-                mutableState.setEndOfNewerMessages(false)
-            }
-            noMoreMessages -> if (request.isFilteringNewerMessages()) {
+        if (noMoreMessages) {
+            if (request.isFilteringNewerMessages()) {
                 mutableState.setEndOfNewerMessages(true)
             } else {
                 mutableState.setEndOfOlderMessages(true)
             }
         }
+
+        updateDataFromChannel(
+            channel,
+            shouldRefreshMessages = request.isFilteringAroundIdMessages(),
+            scrollUpdate = true
+        )
     }
 
     /**
@@ -525,7 +506,7 @@ internal class ChannelStateLogicImpl(
     }
 
     /**
-     * Updates [ChannelMutableState._rawMessages] with new messages.
+     * Updates [ChannelMutableState.rawMessages] with new messages.
      * The message will by only updated if its creation/update date is newer than the one stored in the StateFlow.
      *
      * @param messages The list of messages to update.
