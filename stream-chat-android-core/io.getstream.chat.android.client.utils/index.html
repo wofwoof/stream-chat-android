@@ -1,281 +1,272 @@
+<!doctype html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>io.getstream.chat.android.client.utils</title>
-</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script><script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../scripts/main.js" async></script>
-  
-    <div id="container">
-      <div id="leftColumn"><a href="../../index.html">
-            <div id="logo"></div>
-          </a>
-        <div id="paneSearch"></div>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../index.html">
+<span>stream-chat-android</span>            </a>    </div>
+    <div>5.7.0
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
         <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <script type="text/javascript" src="../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
-
-        <div class="main-content" id="content" pageids="stream-chat-android-core::io.getstream.chat.android.client.utils////PointingToDeclaration//-1733806941">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../index.html">stream-chat-android-core</a>/<a href="index.html">io.getstream.chat.android.client.utils</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span>Package io.</span><wbr><span>getstream.</span><wbr><span>chat.</span><wbr><span>android.</span><wbr><span>client.</span><wbr><span>utils</span></h1>
-          </div>
-          <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
-            <div class="tabs-section-body">
-              <h2 class="">Types</h2>
-              <div class="table" data-togglable="Types"><a data-name="-1862244632%2FClasslikes%2F-1733806941" anchor-label="Result" id="-1862244632%2FClasslikes%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-result/index.html">Result</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1862244632%2FClasslikes%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">class <a href="-result/index.html">Result</a>&lt;<a href="-result/index.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="stream-chat-android-core::io.getstream.chat.android.client.utils////PointingToDeclaration//-1733806941">
+  <div class="breadcrumbs"><a href="../index.html">stream-chat-android-core</a><span class="delimiter">/</span><a href="index.html">io.getstream.chat.android.client.utils</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Package io.</span><wbr><span>getstream.</span><wbr><span>chat.</span><wbr><span>android.</span><wbr><span>client.</span><wbr><span>utils</span></h1>
   </div>
-<a data-name="-1862244632%2FClasslikes%2F-1733806941" anchor-label="Result" id="-1862244632%2FClasslikes%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1862244632%2FClasslikes%2F-1733806941" anchor-label="Result" id="-1862244632%2FClasslikes%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>A class which encapsulates a successful outcome with a value of type <a href="-result/index.html">T</a> or a failure with <a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="-1298730234%2FFunctions%2F-1733806941" anchor-label="flatMap" id="-1298730234%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="flat-map.html">flatMap</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1298730234%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="flat-map.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="flat-map.html">R</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="flat-map.html">T</a>&gt;.<a href="flat-map.html">flatMap</a>(func: (<a href="flat-map.html">T</a>) -&gt; <a href="-result/index.html">Result</a>&lt;<a href="flat-map.html">R</a>&gt;): <a href="-result/index.html">Result</a>&lt;<a href="flat-map.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1298730234%2FFunctions%2F-1733806941" anchor-label="flatMap" id="-1298730234%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1298730234%2FFunctions%2F-1733806941" anchor-label="flatMap" id="-1298730234%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a transformed <a href="-result/index.html">Result</a> from results of the <a href="flat-map.html">func</a> if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1915168555%2FFunctions%2F-1733806941" anchor-label="flatMapSuspend" id="1915168555%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="flat-map-suspend.html">flatMapSuspend</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1915168555%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">suspend fun &lt;<a href="flat-map-suspend.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="flat-map-suspend.html">R</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="flat-map-suspend.html">T</a>&gt;.<a href="flat-map-suspend.html">flatMapSuspend</a>(func: suspend (<a href="flat-map-suspend.html">T</a>) -&gt; <a href="-result/index.html">Result</a>&lt;<a href="flat-map-suspend.html">R</a>&gt;): <a href="-result/index.html">Result</a>&lt;<a href="flat-map-suspend.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1915168555%2FFunctions%2F-1733806941" anchor-label="flatMapSuspend" id="1915168555%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1915168555%2FFunctions%2F-1733806941" anchor-label="flatMapSuspend" id="1915168555%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a transformed <a href="-result/index.html">Result</a> from results of the suspending <a href="flat-map-suspend.html">func</a> if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1938561389%2FFunctions%2F-1733806941" anchor-label="map" id="-1938561389%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="map.html">map</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938561389%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="map.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="map.html">K</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="map.html">T</a>&gt;.<a href="map.html">map</a>(mapper: (<a href="map.html">T</a>) -&gt; <a href="map.html">K</a>): <a href="-result/index.html">Result</a>&lt;<a href="map.html">K</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1938561389%2FFunctions%2F-1733806941" anchor-label="map" id="-1938561389%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1938561389%2FFunctions%2F-1733806941" anchor-label="map" id="-1938561389%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a transformed <a href="-result/index.html">Result</a> of applying the given <a href="map.html">mapper</a> function if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="714633504%2FFunctions%2F-1733806941" anchor-label="mapSuspend" id="714633504%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="map-suspend.html">mapSuspend</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="714633504%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">suspend fun &lt;<a href="map-suspend.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="map-suspend.html">K</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="map-suspend.html">T</a>&gt;.<a href="map-suspend.html">mapSuspend</a>(mapper: suspend (<a href="map-suspend.html">T</a>) -&gt; <a href="map-suspend.html">K</a>): <a href="-result/index.html">Result</a>&lt;<a href="map-suspend.html">K</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="714633504%2FFunctions%2F-1733806941" anchor-label="mapSuspend" id="714633504%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="714633504%2FFunctions%2F-1733806941" anchor-label="mapSuspend" id="714633504%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a transformed <a href="-result/index.html">Result</a> of applying the given suspending <a href="map-suspend.html">mapper</a> function if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1861147046%2FFunctions%2F-1733806941" anchor-label="onError" id="-1861147046%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-error.html">onError</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1861147046%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">inline fun &lt;<a href="on-error.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="on-error.html">T</a>&gt;.<a href="on-error.html">onError</a>(crossinline errorSideEffect: (<a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-result/index.html">Result</a>&lt;<a href="on-error.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1861147046%2FFunctions%2F-1733806941" anchor-label="onError" id="-1861147046%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1861147046%2FFunctions%2F-1733806941" anchor-label="onError" id="-1861147046%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Runs the <a href="on-error.html">errorSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains an error payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1816897313%2FFunctions%2F-1733806941" anchor-label="onErrorSuspend" id="1816897313%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-error-suspend.html">onErrorSuspend</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1816897313%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">inline suspend fun &lt;<a href="on-error-suspend.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="on-error-suspend.html">T</a>&gt;.<a href="on-error-suspend.html">onErrorSuspend</a>(crossinline errorSideEffect: suspend (<a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-result/index.html">Result</a>&lt;<a href="on-error-suspend.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1816897313%2FFunctions%2F-1733806941" anchor-label="onErrorSuspend" id="1816897313%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1816897313%2FFunctions%2F-1733806941" anchor-label="onErrorSuspend" id="1816897313%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Runs the suspending <a href="on-error-suspend.html">errorSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains an error payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1360801279%2FFunctions%2F-1733806941" anchor-label="onSuccess" id="-1360801279%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-success.html">onSuccess</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1360801279%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">inline fun &lt;<a href="on-success.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="on-success.html">T</a>&gt;.<a href="on-success.html">onSuccess</a>(crossinline successSideEffect: (<a href="on-success.html">T</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-result/index.html">Result</a>&lt;<a href="on-success.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1360801279%2FFunctions%2F-1733806941" anchor-label="onSuccess" id="-1360801279%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1360801279%2FFunctions%2F-1733806941" anchor-label="onSuccess" id="-1360801279%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Runs the <a href="on-success.html">successSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="329111940%2FFunctions%2F-1733806941" anchor-label="onSuccessSuspend" id="329111940%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-success-suspend.html">onSuccessSuspend</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="329111940%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">inline suspend fun &lt;<a href="on-success-suspend.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="on-success-suspend.html">T</a>&gt;.<a href="on-success-suspend.html">onSuccessSuspend</a>(crossinline successSideEffect: suspend (<a href="on-success-suspend.html">T</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-result/index.html">Result</a>&lt;<a href="on-success-suspend.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="329111940%2FFunctions%2F-1733806941" anchor-label="onSuccessSuspend" id="329111940%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="329111940%2FFunctions%2F-1733806941" anchor-label="onSuccessSuspend" id="329111940%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Runs the suspending <a href="on-success-suspend.html">successSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains a successful data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1689129075%2FFunctions%2F-1733806941" anchor-label="recover" id="-1689129075%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="recover.html">recover</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1689129075%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="recover.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="recover.html">T</a>&gt;.<a href="recover.html">recover</a>(errorMapper: (<a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>) -&gt; <a href="recover.html">T</a>): <a href="-result/index.html">Result</a>&lt;<a href="recover.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1689129075%2FFunctions%2F-1733806941" anchor-label="recover" id="-1689129075%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1689129075%2FFunctions%2F-1733806941" anchor-label="recover" id="-1689129075%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Recovers the error payload by applying the given <a href="recover.html">errorMapper</a> function if the <a href="-result/index.html">Result</a> contains an error payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="587804112%2FFunctions%2F-1733806941" anchor-label="recoverSuspend" id="587804112%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="recover-suspend.html">recoverSuspend</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="587804112%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">suspend fun &lt;<a href="recover-suspend.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="-result/index.html">Result</a>&lt;<a href="recover-suspend.html">T</a>&gt;.<a href="recover-suspend.html">recoverSuspend</a>(errorMapper: suspend (<a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>) -&gt; <a href="recover-suspend.html">T</a>): <a href="-result/index.html">Result</a>&lt;<a href="recover-suspend.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="587804112%2FFunctions%2F-1733806941" anchor-label="recoverSuspend" id="587804112%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="587804112%2FFunctions%2F-1733806941" anchor-label="recoverSuspend" id="587804112%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Recovers the error payload by applying the given suspending <a href="recover-suspend.html">errorMapper</a> function if the <a href="-result/index.html">Result</a> contains an error payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1762788245%2FFunctions%2F-1733806941" anchor-label="toResult" id="1762788245%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="to-result.html">toResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1762788245%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="to-result.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="to-result.html">T</a>.<a href="to-result.html">toResult</a>(): <a href="-result/index.html">Result</a>&lt;<a href="to-result.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1762788245%2FFunctions%2F-1733806941" anchor-label="toResult" id="1762788245%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1762788245%2FFunctions%2F-1733806941" anchor-label="toResult" id="1762788245%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a <a href="-result/index.html">Result</a> that contains an instance of <a href="to-result.html">T</a> as a data payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1064642169%2FFunctions%2F-1733806941" anchor-label="toResultError" id="-1064642169%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="to-result-error.html">toResultError</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1064642169%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="to-result-error.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>.<a href="to-result-error.html">toResultError</a>(): <a href="-result/index.html">Result</a>&lt;<a href="to-result-error.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1064642169%2FFunctions%2F-1733806941" anchor-label="toResultError" id="-1064642169%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1064642169%2FFunctions%2F-1733806941" anchor-label="toResultError" id="-1064642169%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a <a href="-result/index.html">Result</a> of type <a href="to-result-error.html">T</a> that contains an they same error as payload.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="847164388%2FFunctions%2F-1733806941" anchor-label="toUnitResult" id="847164388%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="to-unit-result.html">toUnitResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="847164388%2FFunctions%2F-1733806941"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="-result/index.html">Result</a>&lt;*&gt;.<a href="to-unit-result.html">toUnitResult</a>(): <a href="-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="847164388%2FFunctions%2F-1733806941" anchor-label="toUnitResult" id="847164388%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="847164388%2FFunctions%2F-1733806941" anchor-label="toUnitResult" id="847164388%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>Returns a <a href="-result/index.html">Result</a> of <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> from any type of a <a href="-result/index.html">Result</a>.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="-1862244632%2FClasslikes%2F-1733806941" anchor-label="Result" id="-1862244632%2FClasslikes%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-result/index.html"><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1862244632%2FClasslikes%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-result/index.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">A class which encapsulates a successful outcome with a value of type <a href="-result/index.html">T</a> or a failure with <a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a>.</p></div></div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-1298730234%2FFunctions%2F-1733806941" anchor-label="flatMap" id="-1298730234%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="flat-map.html"><span>flat</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1298730234%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="flat-map.html">R</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="flat-map.html"><span class="token function">flatMap</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="flat-map.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a transformed <a href="-result/index.html">Result</a> from results of the <a href="flat-map.html">func</a> if the <a href="-result/index.html">Result</a> contains a successful data payload. Returns an original <a href="-result/index.html">Result</a> if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1915168555%2FFunctions%2F-1733806941" anchor-label="flatMapSuspend" id="1915168555%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="flat-map-suspend.html"><span>flat</span><wbr><span>Map</span><wbr><span><span>Suspend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1915168555%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map-suspend.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="flat-map-suspend.html">R</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map-suspend.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="flat-map-suspend.html"><span class="token function">flatMapSuspend</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="flat-map-suspend.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map-suspend.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="flat-map-suspend.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a transformed <a href="-result/index.html">Result</a> from results of the suspending <a href="flat-map-suspend.html">func</a> if the <a href="-result/index.html">Result</a> contains a successful data payload. Returns an original <a href="-result/index.html">Result</a> if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1938561389%2FFunctions%2F-1733806941" anchor-label="map" id="-1938561389%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="map.html"><span><span>map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938561389%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="map.html">K</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="map.html"><span class="token function">map</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">mapper<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="map.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="map.html">K</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map.html">K</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a transformed <a href="-result/index.html">Result</a> of applying the given <a href="map.html">mapper</a> function if the <a href="-result/index.html">Result</a> contains a successful data payload. Returns an original <a href="-result/index.html">Result</a> if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="714633504%2FFunctions%2F-1733806941" anchor-label="mapSuspend" id="714633504%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="map-suspend.html"><span>map</span><wbr><span><span>Suspend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="714633504%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map-suspend.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="map-suspend.html">K</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map-suspend.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="map-suspend.html"><span class="token function">mapSuspend</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">mapper<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="map-suspend.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="map-suspend.html">K</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="map-suspend.html">K</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a transformed <a href="-result/index.html">Result</a> of applying the given suspending <a href="map-suspend.html">mapper</a> function if the <a href="-result/index.html">Result</a> contains a successful data payload. Returns an original <a href="-result/index.html">Result</a> if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1861147046%2FFunctions%2F-1733806941" anchor-label="onError" id="-1861147046%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-error.html"><span>on</span><wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1861147046%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="on-error.html"><span class="token function">onError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>errorSideEffect<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Runs the <a href="on-error.html">errorSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1816897313%2FFunctions%2F-1733806941" anchor-label="onErrorSuspend" id="1816897313%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-error-suspend.html"><span>on</span><wbr><span>Error</span><wbr><span><span>Suspend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1816897313%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error-suspend.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error-suspend.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="on-error-suspend.html"><span class="token function">onErrorSuspend</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>errorSideEffect<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-error-suspend.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Runs the suspending <a href="on-error-suspend.html">errorSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1360801279%2FFunctions%2F-1733806941" anchor-label="onSuccess" id="-1360801279%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-success.html"><span>on</span><wbr><span><span>Success</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1360801279%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="on-success.html"><span class="token function">onSuccess</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>successSideEffect<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="on-success.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Runs the <a href="on-success.html">successSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains a successful data payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="329111940%2FFunctions%2F-1733806941" anchor-label="onSuccessSuspend" id="329111940%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-success-suspend.html"><span>on</span><wbr><span>Success</span><wbr><span><span>Suspend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="329111940%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success-suspend.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success-suspend.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="on-success-suspend.html"><span class="token function">onSuccessSuspend</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>successSideEffect<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="on-success-suspend.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="on-success-suspend.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Runs the suspending <a href="on-success-suspend.html">successSideEffect</a> lambda function if the <a href="-result/index.html">Result</a> contains a successful data payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1689129075%2FFunctions%2F-1733806941" anchor-label="recover" id="-1689129075%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="recover.html"><span><span>recover</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1689129075%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="recover.html"><span class="token function">recover</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">errorMapper<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="recover.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Recovers the error payload by applying the given <a href="recover.html">errorMapper</a> function if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="587804112%2FFunctions%2F-1733806941" anchor-label="recoverSuspend" id="587804112%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="recover-suspend.html"><span>recover</span><wbr><span><span>Suspend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="587804112%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover-suspend.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover-suspend.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="recover-suspend.html"><span class="token function">recoverSuspend</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">errorMapper<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="recover-suspend.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="recover-suspend.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Recovers the error payload by applying the given suspending <a href="recover-suspend.html">errorMapper</a> function if the <a href="-result/index.html">Result</a> contains an error payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1762788245%2FFunctions%2F-1733806941" anchor-label="toResult" id="1762788245%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-result.html"><span>to</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1762788245%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="to-result.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="to-result.html">T</a><span class="token punctuation">.</span><a href="to-result.html"><span class="token function">toResult</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="to-result.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a <a href="-result/index.html">Result</a> that contains an instance of <a href="to-result.html">T</a> as a data payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1064642169%2FFunctions%2F-1733806941" anchor-label="toResultError" id="-1064642169%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-result-error.html"><span>to</span><wbr><span>Result</span><wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1064642169%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="to-result-error.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="../io.getstream.chat.android.client.errors/-chat-error/index.html">ChatError</a><span class="token punctuation">.</span><a href="to-result-error.html"><span class="token function">toResultError</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="to-result-error.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a <a href="-result/index.html">Result</a> of type <a href="to-result-error.html">T</a> that contains an they same error as payload.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="847164388%2FFunctions%2F-1733806941" anchor-label="toUnitResult" id="847164388%2FFunctions%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-unit-result.html"><span>to</span><wbr><span>Unit</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="847164388%2FFunctions%2F-1733806941"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-unit-result.html"><span class="token function">toUnitResult</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a <a href="-result/index.html">Result</a> of <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> from any type of a <a href="-result/index.html">Result</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  
-</body></html>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
 
+</body></html>
 

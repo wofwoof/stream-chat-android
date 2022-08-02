@@ -1,484 +1,455 @@
+<!doctype html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>ChatXiaomiMessagingReceiver</title>
-</head><body><link href="../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" async></script>
-  
-    <div id="container">
-      <div id="leftColumn"><a href="../../../index.html">
-            <div id="logo"></div>
-          </a>
-        <div id="paneSearch"></div>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../index.html">
+<span>stream-chat-android</span>            </a>    </div>
+    <div>5.7.0
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
         <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <script type="text/javascript" src="../../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
-
-        <div class="main-content" id="content" pageids="stream-chat-android-pushprovider-xiaomi::io.getstream.chat.android.pushprovider.xiaomi/ChatXiaomiMessagingReceiver///PointingToDeclaration//542199022">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-pushprovider-xiaomi</a>/<a href="../index.html">io.getstream.chat.android.pushprovider.xiaomi</a>/<a href="index.html">ChatXiaomiMessagingReceiver</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span>Chat</span><wbr><span>Xiaomi</span><wbr><span>Messaging</span><wbr><span>Receiver</span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">class <a href="index.html">ChatXiaomiMessagingReceiver</a> : <span data-unresolved-link="com.xiaomi.mipush.sdk/PushMessageReceiver///PointingToDeclaration/">PushMessageReceiver</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Receiver that handle Push Notifications from Xiaomi servers.</p></div></div>
-          </div>
-          <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Inherited functions">Inherited functions</button></div>
-            <div class="tabs-section-body">
-              <h2 class="tabbedcontent">Constructors</h2>
-              <div class="table" data-togglable="Constructors"><a data-name="-1624333838%2FConstructors%2F542199022" anchor-label="ChatXiaomiMessagingReceiver" id="-1624333838%2FConstructors%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue TabbedContent">
-                    <div class=""><span class="inline-flex"><a href="-chat-xiaomi-messaging-receiver.html">ChatXiaomiMessagingReceiver</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1624333838%2FConstructors%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="-chat-xiaomi-messaging-receiver.html">ChatXiaomiMessagingReceiver</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="-838693884%2FFunctions%2F542199022" anchor-label="onReceivePassThroughMessage" id="-838693884%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-receive-pass-through-message.html">onReceivePassThroughMessage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-838693884%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open override fun <a href="on-receive-pass-through-message.html">onReceivePassThroughMessage</a>(context: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, miPushMessage: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="stream-chat-android-pushprovider-xiaomi::io.getstream.chat.android.pushprovider.xiaomi/ChatXiaomiMessagingReceiver///PointingToDeclaration//542199022">
+  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-pushprovider-xiaomi</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.pushprovider.xiaomi</a><span class="delimiter">/</span><a href="index.html">ChatXiaomiMessagingReceiver</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Chat</span><wbr><span>Xiaomi</span><wbr><span>Messaging</span><wbr><span><span>Receiver</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ChatXiaomiMessagingReceiver</a> : <span data-unresolved-link="com.xiaomi.mipush.sdk/PushMessageReceiver///PointingToDeclaration/">PushMessageReceiver</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Receiver that handle Push Notifications from Xiaomi servers.</p></div></div>
   </div>
-<a data-name="-838693884%2FFunctions%2F542199022" anchor-label="onReceivePassThroughMessage" id="-838693884%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a><div class="brief "><a data-name="-838693884%2FFunctions%2F542199022" anchor-label="onReceivePassThroughMessage" id="-838693884%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>This method is called when a push notification is received from Xiaomi Servers.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1275982610%2FFunctions%2F542199022" anchor-label="onReceiveRegisterResult" id="-1275982610%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="on-receive-register-result.html">onReceiveRegisterResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1275982610%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open override fun <a href="on-receive-register-result.html">onReceiveRegisterResult</a>(context: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, miPushCommandMessage: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushCommandMessage///PointingToDeclaration/">MiPushCommandMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1275982610%2FFunctions%2F542199022" anchor-label="onReceiveRegisterResult" id="-1275982610%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a><div class="brief "><a data-name="-1275982610%2FFunctions%2F542199022" anchor-label="onReceiveRegisterResult" id="-1275982610%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>This method is called when the device is registered on Xiaomi Servers.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Inherited functions</h2>
-              <div class="table" data-togglable="Inherited functions"><a data-name="-1578158536%2FFunctions%2F542199022" anchor-label="abortBroadcast" id="-1578158536%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1578158536%2FFunctions%2F542199022">abortBroadcast</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1578158536%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-1578158536%2FFunctions%2F542199022">abortBroadcast</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-547655405%2FFunctions%2F542199022" anchor-label="clearAbortBroadcast" id="-547655405%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-547655405%2FFunctions%2F542199022">clearAbortBroadcast</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-547655405%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-547655405%2FFunctions%2F542199022">clearAbortBroadcast</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1852574954%2FFunctions%2F542199022" anchor-label="getAbortBroadcast" id="1852574954%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1852574954%2FFunctions%2F542199022">getAbortBroadcast</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1852574954%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#1852574954%2FFunctions%2F542199022">getAbortBroadcast</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-2066178064%2FFunctions%2F542199022" anchor-label="getDebugUnregister" id="-2066178064%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-2066178064%2FFunctions%2F542199022">getDebugUnregister</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2066178064%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-2066178064%2FFunctions%2F542199022">getDebugUnregister</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1855658543%2FFunctions%2F542199022" anchor-label="getResultCode" id="-1855658543%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1855658543%2FFunctions%2F542199022">getResultCode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1855658543%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-1855658543%2FFunctions%2F542199022">getResultCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="485630644%2FFunctions%2F542199022" anchor-label="getResultData" id="485630644%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#485630644%2FFunctions%2F542199022">getResultData</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="485630644%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#485630644%2FFunctions%2F542199022">getResultData</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1243983328%2FFunctions%2F542199022" anchor-label="getResultExtras" id="1243983328%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1243983328%2FFunctions%2F542199022">getResultExtras</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1243983328%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#1243983328%2FFunctions%2F542199022">getResultExtras</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>): <a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="478464125%2FFunctions%2F542199022" anchor-label="goAsync" id="478464125%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#478464125%2FFunctions%2F542199022">goAsync</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="478464125%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#478464125%2FFunctions%2F542199022">goAsync</a>(): <a href="https://developer.android.com/reference/kotlin/android/content/BroadcastReceiver.PendingResult.html">BroadcastReceiver.PendingResult</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-448034677%2FFunctions%2F542199022" anchor-label="isInitialStickyBroadcast" id="-448034677%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-448034677%2FFunctions%2F542199022">isInitialStickyBroadcast</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448034677%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-448034677%2FFunctions%2F542199022">isInitialStickyBroadcast</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1250697259%2FFunctions%2F542199022" anchor-label="isOrderedBroadcast" id="1250697259%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1250697259%2FFunctions%2F542199022">isOrderedBroadcast</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1250697259%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#1250697259%2FFunctions%2F542199022">isOrderedBroadcast</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="840483566%2FFunctions%2F542199022" anchor-label="onCommandResult" id="840483566%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#840483566%2FFunctions%2F542199022">onCommandResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="840483566%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="index.html#840483566%2FFunctions%2F542199022">onCommandResult</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushCommandMessage///PointingToDeclaration/">MiPushCommandMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-634900436%2FFunctions%2F542199022" anchor-label="onNotificationMessageArrived" id="-634900436%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-634900436%2FFunctions%2F542199022">onNotificationMessageArrived</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-634900436%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="index.html#-634900436%2FFunctions%2F542199022">onNotificationMessageArrived</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-677254426%2FFunctions%2F542199022" anchor-label="onNotificationMessageClicked" id="-677254426%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-677254426%2FFunctions%2F542199022">onNotificationMessageClicked</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-677254426%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="index.html#-677254426%2FFunctions%2F542199022">onNotificationMessageClicked</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="2092355611%2FFunctions%2F542199022" anchor-label="onReceive" id="2092355611%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#2092355611%2FFunctions%2F542199022">onReceive</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2092355611%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">override fun <a href="index.html#2092355611%2FFunctions%2F542199022">onReceive</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-276756065%2FFunctions%2F542199022" anchor-label="onReceiveMessage" id="-276756065%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-276756065%2FFunctions%2F542199022">onReceiveMessage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-276756065%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace strikethrough">open fun <a href="index.html#-276756065%2FFunctions%2F542199022">onReceiveMessage</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1151359799%2FFunctions%2F542199022" anchor-label="onRequirePermissions" id="1151359799%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1151359799%2FFunctions%2F542199022">onRequirePermissions</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1151359799%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="index.html#1151359799%2FFunctions%2F542199022">onRequirePermissions</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1162131393%2FFunctions%2F542199022" anchor-label="peekService" id="-1162131393%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1162131393%2FFunctions%2F542199022">peekService</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1162131393%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="index.html#-1162131393%2FFunctions%2F542199022">peekService</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>, p1: <a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a>): <a href="https://developer.android.com/reference/kotlin/android/os/IBinder.html">IBinder</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="375803713%2FFunctions%2F542199022" anchor-label="setDebugUnregister" id="375803713%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#375803713%2FFunctions%2F542199022">setDebugUnregister</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="375803713%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#375803713%2FFunctions%2F542199022">setDebugUnregister</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="48379132%2FFunctions%2F542199022" anchor-label="setOrderedHint" id="48379132%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#48379132%2FFunctions%2F542199022">setOrderedHint</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="48379132%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#48379132%2FFunctions%2F542199022">setOrderedHint</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="455010187%2FFunctions%2F542199022" anchor-label="setResult" id="455010187%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#455010187%2FFunctions%2F542199022">setResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="455010187%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#455010187%2FFunctions%2F542199022">setResult</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, p1: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, p2: <a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1146739549%2FFunctions%2F542199022" anchor-label="setResultCode" id="-1146739549%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1146739549%2FFunctions%2F542199022">setResultCode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146739549%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#-1146739549%2FFunctions%2F542199022">setResultCode</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="44586972%2FFunctions%2F542199022" anchor-label="setResultData" id="44586972%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#44586972%2FFunctions%2F542199022">setResultData</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="44586972%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#44586972%2FFunctions%2F542199022">setResultData</a>(p0: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1065610694%2FFunctions%2F542199022" anchor-label="setResultExtras" id="1065610694%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
-                <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1065610694%2FFunctions%2F542199022">setResultExtras</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1065610694%2FFunctions%2F542199022"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace">fun <a href="index.html#1065610694%2FFunctions%2F542199022">setResultExtras</a>(p0: <a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Inherited functions">Inherited functions</button></div>
+    <div class="tabs-section-body">
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="-1624333838%2FConstructors%2F542199022" anchor-label="ChatXiaomiMessagingReceiver" id="-1624333838%2FConstructors%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-chat-xiaomi-messaging-receiver.html"><span>Chat</span><wbr><span>Xiaomi</span><wbr><span>Messaging</span><wbr><span><span>Receiver</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1624333838%2FConstructors%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-chat-xiaomi-messaging-receiver.html"><span class="token function">ChatXiaomiMessagingReceiver</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-838693884%2FFunctions%2F542199022" anchor-label="onReceivePassThroughMessage" id="-838693884%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-receive-pass-through-message.html"><span>on</span><wbr><span>Receive</span><wbr><span>Pass</span><wbr><span>Through</span><wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-838693884%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-receive-pass-through-message.html"><span class="token function">onReceivePassThroughMessage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">miPushMessage<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This method is called when a push notification is received from Xiaomi Servers.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1275982610%2FFunctions%2F542199022" anchor-label="onReceiveRegisterResult" id="-1275982610%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-receive-register-result.html"><span>on</span><wbr><span>Receive</span><wbr><span>Register</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1275982610%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-receive-register-result.html"><span class="token function">onReceiveRegisterResult</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">miPushCommandMessage<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushCommandMessage///PointingToDeclaration/">MiPushCommandMessage</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This method is called when the device is registered on Xiaomi Servers.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inherited functions</h2>
+      <div class="table" data-togglable="Inherited functions"><a data-name="-1578158536%2FFunctions%2F542199022" anchor-label="abortBroadcast" id="-1578158536%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-1578158536%2FFunctions%2F542199022"><span>abort</span><wbr><span><span>Broadcast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1578158536%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1578158536%2FFunctions%2F542199022"><span class="token function">abortBroadcast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-547655405%2FFunctions%2F542199022" anchor-label="clearAbortBroadcast" id="-547655405%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-547655405%2FFunctions%2F542199022"><span>clear</span><wbr><span>Abort</span><wbr><span><span>Broadcast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-547655405%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-547655405%2FFunctions%2F542199022"><span class="token function">clearAbortBroadcast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1852574954%2FFunctions%2F542199022" anchor-label="getAbortBroadcast" id="1852574954%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1852574954%2FFunctions%2F542199022"><span>get</span><wbr><span>Abort</span><wbr><span><span>Broadcast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1852574954%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1852574954%2FFunctions%2F542199022"><span class="token function">getAbortBroadcast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2066178064%2FFunctions%2F542199022" anchor-label="getDebugUnregister" id="-2066178064%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-2066178064%2FFunctions%2F542199022"><span>get</span><wbr><span>Debug</span><wbr><span><span>Unregister</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2066178064%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-2066178064%2FFunctions%2F542199022"><span class="token function">getDebugUnregister</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1855658543%2FFunctions%2F542199022" anchor-label="getResultCode" id="-1855658543%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-1855658543%2FFunctions%2F542199022"><span>get</span><wbr><span>Result</span><wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1855658543%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1855658543%2FFunctions%2F542199022"><span class="token function">getResultCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="485630644%2FFunctions%2F542199022" anchor-label="getResultData" id="485630644%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#485630644%2FFunctions%2F542199022"><span>get</span><wbr><span>Result</span><wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="485630644%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#485630644%2FFunctions%2F542199022"><span class="token function">getResultData</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1243983328%2FFunctions%2F542199022" anchor-label="getResultExtras" id="1243983328%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1243983328%2FFunctions%2F542199022"><span>get</span><wbr><span>Result</span><wbr><span><span>Extras</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1243983328%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1243983328%2FFunctions%2F542199022"><span class="token function">getResultExtras</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="478464125%2FFunctions%2F542199022" anchor-label="goAsync" id="478464125%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#478464125%2FFunctions%2F542199022"><span>go</span><wbr><span><span>Async</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="478464125%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#478464125%2FFunctions%2F542199022"><span class="token function">goAsync</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/BroadcastReceiver.PendingResult.html">BroadcastReceiver.PendingResult</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-448034677%2FFunctions%2F542199022" anchor-label="isInitialStickyBroadcast" id="-448034677%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-448034677%2FFunctions%2F542199022"><span>is</span><wbr><span>Initial</span><wbr><span>Sticky</span><wbr><span><span>Broadcast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448034677%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-448034677%2FFunctions%2F542199022"><span class="token function">isInitialStickyBroadcast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1250697259%2FFunctions%2F542199022" anchor-label="isOrderedBroadcast" id="1250697259%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1250697259%2FFunctions%2F542199022"><span>is</span><wbr><span>Ordered</span><wbr><span><span>Broadcast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1250697259%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1250697259%2FFunctions%2F542199022"><span class="token function">isOrderedBroadcast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="840483566%2FFunctions%2F542199022" anchor-label="onCommandResult" id="840483566%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#840483566%2FFunctions%2F542199022"><span>on</span><wbr><span>Command</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="840483566%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#840483566%2FFunctions%2F542199022"><span class="token function">onCommandResult</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushCommandMessage///PointingToDeclaration/">MiPushCommandMessage</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-634900436%2FFunctions%2F542199022" anchor-label="onNotificationMessageArrived" id="-634900436%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-634900436%2FFunctions%2F542199022"><span>on</span><wbr><span>Notification</span><wbr><span>Message</span><wbr><span><span>Arrived</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-634900436%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-634900436%2FFunctions%2F542199022"><span class="token function">onNotificationMessageArrived</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-677254426%2FFunctions%2F542199022" anchor-label="onNotificationMessageClicked" id="-677254426%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-677254426%2FFunctions%2F542199022"><span>on</span><wbr><span>Notification</span><wbr><span>Message</span><wbr><span><span>Clicked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-677254426%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-677254426%2FFunctions%2F542199022"><span class="token function">onNotificationMessageClicked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2092355611%2FFunctions%2F542199022" anchor-label="onReceive" id="2092355611%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#2092355611%2FFunctions%2F542199022"><span>on</span><wbr><span><span>Receive</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2092355611%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#2092355611%2FFunctions%2F542199022"><span class="token function">onReceive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-276756065%2FFunctions%2F542199022" anchor-label="onReceiveMessage" id="-276756065%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-276756065%2FFunctions%2F542199022"><span>on</span><wbr><span>Receive</span><wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-276756065%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace strikethrough"><strike><span class="token keyword">open </span></strike><strike><span class="token keyword"></span></strike><strike><span class="token keyword">fun </span></strike><a href="index.html#-276756065%2FFunctions%2F542199022"><strike><span class="token function">onReceiveMessage</span></strike></a><strike><span class="token punctuation">(</span></strike><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><span data-unresolved-link="com.xiaomi.mipush.sdk/MiPushMessage///PointingToDeclaration/">MiPushMessage</span></span></span><strike><span class="token punctuation">)</span></strike><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1151359799%2FFunctions%2F542199022" anchor-label="onRequirePermissions" id="1151359799%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1151359799%2FFunctions%2F542199022"><span>on</span><wbr><span>Require</span><wbr><span><span>Permissions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1151359799%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1151359799%2FFunctions%2F542199022"><span class="token function">onRequirePermissions</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1162131393%2FFunctions%2F542199022" anchor-label="peekService" id="-1162131393%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-1162131393%2FFunctions%2F542199022"><span>peek</span><wbr><span><span>Service</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1162131393%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1162131393%2FFunctions%2F542199022"><span class="token function">peekService</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">p1<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/IBinder.html">IBinder</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="375803713%2FFunctions%2F542199022" anchor-label="setDebugUnregister" id="375803713%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#375803713%2FFunctions%2F542199022"><span>set</span><wbr><span>Debug</span><wbr><span><span>Unregister</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="375803713%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#375803713%2FFunctions%2F542199022"><span class="token function">setDebugUnregister</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="48379132%2FFunctions%2F542199022" anchor-label="setOrderedHint" id="48379132%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#48379132%2FFunctions%2F542199022"><span>set</span><wbr><span>Ordered</span><wbr><span><span>Hint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="48379132%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#48379132%2FFunctions%2F542199022"><span class="token function">setOrderedHint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="455010187%2FFunctions%2F542199022" anchor-label="setResult" id="455010187%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#455010187%2FFunctions%2F542199022"><span>set</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="455010187%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#455010187%2FFunctions%2F542199022"><span class="token function">setResult</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;p1<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;p2<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1146739549%2FFunctions%2F542199022" anchor-label="setResultCode" id="-1146739549%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-1146739549%2FFunctions%2F542199022"><span>set</span><wbr><span>Result</span><wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146739549%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1146739549%2FFunctions%2F542199022"><span class="token function">setResultCode</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="44586972%2FFunctions%2F542199022" anchor-label="setResultData" id="44586972%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#44586972%2FFunctions%2F542199022"><span>set</span><wbr><span>Result</span><wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="44586972%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#44586972%2FFunctions%2F542199022"><span class="token function">setResultData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1065610694%2FFunctions%2F542199022" anchor-label="setResultExtras" id="1065610694%2FFunctions%2F542199022" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1065610694%2FFunctions%2F542199022"><span>set</span><wbr><span>Result</span><wbr><span><span>Extras</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1065610694%2FFunctions%2F542199022"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-pushprovider-xiaomi:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1065610694%2FFunctions%2F542199022"><span class="token function">setResultExtras</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  
-</body></html>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
 
+</body></html>
 

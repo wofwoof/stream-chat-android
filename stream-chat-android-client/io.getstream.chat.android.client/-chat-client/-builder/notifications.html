@@ -1,40 +1,54 @@
+<!doctype html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>notifications</title>
-</head><body><link href="../../../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script><script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script><link href="../../../../styles/style.css" rel="Stylesheet"><link href="../../../../styles/logo-styles.css" rel="Stylesheet"><link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../../scripts/main.js" async></script>
-  
-    <div id="container">
-      <div id="leftColumn"><a href="../../../../index.html">
-            <div id="logo"></div>
-          </a>
-        <div id="paneSearch"></div>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../../index.html">
+<span>stream-chat-android</span>            </a>    </div>
+    <div>5.7.0
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
         <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <script type="text/javascript" src="../../../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
-
-        <div class="main-content" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client/ChatClient.Builder/notifications/#io.getstream.chat.android.client.notifications.handler.NotificationConfig#io.getstream.chat.android.client.notifications.handler.NotificationHandler/PointingToDeclaration//-423410878">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../../../index.html">stream-chat-android-client</a>/<a href="../../index.html">io.getstream.chat.android.client</a>/<a href="../index.html">ChatClient</a>/<a href="index.html">Builder</a>/<a href="notifications.html">notifications</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span>notifications</span></h1>
-          </div>
-<div class="divergent-group" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>fun <a href="notifications.html">notifications</a>(notificationConfig: <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-config/index.html">NotificationConfig</a>, notificationsHandler: <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a> = NotificationHandlerFactory.createNotificationHandler(context = appContext)): <a href="index.html">ChatClient.Builder</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client/ChatClient.Builder/notifications/#io.getstream.chat.android.client.notifications.handler.NotificationConfig#io.getstream.chat.android.client.notifications.handler.NotificationHandler/PointingToDeclaration//-423410878">
+  <div class="breadcrumbs"><a href="../../../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="../../index.html">io.getstream.chat.android.client</a><span class="delimiter">/</span><a href="../index.html">ChatClient</a><span class="delimiter">/</span><a href="index.html">Builder</a><span class="delimiter">/</span><a href="notifications.html">notifications</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>notifications</span></span></h1>
   </div>
-<p class="paragraph">Sets a custom <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a> that the SDK will use to handle everything around push notifications. Create your own subclass and override methods to customize notification appearance and behavior.</p><p class="paragraph">See the <a href="https://staging.getstream.io/chat/docs/sdk/android/client/guides/push-notifications/">Push Notifications</a> documentation for more information.</p><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">notificationConfig</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Config push notification.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">notificationsHandler</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Your custom class implementation of <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a>.</p></div></div></div></div></div></div></div></div></div></div></div>
-        </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="notifications.html"><span class="token function">notifications</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationConfig<span class="token operator">: </span><a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-config/index.html">NotificationConfig</a><span class="token punctuation">, </span></span><span class="parameter ">notificationsHandler<span class="token operator">: </span><a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a><span class="token operator"> = </span>NotificationHandlerFactory.createNotificationHandler(context = appContext)</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ChatClient.Builder</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Sets a custom <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a> that the SDK will use to handle everything around push notifications. Create your own subclass and override methods to customize notification appearance and behavior.</p><p class="paragraph">See the <a href="https://staging.getstream.io/chat/docs/sdk/android/client/guides/push-notifications/">Push Notifications</a> documentation for more information.</p><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>notification</span><wbr><span><span>Config</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Config push notification.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>notifications</span><wbr><span><span>Handler</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Your custom class implementation of <a href="../../../io.getstream.chat.android.client.notifications.handler/-notification-handler/index.html">NotificationHandler</a>.</p></div></div></div></div></div></div></div></div></div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
     </div>
-  
-</body></html>
+</div>
 
+</body></html>
 
