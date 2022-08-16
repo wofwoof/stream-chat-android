@@ -87,6 +87,7 @@ io.getstream.chat.android.compose.ui.components.suggestions.mentions
 io.getstream.chat.android.compose.ui.components.userreactions
 io.getstream.chat.android.compose.ui.messages
 io.getstream.chat.android.compose.ui.messages.attachments
+io.getstream.chat.android.compose.ui.messages.attachments.factory
 io.getstream.chat.android.compose.ui.messages.composer
 io.getstream.chat.android.compose.ui.messages.header
 io.getstream.chat.android.compose.ui.messages.list
@@ -192,6 +193,10 @@ io.getstream.chat.android.ui.message.composer.content
 io.getstream.chat.android.ui.message.composer.viewmodel
 io.getstream.chat.android.ui.message.input
 io.getstream.chat.android.ui.message.input.attachment
+io.getstream.chat.android.ui.message.input.attachment.factory
+io.getstream.chat.android.ui.message.input.attachment.factory.camera
+io.getstream.chat.android.ui.message.input.attachment.factory.file
+io.getstream.chat.android.ui.message.input.attachment.factory.media
 io.getstream.chat.android.ui.message.input.attachment.selected.internal
 io.getstream.chat.android.ui.message.input.mention
 io.getstream.chat.android.ui.message.input.transliteration
