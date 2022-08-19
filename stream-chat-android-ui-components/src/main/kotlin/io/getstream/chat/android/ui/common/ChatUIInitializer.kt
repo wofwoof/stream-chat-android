@@ -18,6 +18,8 @@ package io.getstream.chat.android.ui.common
 
 import android.content.Context
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import androidx.startup.Initializer
 import coil.ImageLoaderFactory
 import coil.decode.GifDecoder
@@ -33,7 +35,11 @@ import io.getstream.chat.android.core.internal.coroutines.DispatcherProvider
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.common.internal.AvatarFetcherFactory
 import io.getstream.chat.android.ui.common.internal.AvatarKeyer
+import io.getstream.logging.StreamLog
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.atomic.AtomicBoolean
+
+private const val TAG = "ChatUIInitializer"
 
 /**
  * Jetpack Startup Initializer for Stream's Chat UI Components.
@@ -45,6 +51,7 @@ public class ChatUIInitializer : Initializer<Unit> {
         ChatUI.appContext = context
 
         setImageLoader(context)
+        installExternalDependencies(context.applicationContext)
     }
 
     private fun setImageLoader(context: Context) {
@@ -62,22 +69,20 @@ public class ChatUIInitializer : Initializer<Unit> {
                 add(VideoFrameDecoder.Factory())
             }
         }
-        val dependencyInitializer = externalDependenciesInitializer(context)
         val imageLoaderFactory = ImageLoaderFactory {
-            dependencyInitializer.invoke()
             delegate.newImageLoader()
         }
         StreamCoil.setImageLoader(imageLoaderFactory)
     }
 
-    private fun externalDependenciesInitializer(context: Context): () -> Unit {
-        var dependenciesAdded = false
-        return {
-            if (!dependenciesAdded) {
+    private fun installExternalDependencies(appContext: Context) {
+        val dependenciesAdded = AtomicBoolean(false)
+        Handler(Looper.getMainLooper()).post {
+            if (dependenciesAdded.compareAndSet(false, true)) {
+                StreamLog.i(TAG) { "[installExternalDependencies] no args" }
                 ChatClient.instance().addExternalDependency<ImageLoader>(
-                    CoilImageLoader(context.applicationContext)
+                    CoilImageLoader(appContext.applicationContext)
                 )
-                dependenciesAdded = true
             }
         }
     }

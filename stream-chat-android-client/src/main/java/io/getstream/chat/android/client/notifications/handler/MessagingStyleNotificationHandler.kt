@@ -37,6 +37,7 @@ import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.receivers.NotificationMessageReceiver
 import io.getstream.chat.android.client.utils.ImageLoader
 import io.getstream.chat.android.core.internal.coroutines.DispatcherProvider
+import io.getstream.logging.StreamLog
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
@@ -53,6 +54,8 @@ internal class MessagingStyleNotificationHandler(
     private val notificationChannel: () -> NotificationChannel,
     private val imageLoader: ImageLoader,
 ) : NotificationHandler {
+
+    private val logger = StreamLog.getLogger("Chat:MsnHandler")
 
     private val sharedPreferences: SharedPreferences by lazy {
         context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
@@ -77,10 +80,15 @@ internal class MessagingStyleNotificationHandler(
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         ChatClient.instance().scope.launch {
-            val initialMessagingStyle = restoreMessagingStyle(channel) ?: createMessagingStyle(currentUser, channel)
+            val currentImageLoader = ChatClient.instance().resolveDependency<ExternalDependencies, ImageLoader>()
+                ?: imageLoader
+            val initialMessagingStyle = restoreMessagingStyle(channel)
+                ?: createMessagingStyle(currentUser, channel, currentImageLoader)
             val notification = NotificationCompat.Builder(context, getNotificationChannelId())
                 .setSmallIcon(R.drawable.stream_ic_notification)
-                .setStyle(initialMessagingStyle.addMessage(message.toMessagingStyleMessage(context, imageLoader)))
+                .setStyle(initialMessagingStyle.addMessage(
+                    message.toMessagingStyleMessage(context, currentImageLoader)
+                ))
                 .setContentIntent(contentPendingIntent)
                 .addAction(NotificationMessageReceiver.createReadAction(context, notificationId, channel, message))
                 .addAction(NotificationMessageReceiver.createReplyAction(context, notificationId, channel))
@@ -126,10 +134,9 @@ internal class MessagingStyleNotificationHandler(
             ?.notification
             ?.let(NotificationCompat.MessagingStyle::extractMessagingStyleFromNotification)
 
-    private suspend fun createMessagingStyle(currentUser: User, channel: Channel): NotificationCompat.MessagingStyle {
-        val imageLoader = ChatClient.instance().resolveDependency<ExternalDependencies, ImageLoader>()
-            ?: imageLoader
-
+    private suspend fun createMessagingStyle(
+        currentUser: User, channel: Channel, imageLoader: ImageLoader
+    ): NotificationCompat.MessagingStyle {
         return NotificationCompat.MessagingStyle(currentUser.toPerson(context, imageLoader))
             .setConversationTitle(channel.name)
             .setGroupConversation(channel.name.isNotBlank())

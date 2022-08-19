@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.core.graphics.drawable.toBitmapOrNull
 import io.getstream.chat.android.client.errors.ChatError
+import io.getstream.logging.StreamLog
 import java.net.URL
 
 public fun interface ImageLoader {
@@ -16,6 +17,7 @@ public fun interface ImageLoader {
 
 internal class DefaultImageLoader(private val context: Context) : ImageLoader {
     override suspend fun loadImage(uri: String): Result<Bitmap> {
+        StreamLog.i("DefaultImageLoader") { "[loadImage] uri: $uri" }
         return try {
             val bitmap = URL(uri).openStream().use {
                 RoundedBitmapDrawableFactory.create(
