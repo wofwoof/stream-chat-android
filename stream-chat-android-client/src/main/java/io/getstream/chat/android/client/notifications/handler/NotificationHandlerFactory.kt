@@ -21,9 +21,13 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.annotation.RequiresApi
 import io.getstream.chat.android.client.R
+import io.getstream.chat.android.client.utils.DefaultImageLoader
+import io.getstream.chat.android.client.utils.ImageLoader
+import io.getstream.chat.android.client.utils.Result
 
 /**
  * Factory for default [NotificationHandler].
@@ -44,11 +48,12 @@ public object NotificationHandlerFactory {
         context: Context,
         newMessageIntent: ((messageId: String, channelType: String, channelId: String) -> Intent)? = null,
         notificationChannel: (() -> NotificationChannel)? = null,
+        imageLoader: ImageLoader = DefaultImageLoader(context)
     ): NotificationHandler {
         val notificationChannelFun = notificationChannel ?: getDefaultNotificationChannel(context)
         (newMessageIntent ?: getDefaultNewMessageIntentFun(context)).let { newMessageIntentFun ->
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                MessagingStyleNotificationHandler(context, newMessageIntentFun, notificationChannelFun)
+                MessagingStyleNotificationHandler(context, newMessageIntentFun, notificationChannelFun, imageLoader)
             } else {
                 ChatNotificationHandler(context, newMessageIntentFun, notificationChannelFun)
             }

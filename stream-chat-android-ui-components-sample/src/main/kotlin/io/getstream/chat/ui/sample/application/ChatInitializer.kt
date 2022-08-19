@@ -17,11 +17,20 @@
 package io.getstream.chat.ui.sample.application
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import coil.Coil
+import coil.request.Disposable
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.google.firebase.FirebaseApp
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.notifications.handler.NotificationConfig
 import io.getstream.chat.android.client.notifications.handler.NotificationHandlerFactory
+import io.getstream.chat.android.client.utils.ImageLoader
+import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.markdown.MarkdownTextTransformer
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
@@ -31,12 +40,19 @@ import io.getstream.chat.android.pushprovider.xiaomi.XiaomiPushDeviceGenerator
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.ui.sample.BuildConfig
 import io.getstream.chat.ui.sample.feature.HostActivity
+import io.getstream.logging.StreamLog
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class ChatInitializer(private val context: Context) {
 
     @Suppress("UNUSED_VARIABLE")
     fun init(apiKey: String) {
         FirebaseApp.initializeApp(context)
+
+        val imageLoader = buildImageLoader()
+
         val notificationHandler = NotificationHandlerFactory.createNotificationHandler(
             context = context,
             newMessageIntent = {
@@ -45,7 +61,8 @@ class ChatInitializer(private val context: Context) {
                     channelId: String,
                 ->
                 HostActivity.createLaunchIntent(context, messageId, channelType, channelId)
-            }
+            },
+            imageLoader = imageLoader
         )
         val notificationConfig =
             NotificationConfig(
@@ -73,5 +90,29 @@ class ChatInitializer(private val context: Context) {
 
         // Using markdown as text transformer
         ChatUI.messageTextTransformer = MarkdownTextTransformer(context)
+    }
+
+    private fun buildImageLoader() = ImageLoader { uri ->
+        suspendCancellableCoroutine { cont ->
+            var disposable: Disposable? = null
+            cont.invokeOnCancellation {
+                disposable?.dispose()
+            }
+            val req = ImageRequest.Builder(context)
+                .data(uri)
+                .transformations(CircleCropTransformation())
+                .target(onSuccess = { result ->
+                    val bitmap = (result as BitmapDrawable).bitmap
+                    cont.resume(Result.success(bitmap))
+                }, onError = {
+                    cont.resume(Result.error(ChatError(
+                        message = "Failed to load image by uri: $uri"
+                    )))
+                })
+                .build()
+            StreamLog.d("CoilImageLoader") { "[loadImage] uri: $uri" }
+            disposable = Coil.imageLoader(context).enqueue(req)
+
+        }
     }
 }
