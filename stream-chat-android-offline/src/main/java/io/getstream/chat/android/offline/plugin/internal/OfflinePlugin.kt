@@ -17,7 +17,7 @@
 package io.getstream.chat.android.offline.plugin.internal
 
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.client.plugin.DependencyResolver
+import io.getstream.chat.android.client.dependency.DependencyResolver
 import io.getstream.chat.android.client.plugin.Plugin
 import io.getstream.chat.android.client.plugin.listeners.ChannelMarkReadListener
 import io.getstream.chat.android.client.plugin.listeners.CreateChannelListener

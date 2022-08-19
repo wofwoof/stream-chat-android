@@ -17,11 +17,12 @@
 package io.getstream.chat.android.client.plugin
 
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.dependency.DependencyResolver
 
 /**
  * Plugin is an extension for [ChatClient].
  */
-public interface Plugin {
+public interface Plugin : DependencyResolver {
     /**
      * Name of this plugin.
      */

@@ -30,6 +30,7 @@ import androidx.core.content.edit
 import androidx.core.graphics.drawable.IconCompat
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.R
+import io.getstream.chat.android.client.dependency.ExternalDependencies
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
@@ -125,10 +126,15 @@ internal class MessagingStyleNotificationHandler(
             ?.notification
             ?.let(NotificationCompat.MessagingStyle::extractMessagingStyleFromNotification)
 
-    private suspend fun createMessagingStyle(currentUser: User, channel: Channel): NotificationCompat.MessagingStyle =
-        NotificationCompat.MessagingStyle(currentUser.toPerson(context, imageLoader))
+    private suspend fun createMessagingStyle(currentUser: User, channel: Channel): NotificationCompat.MessagingStyle {
+        val imageLoader = ChatClient.instance().resolveDependency<ExternalDependencies, ImageLoader>()
+            ?: imageLoader
+
+        return NotificationCompat.MessagingStyle(currentUser.toPerson(context, imageLoader))
             .setConversationTitle(channel.name)
             .setGroupConversation(channel.name.isNotBlank())
+    }
+
 
     private fun getNotificationChannelId(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

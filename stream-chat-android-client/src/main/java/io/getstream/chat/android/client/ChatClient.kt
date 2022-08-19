@@ -129,7 +129,8 @@ import io.getstream.chat.android.client.notifications.handler.NotificationHandle
 import io.getstream.chat.android.client.persistance.repository.RepositoryFacade
 import io.getstream.chat.android.client.persistance.repository.factory.RepositoryFactory
 import io.getstream.chat.android.client.persistance.repository.noop.NoOpRepositoryFactory
-import io.getstream.chat.android.client.plugin.DependencyResolver
+import io.getstream.chat.android.client.dependency.DependencyResolver
+import io.getstream.chat.android.client.dependency.ExternalDependencies
 import io.getstream.chat.android.client.plugin.Plugin
 import io.getstream.chat.android.client.plugin.factory.PluginFactory
 import io.getstream.chat.android.client.plugin.listeners.ChannelMarkReadListener
@@ -225,7 +226,8 @@ internal constructor(
     lifecycle: Lifecycle,
     private val repositoryFactoryProvider: RepositoryFactory.Provider,
 ) {
-    private val logger = StreamLog.getLogger("Chat:Client")
+    @PublishedApi
+    internal val logger = StreamLog.getLogger("Chat:Client")
     internal val scope = scope + SharedCalls()
     private val waitConnection = MutableSharedFlow<Result<ConnectionData>>()
     private val eventsObservable = ChatEventsObservable(socket, waitConnection, scope, chatSocketExperimental)
@@ -261,20 +263,29 @@ internal constructor(
      */
     @PublishedApi
     internal var plugins: List<Plugin> = emptyList()
+    @PublishedApi
+    internal val externalDependencies: ExternalDependencies = ExternalDependencies()
 
     private var interceptors: MutableList<Interceptor> = mutableListOf()
 
     /**
-     * Resolves dependency [T] within the provided plugin [P].
+     * Resolves dependency [T] within the provided dependency resolver [DR].
      *
      * @see [Plugin]
      */
     @InternalStreamChatApi
-    public inline fun <reified P : Plugin, reified T : Any> resolveDependency(): T? {
-        val resolver = plugins.find { plugin ->
-            plugin is P && plugin is DependencyResolver
-        } as? DependencyResolver
+    public inline fun <reified DR : DependencyResolver, reified T : Any> resolveDependency(): T? {
+        val resolver = when (DR::class == ExternalDependencies::class) {
+            true -> externalDependencies
+            else -> plugins.find { plugin -> plugin is DR }
+        }
         return resolver?.resolveDependency(T::class)
+    }
+
+    public inline fun <reified T : Any> addExternalDependency(dependency: T) {
+        if (!externalDependencies.extendWith(T::class, dependency)) {
+            logger.w { "[addExternalDependency] ${T::class} rejected (dependency already exists)" }
+        }
     }
 
     /**

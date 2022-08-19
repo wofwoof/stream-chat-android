@@ -19,13 +19,16 @@ package io.getstream.chat.android.ui.common
 import android.content.Context
 import android.os.Build
 import androidx.startup.Initializer
+import coil.ImageLoaderFactory
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.VideoFrameDecoder
+import com.getstream.sdk.chat.coil.CoilImageLoader
 import com.getstream.sdk.chat.coil.StreamCoil
 import com.getstream.sdk.chat.coil.StreamImageLoaderFactory
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.header.VersionPrefixHeader
+import io.getstream.chat.android.client.utils.ImageLoader
 import io.getstream.chat.android.core.internal.coroutines.DispatcherProvider
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.common.internal.AvatarFetcherFactory
@@ -45,7 +48,7 @@ public class ChatUIInitializer : Initializer<Unit> {
     }
 
     private fun setImageLoader(context: Context) {
-        val imageLoaderFactory = StreamImageLoaderFactory(context) {
+        val delegate = StreamImageLoaderFactory(context) {
             components {
                 // duplicated as we can not extend component
                 // registry of existing image loader builder
@@ -59,7 +62,24 @@ public class ChatUIInitializer : Initializer<Unit> {
                 add(VideoFrameDecoder.Factory())
             }
         }
+        val dependencyInitializer = externalDependenciesInitializer(context)
+        val imageLoaderFactory = ImageLoaderFactory {
+            dependencyInitializer.invoke()
+            delegate.newImageLoader()
+        }
         StreamCoil.setImageLoader(imageLoaderFactory)
+    }
+
+    private fun externalDependenciesInitializer(context: Context): () -> Unit {
+        var dependenciesAdded = false
+        return {
+            if (!dependenciesAdded) {
+                ChatClient.instance().addExternalDependency<ImageLoader>(
+                    CoilImageLoader(context.applicationContext)
+                )
+                dependenciesAdded = true
+            }
+        }
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf()

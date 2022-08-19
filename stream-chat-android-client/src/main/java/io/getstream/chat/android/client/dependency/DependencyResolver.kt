@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.getstream.chat.android.client.plugin
+package io.getstream.chat.android.client.dependency
 
 import io.getstream.chat.android.core.internal.InternalStreamChatApi
 import kotlin.reflect.KClass
