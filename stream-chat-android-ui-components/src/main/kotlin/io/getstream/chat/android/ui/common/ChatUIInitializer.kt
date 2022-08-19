@@ -51,7 +51,8 @@ public class ChatUIInitializer : Initializer<Unit> {
         ChatUI.appContext = context
 
         setImageLoader(context)
-        installExternalDependencies(context.applicationContext)
+        // TODO
+        // installExternalDependencies(context.applicationContext)
     }
 
     private fun setImageLoader(context: Context) {

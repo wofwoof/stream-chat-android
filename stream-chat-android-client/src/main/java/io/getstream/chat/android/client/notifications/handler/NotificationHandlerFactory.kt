@@ -21,13 +21,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Build
 import androidx.annotation.RequiresApi
 import io.getstream.chat.android.client.R
 import io.getstream.chat.android.client.utils.DefaultImageLoader
 import io.getstream.chat.android.client.utils.ImageLoader
-import io.getstream.chat.android.client.utils.Result
+import kotlin.reflect.full.primaryConstructor
 
 /**
  * Factory for default [NotificationHandler].
@@ -48,7 +47,7 @@ public object NotificationHandlerFactory {
         context: Context,
         newMessageIntent: ((messageId: String, channelType: String, channelId: String) -> Intent)? = null,
         notificationChannel: (() -> NotificationChannel)? = null,
-        imageLoader: ImageLoader = DefaultImageLoader(context)
+        imageLoader: ImageLoader = provideDefaultImageLoader(context)
     ): NotificationHandler {
         val notificationChannelFun = notificationChannel ?: getDefaultNotificationChannel(context)
         (newMessageIntent ?: getDefaultNewMessageIntentFun(context)).let { newMessageIntentFun ->
@@ -77,6 +76,18 @@ public object NotificationHandlerFactory {
                 context.getString(R.string.stream_chat_notification_channel_name),
                 NotificationManager.IMPORTANCE_DEFAULT,
             )
+        }
+    }
+
+    private fun provideDefaultImageLoader(context: Context): ImageLoader {
+        val appContext = context.applicationContext
+        return try {
+            Class.forName("com.getstream.sdk.chat.coil.CoilImageLoader")
+                .kotlin.primaryConstructor
+                ?.call(appContext) as? ImageLoader
+                ?: DefaultImageLoader(appContext)
+        } catch (e: Throwable) {
+            DefaultImageLoader(appContext)
         }
     }
 }
