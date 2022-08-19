@@ -184,6 +184,7 @@ import io.getstream.chat.android.core.internal.InternalStreamChatApi
 import io.getstream.logging.CompositeStreamLogger
 import io.getstream.logging.SilentStreamLogger
 import io.getstream.logging.StreamLog
+import io.getstream.logging.TaggedLogger
 import io.getstream.logging.android.AndroidStreamLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -227,7 +228,7 @@ internal constructor(
     private val repositoryFactoryProvider: RepositoryFactory.Provider,
 ) {
     @PublishedApi
-    internal val logger = StreamLog.getLogger("Chat:Client")
+    internal val logger: TaggedLogger = StreamLog.getLogger("Chat:Client")
     internal val scope = scope + SharedCalls()
     private val waitConnection = MutableSharedFlow<Result<ConnectionData>>()
     private val eventsObservable = ChatEventsObservable(socket, waitConnection, scope, chatSocketExperimental)
