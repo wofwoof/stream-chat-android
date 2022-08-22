@@ -96,6 +96,7 @@ internal class ImageAttachmentsGroupView : ConstraintLayout {
         state = State.OneView(imageAttachmentView)
         ConstraintSet().apply {
             constrainMaxHeight(imageAttachmentView.id, maxImageAttachmentHeight)
+            constrainWidth(imageAttachmentView.id, ViewGroup.LayoutParams.MATCH_PARENT)
             constrainViewToParentBySide(imageAttachmentView, ConstraintSet.LEFT)
             constrainViewToParentBySide(imageAttachmentView, ConstraintSet.RIGHT)
             constrainViewToParentBySide(imageAttachmentView, ConstraintSet.TOP)
@@ -114,13 +115,6 @@ internal class ImageAttachmentsGroupView : ConstraintLayout {
             }
 
             applyTo(this@ImageAttachmentsGroupView)
-        }
-
-        // Setting the dimen ratio above makes it narrow the width
-        // of the container, this way we force the width to match the parent
-        // and clip the height if needed.
-        imageAttachmentView.updateLayoutParams {
-            this.width = ViewGroup.LayoutParams.MATCH_PARENT
         }
 
         imageAttachmentView.showAttachment(first)
