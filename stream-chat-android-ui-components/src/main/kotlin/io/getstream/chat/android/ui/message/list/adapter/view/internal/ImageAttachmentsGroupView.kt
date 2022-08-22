@@ -123,7 +123,7 @@ internal class ImageAttachmentsGroupView : ConstraintLayout {
             // Allow the image loader to expand the View if we have no fixed
             // dimensions. Doing this eagerly will wrap the height to 0dp
             // So we have to do it here.
-            if(first.originalWidth == null || first.originalHeight == null){
+            if (first.originalWidth == null || first.originalHeight == null) {
                 this.height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
         }
