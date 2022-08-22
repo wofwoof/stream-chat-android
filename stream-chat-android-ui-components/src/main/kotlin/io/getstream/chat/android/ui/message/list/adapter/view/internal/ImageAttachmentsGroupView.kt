@@ -109,6 +109,8 @@ internal class ImageAttachmentsGroupView : ConstraintLayout {
             if (imageWidth != null && imageHeight != null) {
                 val ratio = (imageWidth / imageHeight).toString()
                 this.setDimensionRatio(imageAttachmentView.id, ratio)
+            } else {
+                constrainHeight(imageAttachmentView.id, LayoutParams.WRAP_CONTENT)
             }
 
             applyTo(this@ImageAttachmentsGroupView)
@@ -119,13 +121,6 @@ internal class ImageAttachmentsGroupView : ConstraintLayout {
         // and clip the height if needed.
         imageAttachmentView.updateLayoutParams {
             this.width = ViewGroup.LayoutParams.MATCH_PARENT
-
-            // Allow the image loader to expand the View if we have no fixed
-            // dimensions. Doing this eagerly will wrap the height to 0dp
-            // So we have to do it here.
-            if (first.originalWidth == null || first.originalHeight == null) {
-                this.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            }
         }
 
         imageAttachmentView.showAttachment(first)
