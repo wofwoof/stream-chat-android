@@ -146,12 +146,12 @@ com.getstream.sdk.chat.model
 com.getstream.sdk.chat.startup
 com.getstream.sdk.chat.utils
 com.getstream.sdk.chat.utils.extensions
-com.getstream.sdk.chat.utils.roundedImageView
 com.getstream.sdk.chat.utils.typing
 com.getstream.sdk.chat.view.activity
 io.getstream.chat.android.common
 io.getstream.chat.android.common.composer
 io.getstream.chat.android.common.model
+io.getstream.chat.android.common.notifications
 io.getstream.chat.android.common.state
 module:stream-chat-android-ui-components
 com.getstream.sdk.chat.adapter
