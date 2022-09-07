@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.offline.event
 
+import io.getstream.chat.android.client.events.ChatEvent
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.ChannelCapabilities
 import io.getstream.chat.android.client.models.User
@@ -28,14 +29,12 @@ import io.getstream.chat.android.offline.event.handler.internal.EventHandlerSequ
 import io.getstream.chat.android.offline.event.model.EventHandlerType
 import io.getstream.chat.android.offline.plugin.state.global.internal.GlobalMutableState
 import io.getstream.chat.android.test.TestCoroutineExtension
-import io.getstream.logging.StreamLog
-import io.getstream.logging.kotlin.KotlinStreamLogger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.`should be equal to`
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -64,12 +63,6 @@ internal class TotalUnreadCountTest {
 
     private val totalUnreadCount = MutableStateFlow(0)
     private val channelUnreadCount = MutableStateFlow(0)
-
-    @BeforeAll
-    fun beforeAll() {
-        StreamLog.setValidator { _, _ -> true }
-        StreamLog.setLogger(KotlinStreamLogger())
-    }
 
     private lateinit var userStateFlow: StateFlow<User>
 
@@ -157,30 +150,31 @@ internal class TotalUnreadCountTest {
         clientMutableState: ClientState,
         eventHandlerType: EventHandlerType,
         currentUser: User,
+        sideEffect: suspend () -> Unit = {},
+        syncedEvents: Flow<List<ChatEvent>> = MutableStateFlow(emptyList()),
     ) {
         private val repos: RepositoryFacade = mock()
-        private val eventHandler = when (eventHandlerType) {
+        private val eventHandler: EventHandler = when (eventHandlerType) {
             EventHandlerType.SEQUENTIAL -> EventHandlerSequential(
+                currentUserId = currentUser.id,
                 scope = testCoroutines.scope,
-                recoveryEnabled = true,
                 subscribeForEvents = { mock() },
                 logicRegistry = mock(),
                 stateRegistry = mock(),
                 mutableGlobalState = globalMutableState,
                 repos = repos,
-                syncManager = mock(),
-                currentUserId = currentUser.id
+                sideEffect = sideEffect,
+                syncedEvents = syncedEvents
             )
             EventHandlerType.DEFAULT -> EventHandlerImpl(
+                currentUserId = currentUser.id,
                 scope = testCoroutines.scope,
-                recoveryEnabled = true,
-                client = mock(),
+                subscribeForEvents = { mock() },
                 logic = mock(),
                 state = mock(),
                 mutableGlobalState = globalMutableState,
-                clientMutableState = clientMutableState,
                 repos = repos,
-                syncManager = mock(),
+                syncedEvents = syncedEvents
             )
         }
 

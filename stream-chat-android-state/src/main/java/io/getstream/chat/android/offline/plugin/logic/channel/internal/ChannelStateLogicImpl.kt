@@ -41,6 +41,7 @@ import io.getstream.chat.android.offline.plugin.state.global.internal.MutableGlo
 import io.getstream.chat.android.offline.utils.Event
 import io.getstream.chat.android.offline.utils.internal.isChannelMutedForCurrentUser
 import io.getstream.logging.StreamLog
+import kotlinx.coroutines.CoroutineScope
 import java.util.Date
 import kotlin.math.max
 
@@ -60,7 +61,18 @@ internal class ChannelStateLogicImpl(
     private val clientState: ClientState,
     private val searchLogic: SearchLogic,
     private val attachmentUrlValidator: AttachmentUrlValidator = AttachmentUrlValidator(),
+    coroutineScope: CoroutineScope,
 ) : ChannelStateLogic {
+
+    /**
+     * Used to prune stale active typing events when the sender
+     * of these events was unable to send a stop typing event.
+     */
+    private val typingEventPruner = TypingEventPruner(
+        coroutineScope = coroutineScope,
+        channelId = mutableState.channelId,
+        onUpdated = ::updateTypingStates
+    )
 
     /**
      * Return [ChannelState] representing the state of the channel. Use this when you would like to
@@ -99,7 +111,7 @@ internal class ChannelStateLogicImpl(
                 message.shouldIncrementUnreadCount(
                     currentUserId = currentUserId,
                     lastMessageAtDate = lastMessageSeenDate,
-                    isChannelMuted = isChannelMutedForCurrentUser(mutableState.cid, clientState)
+                    isChannelMuted = globalMutableState.isChannelMutedForCurrentUser(mutableState.cid)
                 )
 
             if (shouldIncrementUnreadCount) {
@@ -195,22 +207,22 @@ internal class ChannelStateLogicImpl(
      * @param event The start typing event or null if user stops typing.
      */
     override fun setTyping(userId: String, event: TypingStartEvent?) {
-        val typingEventsCopy = mutableState.rawTyping.toMutableMap()
-        when {
-            event == null -> {
-                typingEventsCopy.remove(userId)
-            }
-            userId != clientState.user.value?.id -> {
-                typingEventsCopy[userId] = event
-            }
+        if (userId != clientState.user.value?.id) {
+            typingEventPruner.processEvent(userId, typingStartEvent = event)
         }
+    }
 
-        val typingEvent = typingEventsCopy.values
-            .sortedBy { typingStartEvent -> typingStartEvent.createdAt }
-            .map { typingStartEvent -> typingStartEvent.user }
-            .let { sortedUsers -> TypingEvent(channelId = mutableState.channelId, users = sortedUsers) }
-
-        mutableState.updateTypingEvents(eventsMap = typingEventsCopy, typingEvent = typingEvent)
+    /**
+     * Updates the typing events inside [ChannelMutableState] and [MutableGlobalState].
+     *
+     * @param rawTypingEvents A map of typing events used to update [ChannelMutableState].
+     * @param typingEvent A [TypingEvent] object used to update [MutableGlobalState].
+     */
+    private fun updateTypingStates(
+        rawTypingEvents: Map<String, TypingStartEvent>,
+        typingEvent: TypingEvent,
+    ) {
+        mutableState.updateTypingEvents(eventsMap = rawTypingEvents, typingEvent = typingEvent)
         globalMutableState.tryEmitTypingEvent(cid = mutableState.cid, typingEvent = typingEvent)
     }
 
@@ -220,7 +232,7 @@ internal class ChannelStateLogicImpl(
      * @param watcherCount the count of watchers.
      */
     override fun setWatcherCount(watcherCount: Int) {
-        if (watcherCount != mutableState.watcherCount.value) {
+        if (watcherCount >= 0 && watcherCount != mutableState.watcherCount.value) {
             mutableState.setWatcherCount(watcherCount)
         }
     }
@@ -334,12 +346,19 @@ internal class ChannelStateLogicImpl(
     /**
      * Deletes a member. Doesn't delete in the database.
      *
-     * @param userId Id of the user.
+     * @param member The member to be removed.
      */
-    override fun deleteMember(userId: String) {
-        mutableState.rawMembers = mutableState.rawMembers - userId
+    override fun deleteMember(member: Member) {
+        val user = member.user
+
+        mutableState.rawMembers = mutableState.rawMembers - user.id
 
         mutableState.setMembersCount(mutableState.membersCount.value - 1)
+
+        if (user.online) {
+            deleteWatcher(user)
+            setWatcherCount(mutableState.watcherCount.value - 1)
+        }
     }
 
     /**
@@ -374,7 +393,7 @@ internal class ChannelStateLogicImpl(
      *
      * @param hidden Boolean.
      */
-    override fun setHidden(hidden: Boolean) {
+    override fun toggleHidden(hidden: Boolean) {
         mutableState.setHidden(hidden)
     }
 

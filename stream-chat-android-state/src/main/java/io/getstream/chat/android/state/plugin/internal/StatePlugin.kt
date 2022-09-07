@@ -17,6 +17,7 @@
 package io.getstream.chat.android.state.plugin.internal
 
 import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.client.plugin.DependencyResolver
 import io.getstream.chat.android.client.plugin.Plugin
 import io.getstream.chat.android.client.plugin.listeners.ChannelMarkReadListener
 import io.getstream.chat.android.client.plugin.listeners.DeleteMessageListener
@@ -26,7 +27,6 @@ import io.getstream.chat.android.client.plugin.listeners.HideChannelListener
 import io.getstream.chat.android.client.plugin.listeners.MarkAllReadListener
 import io.getstream.chat.android.client.plugin.listeners.QueryChannelListener
 import io.getstream.chat.android.client.plugin.listeners.QueryChannelsListener
-import io.getstream.chat.android.client.plugin.listeners.QueryMembersListener
 import io.getstream.chat.android.client.plugin.listeners.SendGiphyListener
 import io.getstream.chat.android.client.plugin.listeners.SendMessageListener
 import io.getstream.chat.android.client.plugin.listeners.SendReactionListener
@@ -34,6 +34,7 @@ import io.getstream.chat.android.client.plugin.listeners.ShuffleGiphyListener
 import io.getstream.chat.android.client.plugin.listeners.ThreadQueryListener
 import io.getstream.chat.android.client.plugin.listeners.TypingEventListener
 import io.getstream.chat.android.core.internal.InternalStreamChatApi
+import kotlin.reflect.KClass
 
 /**
  * Implementation of [Plugin] that brings support for the offline feature. This class work as a delegator of calls for one
@@ -52,13 +53,13 @@ import io.getstream.chat.android.core.internal.InternalStreamChatApi
  * @param sendGiphyListener [SendGiphyListener]
  * @param shuffleGiphyListener [ShuffleGiphyListener]
  * @param sendMessageListener [SendMessageListener]
- * @param queryMembersListener [QueryMembersListener]
  * @param typingEventListener [TypingEventListener]
  * @param activeUser User associated with [StatePlugin] instance.
  */
 @InternalStreamChatApi
 @Suppress("LongParameterList")
 public class StatePlugin(
+    internal val activeUser: User,
     private val queryChannelsListener: QueryChannelsListener,
     private val queryChannelListener: QueryChannelListener,
     private val threadQueryListener: ThreadQueryListener,
@@ -72,10 +73,10 @@ public class StatePlugin(
     private val sendGiphyListener: SendGiphyListener,
     private val shuffleGiphyListener: ShuffleGiphyListener,
     private val sendMessageListener: SendMessageListener,
-    private val queryMembersListener: QueryMembersListener,
     private val typingEventListener: TypingEventListener,
-    internal val activeUser: User,
-) : Plugin,
+    private val provideDependency: (KClass<*>) -> Any? = { null },
+) : StateAwarePlugin,
+    DependencyResolver,
     QueryChannelsListener by queryChannelsListener,
     QueryChannelListener by queryChannelListener,
     ThreadQueryListener by threadQueryListener,
@@ -89,15 +90,18 @@ public class StatePlugin(
     SendGiphyListener by sendGiphyListener,
     ShuffleGiphyListener by shuffleGiphyListener,
     SendMessageListener by sendMessageListener,
-    QueryMembersListener by queryMembersListener,
     TypingEventListener by typingEventListener {
 
     override val name: String = MODULE_NAME
+
+    @Suppress("UNCHECKED_CAST")
+    @InternalStreamChatApi
+    public override fun <T : Any> resolveDependency(klass: KClass<T>): T? = provideDependency(klass) as? T
 
     private companion object {
         /**
          * Name of this plugin module.
          */
-        private const val MODULE_NAME: String = "Offline"
+        private const val MODULE_NAME: String = "State"
     }
 }

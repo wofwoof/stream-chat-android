@@ -33,6 +33,7 @@ import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.receivers.NotificationMessageReceiver
+import kotlinx.coroutines.launch
 import java.util.Date
 
 /**
@@ -45,6 +46,7 @@ internal class MessagingStyleNotificationHandler(
     private val context: Context,
     private val newMessageIntent: (messageId: String, channelType: String, channelId: String) -> Intent,
     private val notificationChannel: (() -> NotificationChannel),
+    private val userIconBuilder: UserIconBuilder,
 ) : NotificationHandler {
 
     private val sharedPreferences: SharedPreferences by lazy {
@@ -69,16 +71,18 @@ internal class MessagingStyleNotificationHandler(
             newMessageIntent(message.id, channel.type, channel.id),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        val initialMessagingStyle = restoreMessagingStyle(channel) ?: createMessagingStyle(currentUser, channel)
-        val notification = NotificationCompat.Builder(context, getNotificationChannelId())
-            .setSmallIcon(R.drawable.stream_ic_notification)
-            .setStyle(initialMessagingStyle.addMessage(message.toMessagingStyleMessage(context)))
-            .setContentIntent(contentPendingIntent)
-            .addAction(NotificationMessageReceiver.createReadAction(context, notificationId, channel, message))
-            .addAction(NotificationMessageReceiver.createReplyAction(context, notificationId, channel))
-            .build()
-        addNotificationId(notificationId)
-        notificationManager.notify(notificationId, notification)
+        ChatClient.instance().launch {
+            val initialMessagingStyle = restoreMessagingStyle(channel) ?: createMessagingStyle(currentUser, channel)
+            val notification = NotificationCompat.Builder(context, getNotificationChannelId())
+                .setSmallIcon(R.drawable.stream_ic_notification)
+                .setStyle(initialMessagingStyle.addMessage(message.toMessagingStyleMessage(context)))
+                .setContentIntent(contentPendingIntent)
+                .addAction(NotificationMessageReceiver.createReadAction(context, notificationId, channel, message))
+                .addAction(NotificationMessageReceiver.createReplyAction(context, notificationId, channel))
+                .build()
+            addNotificationId(notificationId)
+            notificationManager.notify(notificationId, notification)
+        }
     }
 
     override fun dismissChannelNotifications(channelType: String, channelId: String) {
@@ -117,7 +121,7 @@ internal class MessagingStyleNotificationHandler(
             ?.notification
             ?.let(NotificationCompat.MessagingStyle::extractMessagingStyleFromNotification)
 
-    private fun createMessagingStyle(currentUser: User, channel: Channel): NotificationCompat.MessagingStyle =
+    private suspend fun createMessagingStyle(currentUser: User, channel: Channel): NotificationCompat.MessagingStyle =
         NotificationCompat.MessagingStyle(currentUser.toPerson(context))
             .setConversationTitle(channel.name)
             .setGroupConversation(channel.name.isNotBlank())
@@ -134,18 +138,22 @@ internal class MessagingStyleNotificationHandler(
         private const val SHARED_PREFERENCES_NAME = "stream_notifications.sp"
         private const val KEY_NOTIFICATIONS_SHOWN = "KEY_NOTIFICATIONS_SHOWN"
     }
+    private suspend fun Message.toMessagingStyleMessage(context: Context): NotificationCompat.MessagingStyle.Message =
+        NotificationCompat.MessagingStyle.Message(text, timestamp, person(context))
+
+    private suspend fun Message.person(context: Context): Person = user.toPerson(context)
+
+    private val Message.timestamp: Long
+        get() = (createdAt ?: createdLocallyAt ?: Date()).time
+
+    private suspend fun User.toPerson(context: Context): Person =
+        Person.Builder()
+            .setKey(id)
+            .setName(personName(context))
+            .setIcon(userIconBuilder.buildIcon(this))
+            .build()
+
+    private fun User.personName(context: Context): String =
+        name.takeIf { it.isNotBlank() }
+            ?: context.getString(R.string.stream_chat_notification_empty_username)
 }
-
-private fun Message.toMessagingStyleMessage(context: Context): NotificationCompat.MessagingStyle.Message =
-    NotificationCompat.MessagingStyle.Message(text, timestamp, person(context))
-
-private fun Message.person(context: Context): Person = user.toPerson(context)
-
-private val Message.timestamp: Long
-    get() = (createdAt ?: createdLocallyAt ?: Date()).time
-
-private fun User.toPerson(context: Context): Person =
-    Person.Builder()
-        .setKey(id)
-        .setName(name.takeIf { it.isNotBlank() } ?: context.getString(R.string.stream_chat_notification_empty_username))
-        .build()

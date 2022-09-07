@@ -22,6 +22,7 @@ import io.getstream.chat.android.client.api.models.QueryChannelsRequest
 import io.getstream.chat.android.client.api.models.querysort.QuerySorter
 import io.getstream.chat.android.client.extensions.cidToTypeAndId
 import io.getstream.chat.android.client.models.Channel
+import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.persistance.repository.RepositoryFacade
 import io.getstream.chat.android.client.setup.state.ClientState
 import io.getstream.chat.android.offline.plugin.logic.channel.internal.ChannelLogic
@@ -29,6 +30,7 @@ import io.getstream.chat.android.offline.plugin.logic.channel.internal.ChannelSt
 import io.getstream.chat.android.offline.plugin.logic.channel.internal.ChannelStateLogicImpl
 import io.getstream.chat.android.offline.plugin.logic.channel.internal.SearchLogic
 import io.getstream.chat.android.offline.plugin.logic.channel.thread.internal.ThreadLogic
+import io.getstream.chat.android.offline.plugin.logic.channel.thread.internal.ThreadStateLogicImpl
 import io.getstream.chat.android.offline.plugin.logic.querychannels.internal.QueryChannelsLogic
 import io.getstream.chat.android.offline.plugin.state.StateRegistry
 import io.getstream.chat.android.offline.plugin.state.channel.internal.toMutableState
@@ -38,7 +40,7 @@ import io.getstream.chat.android.offline.plugin.state.global.internal.MutableGlo
 import io.getstream.chat.android.offline.plugin.state.global.internal.toMutableState
 import io.getstream.chat.android.offline.plugin.state.querychannels.internal.toMutableState
 import io.getstream.logging.StreamLog
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -47,6 +49,7 @@ import java.util.concurrent.ConcurrentHashMap
  * 2. Query channel
  * 3. Query thread
  */
+@Suppress("LongParameterList")
 internal class LogicRegistry internal constructor(
     private val stateRegistry: StateRegistry,
     private val globalState: MutableGlobalState,
@@ -54,6 +57,7 @@ internal class LogicRegistry internal constructor(
     private val userPresence: Boolean,
     private val repos: RepositoryFacade,
     private val client: ChatClient,
+    private val coroutineScope: CoroutineScope,
 ) : ChannelStateLogicProvider {
 
     private val queryChannels: ConcurrentHashMap<Pair<FilterObject, QuerySorter<Channel>>, QueryChannelsLogic> =
@@ -82,7 +86,13 @@ internal class LogicRegistry internal constructor(
     fun channel(channelType: String, channelId: String): ChannelLogic {
         return channels.getOrPut(channelType to channelId) {
             val mutableState = stateRegistry.channel(channelType, channelId).toMutableState()
-            val stateLogic = ChannelStateLogicImpl(mutableState, globalState, clientState, SearchLogic(mutableState))
+            val stateLogic = ChannelStateLogicImpl(
+                mutableState = mutableState,
+                globalMutableState = globalState,
+                searchLogic = SearchLogic(mutableState),
+                clientState = clientState,
+                coroutineScope = coroutineScope
+            )
 
             ChannelLogic(
                 repos = repos,
@@ -98,6 +108,44 @@ internal class LogicRegistry internal constructor(
         }
     }
 
+    fun getMessageById(messageId: String): Message? {
+        return channelFromMessageId(messageId)?.getMessage(messageId)
+            ?: threadFromMessageId(messageId)?.getMessage(messageId)
+    }
+
+    /**
+     * This method returns [ChannelLogic] if the messages passed is not only in a thread. Use this to avoid
+     * updating [ChannelLogic] for a messages that is only inside [ThreadLogic]. If you get null as a result,
+     * that means that no update is necessary.
+     *
+     * @param message [Message]
+     */
+    fun channelFromMessage(message: Message): ChannelLogic? {
+        return if (message.parentId == null || message.showInChannel) {
+            val (channelType, channelId) = message.cid.cidToTypeAndId()
+            channel(channelType, channelId)
+        } else {
+            null
+        }
+    }
+
+    /**
+     * This method returns [ThreadLogic] if the messages passed is inside a thread. Use this to avoid
+     * updating [ThreadLogic] for a messages that is only inside [ChannelLogic]. If you get null as a result,
+     * that means that no update is necessary.
+     *
+     * @param messageId String
+     */
+    fun threadFromMessageId(messageId: String): ThreadLogic? {
+        return threads.values.find { threadLogic ->
+            threadLogic.getMessage(messageId) != null
+        }
+    }
+
+    fun threadFromMessage(message: Message): ThreadLogic? {
+        return message.parentId?.let { thread(it) }
+    }
+
     /**
      * Provides [ChannelStateLogic] for the channelType and channelId
      *
@@ -111,15 +159,9 @@ internal class LogicRegistry internal constructor(
     /** Returns [ThreadLogic] of thread replies with parent message that has id equal to [messageId]. */
     fun thread(messageId: String): ThreadLogic {
         return threads.getOrPut(messageId) {
-            val (channelType, channelId) = runBlocking {
-                repos.selectMessage(messageId)?.cid?.cidToTypeAndId()
-                    ?: error("There is not such message with messageId = $messageId")
-            }
-            ThreadLogic(
-                repos,
-                stateRegistry.thread(messageId).toMutableState(),
-                channel(channelType, channelId)
-            )
+            val mutableState = stateRegistry.thread(messageId).toMutableState()
+            val stateLogic = ThreadStateLogicImpl(mutableState)
+            ThreadLogic(stateLogic)
         }
     }
 
@@ -147,6 +189,9 @@ internal class LogicRegistry internal constructor(
      * @return List of [ChannelLogic].
      */
     fun getActiveChannelsLogic(): List<ChannelLogic> = channels.values.toList()
+
+    fun isActiveThread(messageId: String): Boolean =
+        threads.containsKey(messageId)
 
     /**
      * Clears all stored logic objects.
@@ -183,6 +228,7 @@ internal class LogicRegistry internal constructor(
             userPresence: Boolean,
             repos: RepositoryFacade,
             client: ChatClient,
+            coroutineScope: CoroutineScope,
         ): LogicRegistry {
             if (instance != null) {
                 logger.e {
@@ -191,12 +237,13 @@ internal class LogicRegistry internal constructor(
                 }
             }
             return LogicRegistry(
-                stateRegistry,
-                globalState,
-                clientState,
-                userPresence,
-                repos,
-                client
+                stateRegistry = stateRegistry,
+                globalState = globalState,
+                clientState = clientState,
+                userPresence = userPresence,
+                repos = repos,
+                client = client,
+                coroutineScope = coroutineScope
             )
                 .also { logicRegistry ->
                     instance = logicRegistry

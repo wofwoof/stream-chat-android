@@ -29,7 +29,7 @@ android {
             consumerProguardFiles 'consumer-proguard-rules.pro'
         }
         debug {
-            testCoverageEnabled true
+            testCoverageEnabled false
             consumerProguardFiles 'consumer-proguard-rules.pro'
         }
     }
@@ -103,4 +103,17 @@ dependencies {
     androidTestImplementation Dependencies.junit4
     androidTestImplementation Dependencies.espressoCore
     androidTestImplementation Dependencies.androidxTestJunit
+
+    detektPlugins(Dependencies.detektFormatting)
 }
+
+/* Uncomment if the Dokka page per module is required
+tasks.withType(dokkaHtmlPartial.getClass()) {
+    dokkaSourceSets {
+        named("main") {
+            moduleName.set("LLC")
+            includes.from("DokkaModule.md")
+        }
+    }
+}
+*/

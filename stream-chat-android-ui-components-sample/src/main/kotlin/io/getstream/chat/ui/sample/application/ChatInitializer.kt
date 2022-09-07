@@ -40,9 +40,9 @@ class ChatInitializer(private val context: Context) {
         val notificationHandler = NotificationHandlerFactory.createNotificationHandler(
             context = context,
             newMessageIntent = {
-                messageId: String,
-                channelType: String,
-                channelId: String,
+                    messageId: String,
+                    channelType: String,
+                    channelId: String,
                 ->
                 HostActivity.createLaunchIntent(context, messageId, channelType, channelId)
             }
@@ -61,7 +61,14 @@ class ChatInitializer(private val context: Context) {
             )
         val logLevel = if (BuildConfig.DEBUG) ChatLogLevel.ALL else ChatLogLevel.NOTHING
 
-        val offlinePlugin = StreamOfflinePluginFactory(Config(userPresence = true, persistenceEnabled = true), context)
+        val offlinePlugin = StreamOfflinePluginFactory(
+            Config(
+                userPresence = true,
+                persistenceEnabled = true,
+                useSequentialEventHandler = true
+            ),
+            context
+        )
 
         val client = ChatClient.Builder(apiKey, context)
             .loggerHandler(FirebaseLogger)
