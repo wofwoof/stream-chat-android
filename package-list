@@ -25,7 +25,9 @@ io.getstream.chat.android.client.logger
 io.getstream.chat.android.client.models
 io.getstream.chat.android.client.notifications
 io.getstream.chat.android.client.notifications.handler
+io.getstream.chat.android.client.notifications.permissions
 io.getstream.chat.android.client.parser2.adapters
+io.getstream.chat.android.client.parser2.adapters.internal
 io.getstream.chat.android.client.persistance.repository
 io.getstream.chat.android.client.persistance.repository.factory
 io.getstream.chat.android.client.plugin
@@ -152,7 +154,9 @@ io.getstream.chat.android.common
 io.getstream.chat.android.common.composer
 io.getstream.chat.android.common.model
 io.getstream.chat.android.common.notifications
+io.getstream.chat.android.common.notifications.permissions
 io.getstream.chat.android.common.state
+io.getstream.chat.android.ui.utils
 module:stream-chat-android-ui-components
 com.getstream.sdk.chat.adapter
 com.getstream.sdk.chat.enums
@@ -177,6 +181,7 @@ io.getstream.chat.android.ui.channel.list.viewmodel
 io.getstream.chat.android.ui.channel.list.viewmodel.factory
 io.getstream.chat.android.ui.common
 io.getstream.chat.android.ui.common.extensions
+io.getstream.chat.android.ui.common.internal
 io.getstream.chat.android.ui.common.navigation
 io.getstream.chat.android.ui.common.navigation.destinations
 io.getstream.chat.android.ui.common.style
@@ -233,7 +238,6 @@ io.getstream.chat.android.ui.transformer
 io.getstream.chat.android.ui.typing
 io.getstream.chat.android.ui.typing.viewmodel
 io.getstream.chat.android.ui.typing.viewmodel.factory
-io.getstream.chat.android.ui.utils
 module:stream-chat-android-ui-utils
 io.getstream.chat.android.uiutils.constant
 io.getstream.chat.android.uiutils.extension
