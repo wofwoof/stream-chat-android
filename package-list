@@ -36,6 +36,7 @@ io.getstream.chat.android.client.plugin.listeners
 io.getstream.chat.android.client.plugins.requests
 io.getstream.chat.android.client.query
 io.getstream.chat.android.client.query.pagination
+io.getstream.chat.android.client.query.request
 io.getstream.chat.android.client.setup
 io.getstream.chat.android.client.setup.state
 io.getstream.chat.android.client.socket
