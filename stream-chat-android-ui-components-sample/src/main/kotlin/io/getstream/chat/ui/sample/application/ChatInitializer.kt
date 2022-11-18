@@ -19,10 +19,16 @@ package io.getstream.chat.ui.sample.application
 import android.content.Context
 import com.google.firebase.FirebaseApp
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.UploadAttachmentsNetworkType
+import io.getstream.chat.android.client.models.UploadedFile
+import io.getstream.chat.android.client.models.UploadedImage
 import io.getstream.chat.android.client.notifications.handler.NotificationConfig
 import io.getstream.chat.android.client.notifications.handler.NotificationHandlerFactory
+import io.getstream.chat.android.client.uploader.FileUploader
+import io.getstream.chat.android.client.utils.ProgressCallback
+import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.markdown.MarkdownTextTransformer
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 import io.getstream.chat.android.pushprovider.firebase.FirebasePushDeviceGenerator
@@ -33,6 +39,7 @@ import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.ui.sample.BuildConfig
 import io.getstream.chat.ui.sample.feature.HostActivity
+import java.io.File
 
 class ChatInitializer(private val context: Context) {
 
@@ -81,9 +88,55 @@ class ChatInitializer(private val context: Context) {
             .withPlugins(offlinePlugin, statePluginFactory)
             .debugRequests(true)
             .uploadAttachmentsNetworkType(UploadAttachmentsNetworkType.NOT_ROAMING)
+            .fileUploader(DummyFileUploader())
             .build()
 
         // Using markdown as text transformer
         ChatUI.messageTextTransformer = MarkdownTextTransformer(context)
     }
 }
+
+private class DummyFileUploader : FileUploader {
+
+    override fun sendImage(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+        callback: ProgressCallback,
+    ): Result<UploadedImage> {
+        return Result.Failure(ChatError.GenericError("ABC"))
+    }
+
+    override fun sendImage(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File
+    ): Result<UploadedImage> {
+        return Result.Failure(ChatError.GenericError("ABC"))
+    }
+
+    override fun sendFile(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+        callback: ProgressCallback,
+    ): Result<UploadedFile> {
+        TODO("Not yet implemented")
+    }
+
+    override fun sendFile(channelType: String, channelId: String, userId: String, file: File): Result<UploadedFile> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteFile(channelType: String, channelId: String, userId: String, url: String): Result<Unit> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteImage(channelType: String, channelId: String, userId: String, url: String): Result<Unit> {
+        TODO("Not yet implemented")
+    }
+}
+

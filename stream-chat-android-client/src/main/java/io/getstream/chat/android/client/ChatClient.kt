@@ -297,7 +297,7 @@ internal constructor(
         logger.i { "Initialised: ${buildSdkTrackingHeaders()}" }
     }
 
-    private suspend fun handleEvent(event: ChatEvent) {
+    private fun handleEvent(event: ChatEvent) {
         when (event) {
             is ConnectedEvent -> {
                 logger.i { "[handleEvent] event: ConnectedEvent(userId='${event.me.id}')" }
@@ -323,7 +323,8 @@ internal constructor(
                     is DisconnectCause.NetworkNotAvailable,
                     is DisconnectCause.WebSocketNotAvailable,
                     is DisconnectCause.Error,
-                    -> { }
+                    -> {
+                    }
                     is DisconnectCause.UnrecoverableError -> {
                         userStateService.onSocketUnrecoverableError()
                     }
@@ -533,7 +534,7 @@ internal constructor(
         return setUser(user, tokenProvider, timeoutMilliseconds).also { result ->
             logger.v {
                 "[connectUserSuspend] completed: ${
-                result.stringify { "ConnectionData(connectionId=${it.connectionId})" }
+                    result.stringify { "ConnectionData(connectionId=${it.connectionId})" }
                 }"
             }
         }
@@ -669,7 +670,7 @@ internal constructor(
             ).also { result ->
                 logger.v {
                     "[connectAnonymousUser] completed: ${
-                    result.stringify { "ConnectionData(connectionId=${it.connectionId})" }
+                        result.stringify { "ConnectionData(connectionId=${it.connectionId})" }
                     }"
                 }
             }
@@ -1510,8 +1511,12 @@ internal constructor(
 
         plugins.forEach { listener -> listener.onAttachmentSendRequest(channelType, channelId, preparedMessage) }
 
-        return attachmentsSender
+        val result = attachmentsSender
             .sendAttachments(preparedMessage, channelType, channelId, isRetrying, repositoryFacade)
+
+        plugins.forEach { listener -> listener.onAttachmentSendResult(channelType, channelId, message, result) }
+
+        return result
     }
 
     /**

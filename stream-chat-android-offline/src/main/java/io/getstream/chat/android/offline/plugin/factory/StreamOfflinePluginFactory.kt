@@ -126,7 +126,7 @@ public class StreamOfflinePluginFactory(private val appContext: Context) : Plugi
         )
 
         val sendAttachmentListener: SendAttachmentListener = SendAttachmentsListenerDatabase(
-            repositoryFacade, repositoryFacade
+            repositoryFacade, repositoryFacade, repositoryFacade
         )
 
         val shuffleGiphyListener: ShuffleGiphyListener = ShuffleGiphyListenerDatabase(

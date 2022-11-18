@@ -18,6 +18,7 @@ package io.getstream.chat.android.state.plugin.listener.internal
 
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.plugin.listeners.SendAttachmentListener
+import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.state.plugin.logic.internal.LogicRegistry
 
 /**
@@ -40,5 +41,14 @@ internal class SendAttachmentListenerState(private val logic: LogicRegistry) : S
 
         // Update flow for currently running queries
         logic.getActiveQueryChannelsLogic().forEach { query -> query.refreshChannelState(channel.cid) }
+    }
+
+    override suspend fun onAttachmentSendResult(
+        channelType: String,
+        channelId: String,
+        message: Message,
+        result: Result<Message>,
+    ) {
+        /* Nothing to do */
     }
 }
