@@ -26,13 +26,18 @@ import io.getstream.chat.android.models.Mute
 import io.getstream.chat.android.models.TypingEvent
 import io.getstream.chat.android.models.User
 import io.getstream.chat.android.state.plugin.state.global.GlobalState
+import io.getstream.logging.StreamLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.util.Date
 
 @InternalStreamChatApi
 public class GlobalMutableState private constructor(
     override val clientState: ClientState,
 ) : MutableGlobalState {
+
+    private var lastTotalUnreadCount: Date = Date(Long.MIN_VALUE)
+    private var lastChannelUnreadCount: Date = Date(Long.MIN_VALUE)
 
     private val _totalUnreadCount = MutableStateFlow(0)
     private val _channelUnreadCount = MutableStateFlow(0)
@@ -95,12 +100,27 @@ public class GlobalMutableState private constructor(
         _user.value = user
     }
 
-    override fun setTotalUnreadCount(totalUnreadCount: Int) {
-        _totalUnreadCount.value = totalUnreadCount
+    override fun setTotalUnreadCount(totalUnreadCount: Int, eventCreatedAt: Date) {
+        if (eventCreatedAt.after(lastTotalUnreadCount)) {
+            StreamLog.d("GlobalMutableState") {
+                "Incrementing total count to: $totalUnreadCount"
+            }
+
+            _totalUnreadCount.value = totalUnreadCount
+            lastTotalUnreadCount = eventCreatedAt
+        } else {
+            StreamLog.d("GlobalMutableState") {
+                "Could not increment unread count. eventCreatedAt: ${eventCreatedAt.time}, " +
+                    "lastTotalUnreadCount: ${lastTotalUnreadCount.time}"
+            }
+        }
     }
 
-    override fun setChannelUnreadCount(channelUnreadCount: Int) {
-        _channelUnreadCount.value = channelUnreadCount
+    override fun setChannelUnreadCount(channelUnreadCount: Int, eventCreatedAt: Date) {
+        if (eventCreatedAt.after(lastChannelUnreadCount)) {
+            _channelUnreadCount.value = channelUnreadCount
+            lastChannelUnreadCount = eventCreatedAt
+        }
     }
 
     override fun setBanned(banned: Boolean) {
@@ -130,5 +150,3 @@ public class GlobalMutableState private constructor(
         _isQueryingFree.value = isQueryingFree
     }
 }
-
-internal fun GlobalState.toMutableState(): GlobalMutableState = this as GlobalMutableState

@@ -33,6 +33,7 @@ import io.getstream.chat.android.client.events.GlobalUserBannedEvent
 import io.getstream.chat.android.client.events.GlobalUserUnbannedEvent
 import io.getstream.chat.android.client.events.HasMessage
 import io.getstream.chat.android.client.events.HasOwnUser
+import io.getstream.chat.android.client.events.HasUnreadCounts
 import io.getstream.chat.android.client.events.MarkAllReadEvent
 import io.getstream.chat.android.client.events.MemberAddedEvent
 import io.getstream.chat.android.client.events.MemberRemovedEvent
@@ -108,7 +109,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.util.InputMismatchException
 
-private const val TAG = "Chat:EventHandlerSeq"
+private const val TAG = "EventHandlerSeq"
 private const val TAG_SOCKET = "Chat:SocketEvent"
 private const val EVENTS_BUFFER = 100
 
@@ -144,6 +145,25 @@ internal class EventHandlerSequential(
 
     init {
         logger.d { "<init> no args" }
+    }
+
+    private fun logBatchEvents(batchEvent: BatchEvent) {
+        batchEvent.sortedEvents
+            .forEach { event ->
+                when (event) {
+                    is HasOwnUser -> {
+                        val me = event.me
+                        logger.d { "event count type: ${event.type}. unread count: ${me.totalUnreadCount}" }
+                    }
+
+                    is HasUnreadCounts -> {
+                        logger.d { "event count type: ${event.type}. unread count: ${event.totalUnreadCount}" }
+                    }
+                    else -> {
+                        logger.d { "event type: ${event.type}" }
+                    }
+                }
+            }
     }
 
     /**
@@ -239,6 +259,7 @@ internal class EventHandlerSequential(
                 "[handleBatchEvent] >>> id: ${event.id}, fromSocket: ${event.isFromSocketConnection}" +
                     ", size: ${event.size}, event.types: '${event.sortedEvents.joinToString { it.type }}'"
             }
+            logBatchEvents(event)
             updateGlobalState(event)
             updateChannelsState(event)
             updateOfflineStorage(event)
@@ -256,42 +277,42 @@ internal class EventHandlerSequential(
             when (event) {
                 is ConnectedEvent -> if (batchEvent.isFromSocketConnection) {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is NotificationMutesUpdatedEvent -> {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is NotificationChannelMutesUpdatedEvent -> {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is UserUpdatedEvent -> if (event.user.id == currentUserId) {
-                    mutableGlobalState.updateCurrentUser(SelfUserPart(event.user))
+                    mutableGlobalState.updateCurrentUser(SelfUserPart(event.user), event.createdAt)
                 }
                 is MarkAllReadEvent -> {
-                    mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
-                    mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
+                    mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
+                    mutableGlobalState.setChannelUnreadCount(event.unreadChannels, event.createdAt)
                 }
                 is NotificationMessageNewEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
-                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
+                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels, event.createdAt)
                     }
                 }
                 is NotificationMarkReadEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
-                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
+                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels, event.createdAt)
                     }
                 }
                 is NewMessageEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
-                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
+                        mutableGlobalState.setChannelUnreadCount(event.unreadChannels, event.createdAt)
                     }
                 }
                 else -> Unit

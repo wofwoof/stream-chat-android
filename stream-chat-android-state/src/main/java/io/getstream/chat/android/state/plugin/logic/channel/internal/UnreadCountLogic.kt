@@ -16,9 +16,11 @@
 
 package io.getstream.chat.android.state.plugin.logic.channel.internal
 
+import io.getstream.chat.android.client.events.ChatEvent
+import io.getstream.chat.android.client.events.HasMessage
+import io.getstream.chat.android.client.events.HasUnreadCounts
 import io.getstream.chat.android.client.extensions.internal.shouldIncrementUnreadCount
 import io.getstream.chat.android.client.utils.buffer.StartStopBuffer
-import io.getstream.chat.android.models.ChannelUserRead
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.state.plugin.state.channel.internal.ChannelMutableState
 import io.getstream.chat.android.state.plugin.state.global.internal.MutableGlobalState
@@ -30,7 +32,7 @@ internal class UnreadCountLogic(
     private val globalMutableState: MutableGlobalState,
 ) {
 
-    private val countBuffer: StartStopBuffer<Message> = StartStopBuffer(globalMutableState.queryingChannelsFree)
+    private val countBuffer: StartStopBuffer<ChatEvent> = StartStopBuffer(globalMutableState.queryingChannelsFree)
 
     init {
         countBuffer.subscribe(this::performCount)
@@ -41,11 +43,12 @@ internal class UnreadCountLogic(
      *
      * @param message [Message].
      */
-    fun incrementUnreadCountIfNecessary(message: Message) {
-        countBuffer.enqueueData(message)
+    fun incrementUnreadCountIfNecessary(chatEvent: ChatEvent) {
+        countBuffer.enqueueData(chatEvent)
     }
 
-    private fun performCount(message: Message) {
+    private fun performCount(chatEvent: ChatEvent) {
+        val message = (chatEvent as HasMessage).message //todo: Fix this!
         val user = globalMutableState.user.value ?: return
         val currentUserId = user.id
 
@@ -53,7 +56,7 @@ internal class UnreadCountLogic(
          * same time, one increment can be lost.
          */
         synchronized(this) {
-            val readState = mutableState.read.value?.copy() ?: ChannelUserRead(user)
+            val readState = mutableState.read.value?.copy() ?: return
             val unreadCount: Int = readState.unreadMessages
             val lastMessageSeenDate = readState.lastMessageSeenDate
 
@@ -72,8 +75,10 @@ internal class UnreadCountLogic(
                     "It is necessary to increment the unread count for channel: " +
                         "${mutableState.channelData.value.id}. The last seen message was " +
                         "at: $lastMessageSeenDate. " +
-                        "New unread count: ${unreadCount + 1}"
+                        "New unread count: ${unreadCount + 1} " +
+                        "Total unread count: ${(chatEvent as HasUnreadCounts).totalUnreadCount}"
                 }
+
                 mutableState.increaseReadWith(message)
             }
         }

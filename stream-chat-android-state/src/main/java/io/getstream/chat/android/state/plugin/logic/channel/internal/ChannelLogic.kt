@@ -442,7 +442,7 @@ internal class ChannelLogic(
         when (event) {
             is NewMessageEvent -> {
                 upsertEventMessage(event.message)
-                channelStateLogic.incrementUnreadCountIfNecessary(event.message)
+                channelStateLogic.incrementUnreadCountIfNecessary(event)
                 channelStateLogic.toggleHidden(false)
             }
             is MessageUpdatedEvent -> {
@@ -464,7 +464,7 @@ internal class ChannelLogic(
                 if (!mutableState.insideSearch.value) {
                     upsertEventMessage(event.message)
                 }
-                channelStateLogic.incrementUnreadCountIfNecessary(event.message)
+                channelStateLogic.incrementUnreadCountIfNecessary(event)
                 channelStateLogic.toggleHidden(false)
             }
             is ReactionNewEvent -> {

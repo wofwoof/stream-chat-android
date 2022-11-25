@@ -21,6 +21,7 @@ import io.getstream.chat.android.client.channel.ChannelMessagesUpdateLogic
 import io.getstream.chat.android.client.channel.state.ChannelState
 import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.errors.isPermanent
+import io.getstream.chat.android.client.events.ChatEvent
 import io.getstream.chat.android.client.events.TypingStartEvent
 import io.getstream.chat.android.client.events.UserStartWatchingEvent
 import io.getstream.chat.android.client.events.UserStopWatchingEvent
@@ -87,8 +88,8 @@ internal class ChannelStateLogic(
      *
      * @param message [Message].
      */
-    fun incrementUnreadCountIfNecessary(message: Message) {
-        unreadCountLogic.incrementUnreadCountIfNecessary(message)
+    fun incrementUnreadCountIfNecessary(chatEvent: ChatEvent) {
+        unreadCountLogic.incrementUnreadCountIfNecessary(chatEvent)
     }
 
     /**
