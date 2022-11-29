@@ -97,7 +97,7 @@ internal class SyncManager(
 
     private var eventsDisposable: Disposable? = null
 
-    private val state = MutableStateFlow(State.Idle)
+    private val state = MutableStateFlow(State.Disconnected)
 
     override val syncedEvents: Flow<List<ChatEvent>> = events
 
@@ -121,6 +121,12 @@ internal class SyncManager(
         state.value = State.Syncing
         performSync()
         state.value = State.Idle
+    }
+
+    override suspend fun syncWhenIdle() {
+        if (state.value == State.Idle) {
+            sync()
+        }
     }
 
     override suspend fun awaitSyncing() {
@@ -165,6 +171,7 @@ internal class SyncManager(
      */
     private suspend fun onConnectionEstablished(userId: String) = try {
         logger.i { "[onConnectionEstablished] >>> isFirstConnect: $isFirstConnect" }
+        state.value = State.Idle
         state.value = State.Syncing
         val online = clientState.isOnline
         logger.v { "[onConnectionEstablished] online: $online" }
@@ -188,7 +195,7 @@ internal class SyncManager(
      */
     private suspend fun onConnectionLost() = try {
         logger.i { "[connectionLost] firstConnect: $isFirstConnect" }
-        state.value = State.Idle
+        state.value = State.Disconnected
         syncState.value?.let { syncState ->
             val activeCids = logicRegistry.getActiveChannelsLogic().map { it.cid }
             logger.d { "[connectionLost] activeCids.size: ${activeCids.size}" }
@@ -543,6 +550,6 @@ internal class SyncManager(
     }
 
     private enum class State {
-        Idle, Syncing
+        Disconnected, Idle, Syncing
     }
 }

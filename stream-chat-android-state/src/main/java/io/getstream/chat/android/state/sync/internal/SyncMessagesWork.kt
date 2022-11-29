@@ -52,7 +52,7 @@ internal class SyncMessagesWork(
             val syncManager = client.resolveDependency<StatePlugin, SyncHistoryManager>() ?: error(
                 "No SyncHistoryManager found in StatePlugin."
             )
-            syncManager.sync()
+            syncManager.syncWhenIdle()
 
             Result.success()
         } catch (e: Throwable) {

@@ -50,4 +50,6 @@ internal interface SyncHistoryManager {
      * Stops history syncing based on WS events.
      */
     fun stop()
+
+    suspend fun syncWhenIdle()
 }

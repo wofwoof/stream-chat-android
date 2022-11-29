@@ -21,11 +21,12 @@ import io.getstream.chat.android.state.event.handler.internal.model.SelfUser
 import io.getstream.chat.android.state.event.handler.internal.model.SelfUserFull
 import io.getstream.chat.android.state.event.handler.internal.model.SelfUserPart
 import io.getstream.chat.android.state.plugin.state.global.internal.MutableGlobalState
+import java.util.Date
 
 /**
  * Updates [MutableGlobalState] with [SelfUser] instance.
  */
-internal fun MutableGlobalState.updateCurrentUser(self: SelfUser) {
+internal fun MutableGlobalState.updateCurrentUser(self: SelfUser, updateDate: Date) {
     val me = when (self) {
         is SelfUserFull -> self.me
         is SelfUserPart -> user.value?.mergePartially(self.me) ?: self.me
@@ -36,6 +37,6 @@ internal fun MutableGlobalState.updateCurrentUser(self: SelfUser) {
     setBanned(me.banned)
     setMutedUsers(me.mutes)
     setChannelMutes(me.channelMutes)
-    setTotalUnreadCount(me.totalUnreadCount)
+    setTotalUnreadCount(me.totalUnreadCount, updateDate)
     setChannelUnreadCount(me.unreadChannels)
 }

@@ -25,14 +25,19 @@ import io.getstream.chat.android.models.ChannelMute
 import io.getstream.chat.android.models.Mute
 import io.getstream.chat.android.models.TypingEvent
 import io.getstream.chat.android.models.User
-import io.getstream.chat.android.state.plugin.state.global.GlobalState
+import io.getstream.log.StreamLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.util.Date
+
+private const val TAG = "GlobalMutableState"
 
 @InternalStreamChatApi
 public class GlobalMutableState private constructor(
     override val clientState: ClientState,
 ) : MutableGlobalState {
+
+    private var lastTotalUnreadCountDate = Date(Long.MIN_VALUE)
 
     private val _totalUnreadCount = MutableStateFlow(0)
     private val _channelUnreadCount = MutableStateFlow(0)
@@ -95,8 +100,23 @@ public class GlobalMutableState private constructor(
         _user.value = user
     }
 
-    override fun setTotalUnreadCount(totalUnreadCount: Int) {
-        _totalUnreadCount.value = totalUnreadCount
+    override fun setTotalUnreadCount(totalUnreadCount: Int, updateDate: Date) {
+        if (updateDate.after(lastTotalUnreadCountDate)) {
+            _totalUnreadCount.value = totalUnreadCount
+            lastTotalUnreadCountDate = updateDate
+
+            StreamLog.d(TAG) {
+                "Counting totalUnreadCount. value: $totalUnreadCount " +
+                    "lastTotalUnreadCountDate: $lastTotalUnreadCountDate " +
+                    "updateDate: $updateDate"
+            }
+        } else {
+            StreamLog.d(TAG) {
+                "NOT counting totalUnreadCount. value: $totalUnreadCount " +
+                    "lastTotalUnreadCountDate: $lastTotalUnreadCountDate " +
+                    "updateDate: $updateDate"
+            }
+        }
     }
 
     override fun setChannelUnreadCount(channelUnreadCount: Int) {
@@ -130,5 +150,3 @@ public class GlobalMutableState private constructor(
         _isQueryingFree.value = isQueryingFree
     }
 }
-
-internal fun GlobalState.toMutableState(): GlobalMutableState = this as GlobalMutableState

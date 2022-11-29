@@ -106,7 +106,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.InputMismatchException
+import java.util.Locale
 
 private const val TAG = "Chat:EventHandlerSeq"
 private const val TAG_SOCKET = "Chat:SocketEvent"
@@ -239,6 +242,55 @@ internal class EventHandlerSequential(
                 "[handleBatchEvent] >>> id: ${event.id}, fromSocket: ${event.isFromSocketConnection}" +
                     ", size: ${event.size}, event.types: '${event.sortedEvents.joinToString { it.type }}'"
             }
+
+            val dateFormat: DateFormat = SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault())
+
+
+            if (event.sortedEvents.any { chatEvent -> chatEvent is ConnectedEvent }) {
+                event.sortedEvents.forEach { chatEvent ->
+                    when (chatEvent) {
+                        is NewMessageEvent -> {
+                            StreamLog.d("GlobalMutableState") {
+                                "new message event. total unread count: ${chatEvent.totalUnreadCount}. " +
+                                    "text: ${chatEvent.message.text}. " +
+                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
+                            }
+                        }
+                        is ConnectedEvent -> {
+                            StreamLog.d("GlobalMutableState") {
+                                "ConnectedEvent found. Event type: ${chatEvent.type}. " +
+                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
+                            }
+                        }
+                        else -> {
+                            StreamLog.d("GlobalMutableState") {
+                                "event type: ${chatEvent.type} " +
+                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
+                            }
+                        }
+                    }
+                }
+            } else {
+                event.sortedEvents.forEach { chatEvent ->
+                    when (chatEvent) {
+                        is NewMessageEvent -> {
+                            StreamLog.d("GlobalMutableState") {
+                                "not connected new message event. total unread count: ${chatEvent.totalUnreadCount}. " +
+                                    "text: ${chatEvent.message.text} " +
+                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
+                            }
+                        }
+                        else -> {
+                            StreamLog.d("GlobalMutableState") {
+                                "not connected event type: ${chatEvent.type} " +
+                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
+                            }
+                        }
+                    }
+                }
+            }
+
+
             updateGlobalState(event)
             updateChannelsState(event)
             updateOfflineStorage(event)
@@ -256,41 +308,41 @@ internal class EventHandlerSequential(
             when (event) {
                 is ConnectedEvent -> if (batchEvent.isFromSocketConnection) {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is NotificationMutesUpdatedEvent -> {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is NotificationChannelMutesUpdatedEvent -> {
                     event.me.id mustBe currentUserId
-                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me))
+                    mutableGlobalState.updateCurrentUser(SelfUserFull(event.me), event.createdAt)
                 }
                 is UserUpdatedEvent -> if (event.user.id == currentUserId) {
-                    mutableGlobalState.updateCurrentUser(SelfUserPart(event.user))
+                    mutableGlobalState.updateCurrentUser(SelfUserPart(event.user), event.createdAt)
                 }
                 is MarkAllReadEvent -> {
-                    mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
+                    mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
                     mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
                 }
                 is NotificationMessageNewEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
                         mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
                     }
                 }
                 is NotificationMarkReadEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
                         mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
                     }
                 }
                 is NewMessageEvent -> if (batchEvent.isFromSocketConnection) {
                     // can we somehow get rid of repos usage here?
                     if (repos.hasReadEventsCapability(event.cid)) {
-                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount)
+                        mutableGlobalState.setTotalUnreadCount(event.totalUnreadCount, event.createdAt)
                         mutableGlobalState.setChannelUnreadCount(event.unreadChannels)
                     }
                 }

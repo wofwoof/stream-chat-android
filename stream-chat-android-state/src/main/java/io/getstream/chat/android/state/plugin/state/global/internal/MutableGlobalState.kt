@@ -23,6 +23,7 @@ import io.getstream.chat.android.models.TypingEvent
 import io.getstream.chat.android.models.User
 import io.getstream.chat.android.state.plugin.internal.StatePlugin
 import io.getstream.chat.android.state.plugin.state.global.GlobalState
+import java.util.Date
 
 /**
  * Mutable global state of [StatePlugin].
@@ -33,7 +34,7 @@ internal interface MutableGlobalState : GlobalState {
 
     fun setUser(user: User)
 
-    fun setTotalUnreadCount(totalUnreadCount: Int)
+    fun setTotalUnreadCount(totalUnreadCount: Int, updateDate: Date)
 
     fun setChannelUnreadCount(channelUnreadCount: Int)
 
