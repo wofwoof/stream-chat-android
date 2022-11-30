@@ -27,6 +27,8 @@ import io.getstream.chat.android.client.events.ConnectingEvent
 import io.getstream.chat.android.client.events.DisconnectedEvent
 import io.getstream.chat.android.client.events.HealthEvent
 import io.getstream.chat.android.client.events.MarkAllReadEvent
+import io.getstream.chat.android.client.events.NewMessageEvent
+import io.getstream.chat.android.client.events.UserStartWatchingEvent
 import io.getstream.chat.android.client.extensions.cidToTypeAndId
 import io.getstream.chat.android.client.extensions.enrichWithCid
 import io.getstream.chat.android.client.extensions.internal.users
@@ -84,7 +86,7 @@ internal class SyncManager(
     private val events: Tube<List<ChatEvent>> = Tube(),
 ) : SyncHistoryManager {
 
-    private val logger = StreamLog.getLogger("SyncManager")
+    private val logger = StreamLog.getLogger("DebugUnreads-SM")
 
     private val syncScope = scope + SupervisorJob(scope.coroutineContext.job) +
         CoroutineExceptionHandler { context, throwable ->
@@ -98,6 +100,7 @@ internal class SyncManager(
     private var eventsDisposable: Disposable? = null
 
     private val state = MutableStateFlow(State.Disconnected)
+    private val isWatchingSdk = MutableStateFlow(false)
 
     override val syncedEvents: Flow<List<ChatEvent>> = events
 
@@ -152,6 +155,7 @@ internal class SyncManager(
                 logger.i { "[onEvent] DisconnectedEvent received" }
                 onConnectionLost()
                 syncScope.coroutineContext.job.cancelChildren()
+                isWatchingSdk.value = false
             }
             is HealthEvent -> syncScope.launch {
                 logger.v { "[onEvent] HealthEvent received" }
@@ -160,6 +164,20 @@ internal class SyncManager(
             is MarkAllReadEvent -> syncScope.launch {
                 logger.i { "[onEvent] MarkAllReadEvent received" }
                 updateAllReadStateForDate(event.user.id, event.createdAt)
+            }
+            is UserStartWatchingEvent -> syncScope.launch {
+                logger.i { "[onEvent] UserStartWatchingEvent received" }
+                if (!isWatchingSdk.value) {
+                    isWatchingSdk.value = true
+
+                    state.value = State.Syncing
+                    performSync()
+                    state.value = State.Idle
+                }
+
+            }
+            is NewMessageEvent -> {
+                logger.i { "[onEvent] NewMessageEvent received. total unread: ${event.totalUnreadCount}" }
             }
             else -> Unit
         }
@@ -171,8 +189,6 @@ internal class SyncManager(
      */
     private suspend fun onConnectionEstablished(userId: String) = try {
         logger.i { "[onConnectionEstablished] >>> isFirstConnect: $isFirstConnect" }
-        state.value = State.Idle
-        state.value = State.Syncing
         val online = clientState.isOnline
         logger.v { "[onConnectionEstablished] online: $online" }
         retryFailedEntities()
@@ -180,10 +196,8 @@ internal class SyncManager(
         if (syncState.value == null && syncState.value?.userId != userId) {
             updateAllReadStateForDate(userId, currentDate = Date())
         }
-        performSync()
-        restoreActiveChannels()
-        state.value = State.Idle
 
+        restoreActiveChannels()
         logger.i { "[onConnectionEstablished] <<< completed" }
     } catch (e: Throwable) {
         logger.e { "[onConnectionEstablished] failed: $e" }

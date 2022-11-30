@@ -114,6 +114,7 @@ import java.util.Locale
 private const val TAG = "Chat:EventHandlerSeq"
 private const val TAG_SOCKET = "Chat:SocketEvent"
 private const val EVENTS_BUFFER = 100
+private const val TAG_DEBUG = "DebugUnreads-EH"
 
 /**
  * Processes events sequentially. That means a new event will not be processed
@@ -245,46 +246,30 @@ internal class EventHandlerSequential(
 
             val dateFormat: DateFormat = SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault())
 
-
-            if (event.sortedEvents.any { chatEvent -> chatEvent is ConnectedEvent }) {
-                event.sortedEvents.forEach { chatEvent ->
-                    when (chatEvent) {
-                        is NewMessageEvent -> {
-                            StreamLog.d("GlobalMutableState") {
-                                "new message event. total unread count: ${chatEvent.totalUnreadCount}. " +
-                                    "text: ${chatEvent.message.text}. " +
-                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
-                            }
-                        }
-                        is ConnectedEvent -> {
-                            StreamLog.d("GlobalMutableState") {
-                                "ConnectedEvent found. Event type: ${chatEvent.type}. " +
-                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
-                            }
-                        }
-                        else -> {
-                            StreamLog.d("GlobalMutableState") {
-                                "event type: ${chatEvent.type} " +
-                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
-                            }
+            event.sortedEvents.forEach { chatEvent ->
+                when (chatEvent) {
+                    is NewMessageEvent -> {
+                        StreamLog.d(TAG_DEBUG) {
+                            "new message event. total unread count: ${chatEvent.totalUnreadCount}. " +
+                                "text: ${chatEvent.message.text} " +
+                                "createdAt: ${dateFormat.format(chatEvent.createdAt)} " +
+                                "from sync: ${event.isFromHistorySync}"
                         }
                     }
-                }
-            } else {
-                event.sortedEvents.forEach { chatEvent ->
-                    when (chatEvent) {
-                        is NewMessageEvent -> {
-                            StreamLog.d("GlobalMutableState") {
-                                "not connected new message event. total unread count: ${chatEvent.totalUnreadCount}. " +
-                                    "text: ${chatEvent.message.text} " +
-                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
-                            }
+
+                    is ConnectedEvent -> {
+                        StreamLog.d(TAG_DEBUG) {
+                            "ConnectedEvent found. Event type: ${chatEvent.type}. " +
+                                "createdAt: ${dateFormat.format(chatEvent.createdAt)} " +
+                                "from sync: ${event.isFromHistorySync}"
                         }
-                        else -> {
-                            StreamLog.d("GlobalMutableState") {
-                                "not connected event type: ${chatEvent.type} " +
-                                    "createdAt: ${dateFormat.format(chatEvent.createdAt)}"
-                            }
+                    }
+
+                    else -> {
+                        StreamLog.d(TAG_DEBUG) {
+                            "general event. Event type: ${chatEvent.type} " +
+                                "createdAt: ${dateFormat.format(chatEvent.createdAt)} " +
+                                "from sync: ${event.isFromHistorySync}"
                         }
                     }
                 }
