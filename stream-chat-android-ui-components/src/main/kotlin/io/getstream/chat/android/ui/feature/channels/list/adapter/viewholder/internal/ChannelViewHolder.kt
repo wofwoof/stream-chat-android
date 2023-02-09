@@ -240,6 +240,7 @@ internal class ChannelViewHolder @JvmOverloads constructor(
         channelAvatarView.setChannel(channel)
     }
 
+    //Here!!
     private fun StreamUiChannelListItemForegroundViewBinding.configureLastMessageLabelAndTimestamp(
         lastMessage: Message?,
     ) {

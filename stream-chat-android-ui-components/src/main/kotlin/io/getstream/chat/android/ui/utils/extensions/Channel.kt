@@ -78,6 +78,7 @@ internal fun Channel.diff(other: Channel): ChannelListPayloadDiff {
     )
 }
 
+// The logic is here!!
 internal fun Channel.isMessageRead(message: Message): Boolean {
     val currentUser = ChatClient.instance().globalState.user.value
     return read.filter { it.user.id != currentUser?.id }
