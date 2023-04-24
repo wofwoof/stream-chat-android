@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.ui.message.input.attachment
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,12 +35,15 @@ import io.getstream.chat.android.ui.message.input.attachment.factory.Attachments
 import io.getstream.chat.android.ui.message.input.attachment.factory.AttachmentsPickerTabFactory
 import io.getstream.chat.android.ui.message.input.attachment.factory.AttachmentsPickerTabListener
 import io.getstream.chat.android.ui.message.input.attachment.internal.AttachmentDialogPagerAdapter
+import io.getstream.logging.StreamLog
 
 /**
  * Represent the bottom sheet dialog that allows users to pick attachments.
  */
 @ExperimentalStreamChatApi
 public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), AttachmentSelectionListener {
+
+    private val logger = StreamLog.getLogger("CameraAttachDialog")
 
     private var _binding: StreamUiDialogAttachmentBinding? = null
     private val binding get() = _binding!!
@@ -74,15 +78,18 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        logger.d { "[onCreateView] savedInstanceState: $savedInstanceState" }
         _binding = StreamUiDialogAttachmentBinding.inflate(requireContext().streamThemeInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        logger.d { "[onViewCreated] savedInstanceState: $savedInstanceState" }
         super.onViewCreated(view, savedInstanceState)
-        if (savedInstanceState == null && ::style.isInitialized && ::attachmentsPickerTabFactories.isInitialized) {
+        if (::style.isInitialized && ::attachmentsPickerTabFactories.isInitialized) {
             setupDialog()
         } else {
+            logger.v { "[onViewCreated] dismiss" }
             dismiss()
         }
     }
@@ -105,6 +112,7 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
         binding.attachButton.setImageDrawable(style.attachmentSelectionDialogStyle.attachButtonIcon)
         binding.attachButton.isEnabled = false
         binding.attachButton.setOnClickListener {
+            logger.v { "[setupAttachButton] onClick" }
             attachmentSelectionListener?.onAttachmentsSelected(selectedAttachments, attachmentSource)
             dismiss()
         }
@@ -147,6 +155,7 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
             }
 
             override fun onSelectedAttachmentsSubmitted() {
+                logger.v { "[setupPages] onSelectedAttachmentsSubmitted" }
                 attachmentSelectionListener?.onAttachmentsSelected(selectedAttachments, attachmentSource)
                 dismiss()
             }
@@ -161,12 +170,29 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
         binding.attachmentPager.isUserInputEnabled = false
     }
 
+    override fun dismiss() {
+        logger.v { "[dismiss] no args" }
+        super.dismiss()
+    }
+
+    override fun dismissAllowingStateLoss() {
+        logger.v { "[dismissAllowingStateLoss] no args" }
+        super.dismissAllowingStateLoss()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        logger.d { "[onDismiss] no args" }
+        super.onDismiss(dialog)
+    }
+
     override fun onDestroyView() {
+        logger.d { "[onDestroyView] no args" }
         super.onDestroyView()
         _binding = null
     }
 
     override fun onDestroy() {
+        logger.d { "[onDestroy] no args" }
         super.onDestroy()
         attachmentSelectionListener = null
     }
@@ -179,6 +205,7 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
      * @param style Style for the dialog.
      */
     public fun setStyle(style: MessageInputViewStyle) {
+        logger.i { "[setStyle] style: $style" }
         this.style = style
     }
 
@@ -186,6 +213,7 @@ public class AttachmentSelectionDialogFragment : BottomSheetDialogFragment(), At
      * Sets the list of factories for the tabs that will be displayed in the attachment picker.
      */
     public fun setAttachmentsPickerTabFactories(attachmentsPickerTabFactories: List<AttachmentsPickerTabFactory>) {
+        logger.i { "[setAttachmentsPickerTabFactories] attachmentsPickerTabFactories: $attachmentsPickerTabFactories" }
         this.attachmentsPickerTabFactories = attachmentsPickerTabFactories
     }
 

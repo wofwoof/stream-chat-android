@@ -18,6 +18,7 @@ package io.getstream.chat.android.ui.message.composer
 
 import android.content.Context
 import android.graphics.Rect
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
@@ -52,6 +53,8 @@ import io.getstream.chat.android.ui.message.input.MessageInputViewStyle
 import io.getstream.chat.android.ui.message.input.attachment.AttachmentSelectionDialogFragment
 import io.getstream.chat.android.ui.message.input.attachment.AttachmentSelectionListener
 import io.getstream.chat.android.ui.message.input.attachment.AttachmentSource
+import io.getstream.chat.android.ui.message.input.attachment.factory.AttachmentsPickerTabFactories
+import io.getstream.logging.StreamLog
 
 /**
  * UI component designed for handling message text input, attachments, actions,
@@ -59,6 +62,9 @@ import io.getstream.chat.android.ui.message.input.attachment.AttachmentSource
  */
 @ExperimentalStreamChatApi
 public class MessageComposerView : ConstraintLayout {
+
+    private val logger = StreamLog.getLogger("CameraAttachComposer")
+
     /**
      * Generated binding class for the XML layout.
      */
@@ -214,10 +220,37 @@ public class MessageComposerView : ConstraintLayout {
         init(attrs)
     }
 
+    override fun onSaveInstanceState(): Parcelable? {
+        val state = super.onSaveInstanceState()
+        logger.w { "[onSaveInstanceState] state: $state" }
+        return state
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        logger.w { "[onRestoreInstanceState] state: $state" }
+
+        val fragment = context.getFragmentManager()?.findFragmentByTag(AttachmentSelectionDialogFragment.TAG) as? AttachmentSelectionDialogFragment
+        logger.v { "[onRestoreInstanceState] fragment: $fragment" }
+        /* TODO
+        val listener =
+            AttachmentSelectionListener { attachments: Set<AttachmentMetaData>, _: AttachmentSource ->
+                attachmentSelectionListener(attachments.map { it.toAttachment(context) })
+            }
+        fragment?.setStyle(messageInputViewStyle)
+        fragment?.setAttachmentsPickerTabFactories(
+            AttachmentsPickerTabFactories
+            .defaultFactories(messageInputViewStyle))
+        fragment?.setAttachmentSelectionListener(listener)
+        */
+
+        super.onRestoreInstanceState(state)
+    }
+
     /**
      * Initializing the view with default contents.
      */
     private fun init(attr: AttributeSet? = null) {
+        logger.i { "[init] no args" }
         binding = StreamUiMessageComposerBinding.inflate(streamThemeInflater, this)
 
         validationErrorRenderer = ValidationErrorRenderer(context, this)
