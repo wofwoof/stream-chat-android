@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>stream-chat-android-ui-common</title>
 <link href="../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script>
 <link href="../styles/style.css" rel="Stylesheet">
 <link href="../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../scripts/main.js" defer></script>
-<script type="text/javascript" src="../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../scripts/prism.js" async></script>
+<script type="text/javascript" src="../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-ui-common:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -43,240 +55,362 @@ if(savedDarkMode === true){
     <h1 class="cover"><span><span>stream-chat-android-ui-common</span></span></h1>
   </div>
   <h2 class="">Packages</h2>
-  <div class="table"><a data-name="1433138259%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat" id="1433138259%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+  <div class="table"><a data-name="-1428608014%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common" id="-1428608014%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat/index.html">com.getstream.sdk.chat</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1433138259%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common/index.html">io.getstream.chat.android.ui.common</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1428608014%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1360478606%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.coil" id="1360478606%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="1828115933%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.contract.internal" id="1828115933%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.coil/index.html">com.getstream.sdk.chat.coil</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1360478606%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.contract.internal/index.html">io.getstream.chat.android.ui.common.contract.internal</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1828115933%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1151026015%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.disposable" id="1151026015%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="720069216%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.disposable" id="720069216%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.disposable/index.html">com.getstream.sdk.chat.disposable</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1151026015%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.disposable/index.html">io.getstream.chat.android.ui.common.disposable</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="720069216%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1330467063%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.images" id="1330467063%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="768158916%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.feature.documents" id="768158916%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.images/index.html">com.getstream.sdk.chat.images</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1330467063%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.feature.documents/index.html">io.getstream.chat.android.ui.common.feature.documents</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="768158916%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1684225934%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.model" id="1684225934%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="-123621618%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.feature.messages.composer" id="-123621618%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.model/index.html">com.getstream.sdk.chat.model</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1684225934%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.feature.messages.composer/index.html">io.getstream.chat.android.ui.common.feature.messages.composer</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-123621618%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-1646452446%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.startup" id="-1646452446%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="492274444%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.feature.messages.list" id="492274444%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.startup/index.html">com.getstream.sdk.chat.startup</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1646452446%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.feature.messages.list/index.html">io.getstream.chat.android.ui.common.feature.messages.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="492274444%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="75954966%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.utils" id="75954966%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="1831988782%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.helper" id="1831988782%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.utils/index.html">com.getstream.sdk.chat.utils</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="75954966%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.helper/index.html">io.getstream.chat.android.ui.common.helper</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1831988782%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-1762440592%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.utils.extensions" id="-1762440592%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="-101936575%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.helper.internal" id="-101936575%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.utils.extensions/index.html">com.getstream.sdk.chat.utils.extensions</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1762440592%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.helper.internal/index.html">io.getstream.chat.android.ui.common.helper.internal</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-101936575%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-592762093%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.utils.typing" id="-592762093%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="1522473080%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.images" id="1522473080%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.utils.typing/index.html">com.getstream.sdk.chat.utils.typing</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-592762093%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.images/index.html">io.getstream.chat.android.ui.common.images</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1522473080%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1698586845%2FPackages%2F-348677689" anchor-label="com.getstream.sdk.chat.view.activity" id="1698586845%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="-1530307785%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.images.internal" id="-1530307785%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="com.getstream.sdk.chat.view.activity/index.html">com.getstream.sdk.chat.view.activity</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1698586845%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.images.internal/index.html">io.getstream.chat.android.ui.common.images.internal</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1530307785%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-11492830%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common" id="-11492830%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="2091022315%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.images.resizing" id="2091022315%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common/index.html">io.getstream.chat.android.common</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-11492830%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.images.resizing/index.html">io.getstream.chat.android.ui.common.images.resizing</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2091022315%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1025705328%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common.composer" id="1025705328%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="460364524%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.notifications" id="460364524%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common.composer/index.html">io.getstream.chat.android.common.composer</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1025705328%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.notifications/index.html">io.getstream.chat.android.ui.common.notifications</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="460364524%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1870403101%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common.model" id="1870403101%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="909235612%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.state.channels.actions" id="909235612%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common.model/index.html">io.getstream.chat.android.common.model</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1870403101%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.state.channels.actions/index.html">io.getstream.chat.android.ui.common.state.channels.actions</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="909235612%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-809140964%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common.notifications" id="-809140964%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="1854674633%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.state.messages" id="1854674633%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common.notifications/index.html">io.getstream.chat.android.common.notifications</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-809140964%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.state.messages/index.html">io.getstream.chat.android.ui.common.state.messages</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1854674633%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="485339698%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common.notifications.permissions" id="485339698%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="1668471977%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.state.messages.composer" id="1668471977%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common.notifications.permissions/index.html">io.getstream.chat.android.common.notifications.permissions</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="485339698%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.state.messages.composer/index.html">io.getstream.chat.android.ui.common.state.messages.composer</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1668471977%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-9933435%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.common.state" id="-9933435%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="-84036057%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.state.messages.list" id="-84036057%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.common.state/index.html">io.getstream.chat.android.common.state</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-9933435%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.state.messages.list/index.html">io.getstream.chat.android.ui.common.state.messages.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-84036057%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="1752220878%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.utils" id="1752220878%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+<a data-name="636338037%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.utils" id="636338037%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.ui.utils/index.html">io.getstream.chat.android.ui.utils</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1752220878%2FPackages%2F-348677689"></span>
+              <div><a href="io.getstream.chat.android.ui.common.utils/index.html">io.getstream.chat.android.ui.common.utils</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="636338037%2FPackages%2F-348677689"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1755945807%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.utils.extensions" id="-1755945807%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.ui.common.utils.extensions/index.html">io.getstream.chat.android.ui.common.utils.extensions</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1755945807%2FPackages%2F-348677689"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1869581780%2FPackages%2F-348677689" anchor-label="io.getstream.chat.android.ui.common.utils.typing" id="1869581780%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.ui.common.utils.typing/index.html">io.getstream.chat.android.ui.common.utils.typing</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1869581780%2FPackages%2F-348677689"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1167446265%2FPackages%2F-348677689" anchor-label="io.getstream.sdk.chat.audio.recording" id="1167446265%2FPackages%2F-348677689" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-ui-common:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-common:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.sdk.chat.audio.recording/index.html">io.getstream.sdk.chat.audio.recording</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1167446265%2FPackages%2F-348677689"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -288,6 +422,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

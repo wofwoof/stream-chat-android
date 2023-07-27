@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>StreamOfflinePluginFactory</title>
 <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
-<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../../../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-offline:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -37,63 +49,63 @@ if(savedDarkMode === true){
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="stream-chat-android-offline::io.getstream.chat.android.offline.plugin.factory/StreamOfflinePluginFactory///PointingToDeclaration//-543619192">
-  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-offline</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.offline.plugin.factory</a><span class="delimiter">/</span><a href="index.html">StreamOfflinePluginFactory</a></div>
+<div class="main-content" data-page-type="classlike" id="content" pageids="stream-chat-android-offline::io.getstream.chat.android.offline.plugin.factory/StreamOfflinePluginFactory///PointingToDeclaration//-543619192">
+  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-offline</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.offline.plugin.factory</a><span class="delimiter">/</span><span class="current">StreamOfflinePluginFactory</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Stream</span><wbr><span>Offline</span><wbr><span>Plugin</span><wbr><span><span>Factory</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">StreamOfflinePluginFactory</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">config<span class="token operator">: </span><a href="../../io.getstream.chat.android.offline.plugin.configuration/-config/index.html">Config</a><span class="token punctuation">, </span></span><span class="parameter ">appContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span> : <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin.factory/-plugin-factory/index.html">PluginFactory</a>, <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.persistance.repository.factory/-repository-factory/-provider/index.html">RepositoryFactory.Provider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Implementation of <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin.factory/-plugin-factory/index.html">PluginFactory</a> that provides <span data-unresolved-link="io.getstream.chat.android.offline.plugin.internal/OfflinePlugin///PointingToDeclaration/">OfflinePlugin</span>.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">StreamOfflinePluginFactory</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">appContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span> : <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin.factory/-plugin-factory/index.html">PluginFactory</a>, <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.persistance.repository.factory/-repository-factory/-provider/index.html">RepositoryFactory.Provider</a></div><p class="paragraph">Implementation of <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin.factory/-plugin-factory/index.html">PluginFactory</a> that provides <span data-unresolved-link="io.getstream.chat.android.offline.plugin.internal/OfflinePlugin///PointingToDeclaration/">OfflinePlugin</span>.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>app</span><wbr><span><span>Context</span></span></u></div></span></div><div><div class="title"><p class="paragraph"><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></p></div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Parameters</h2>
-      <div data-togglable="Parameters">
-        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>config</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph"><a href="../../io.getstream.chat.android.offline.plugin.configuration/-config/index.html">Config</a> Configuration of persistence of the SDK.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>app</span><wbr><span><span>Context</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph"><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></p></div></div></div></div></div></div></div></div></div>
-      </div>
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="688386663%2FConstructors%2F-543619192" anchor-label="StreamOfflinePluginFactory" id="688386663%2FConstructors%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-stream-offline-plugin-factory.html"><span>Stream</span><wbr><span>Offline</span><wbr><span>Plugin</span><wbr><span><span>Factory</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="688386663%2FConstructors%2F-543619192"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-stream-offline-plugin-factory.html"><span class="token function">StreamOfflinePluginFactory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">config<span class="token operator">: </span><a href="../../io.getstream.chat.android.offline.plugin.configuration/-config/index.html">Config</a><span class="token punctuation">, </span></span><span class="parameter ">appContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-1153145383%2FConstructors%2F-543619192" anchor-label="StreamOfflinePluginFactory" id="-1153145383%2FConstructors%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-stream-offline-plugin-factory.html"><span>Stream</span><wbr><span>Offline</span><wbr><span>Plugin</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1153145383%2FConstructors%2F-543619192"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">appContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="439337587%2FFunctions%2F-543619192" anchor-label="createRepositoryFactory" id="439337587%2FFunctions%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-repository-factory.html"><span>create</span><wbr><span>Repository</span><wbr><span><span>Factory</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="439337587%2FFunctions%2F-543619192"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="create-repository-factory.html"><span class="token function">createRepositoryFactory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.persistance.repository.factory/-repository-factory/index.html">RepositoryFactory</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1787567828%2FFunctions%2F-543619192" anchor-label="createRepositoryFactory" id="1787567828%2FFunctions%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-repository-factory.html"><span>create</span><wbr><span>Repository</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1787567828%2FFunctions%2F-543619192"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="create-repository-factory.html"><span class="token function">createRepositoryFactory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.persistance.repository.factory/-repository-factory/index.html">RepositoryFactory</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-<a data-name="-1857227103%2FFunctions%2F-543619192" anchor-label="get" id="-1857227103%2FFunctions%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get.html"><span><span>get</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1857227103%2FFunctions%2F-543619192"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin/-plugin/index.html">Plugin</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates a <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin/-plugin/index.html">Plugin</a></p></div></div></div>
+<a data-name="2143363686%2FFunctions%2F-543619192" anchor-label="get" id="2143363686%2FFunctions%2F-543619192" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-offline:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-offline:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get.html"><span><span>get</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2143363686%2FFunctions%2F-543619192"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-offline:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin/-plugin/index.html">Plugin</a></div><div class="brief "><p class="paragraph">Creates a <a href="../../../stream-chat-android-client/io.getstream.chat.android.client.plugin/-plugin/index.html">Plugin</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +119,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

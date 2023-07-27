@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>io.getstream.chat.android.ui</title>
 <link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../scripts/main.js" defer></script>
-<script type="text/javascript" src="../../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-ui-components:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -37,137 +49,28 @@ if(savedDarkMode === true){
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="stream-chat-android-ui-components::io.getstream.chat.android.ui////PointingToDeclaration//-523872580">
-  <div class="breadcrumbs"><a href="../index.html">stream-chat-android-ui-components</a><span class="delimiter">/</span><a href="index.html">io.getstream.chat.android.ui</a></div>
+<div class="main-content" data-page-type="package" id="content" pageids="stream-chat-android-ui-components::io.getstream.chat.android.ui////PointingToDeclaration//-523872580">
+  <div class="breadcrumbs"><a href="../index.html">stream-chat-android-ui-components</a><span class="delimiter">/</span><span class="current">io.getstream.chat.android.ui</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>Package io.</span><wbr><span>getstream.</span><wbr><span>chat.</span><wbr><span>android.</span><wbr><span>ui</span></h1>
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Types</h2>
-      <div class="table" data-togglable="Types"><a data-name="-2018677249%2FClasslikes%2F-523872580" anchor-label="ChatUI" id="-2018677249%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-chat-u-i/index.html"><span>Chat</span><wbr><span><span>UI</span></span></a></div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-2018677249%2FClasslikes%2F-523872580" anchor-label="ChatUI" id="-2018677249%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-chat-u-i/index.html"><span>Chat</span><wbr><span><span>UI</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2018677249%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-chat-u-i/index.html">ChatUI</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">ChatUI handles any configuration for the Chat UI elements.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="926766306%2FClasslikes%2F-523872580" anchor-label="CurrentUserProvider" id="926766306%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-current-user-provider/index.html"><span>Current</span><wbr><span>User</span><wbr><span><span>Provider</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="926766306%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-current-user-provider/index.html">CurrentUserProvider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Provides the currently logged in user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1048312654%2FClasslikes%2F-523872580" anchor-label="MessagePreviewFormatter" id="1048312654%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-message-preview-formatter/index.html"><span>Message</span><wbr><span>Preview</span><wbr><span><span>Formatter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1048312654%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-message-preview-formatter/index.html">MessagePreviewFormatter</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">An interface that allows to generate a preview text for the given message.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="795581363%2FClasslikes%2F-523872580" anchor-label="MimeTypeIconProvider" id="795581363%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-mime-type-icon-provider/index.html"><span>Mime</span><wbr><span>Type</span><wbr><span>Icon</span><wbr><span><span>Provider</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="795581363%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-mime-type-icon-provider/index.html">MimeTypeIconProvider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Provides icons for file attachments.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-2041070477%2FClasslikes%2F-523872580" anchor-label="MimeTypeIconProviderImpl" id="-2041070477%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-mime-type-icon-provider-impl/index.html"><span>Mime</span><wbr><span>Type</span><wbr><span>Icon</span><wbr><span>Provider</span><wbr><span><span>Impl</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2041070477%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-mime-type-icon-provider-impl/index.html">MimeTypeIconProviderImpl</a> : <a href="-mime-type-icon-provider/index.html">MimeTypeIconProvider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Provides icons for file attachments.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-435662269%2FClasslikes%2F-523872580" anchor-label="StyleTransformer" id="-435662269%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-style-transformer/index.html"><span>Style</span><wbr><span><span>Transformer</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-435662269%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-style-transformer/index.html">StyleTransformer</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-style-transformer/index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1074107023%2FClasslikes%2F-523872580" anchor-label="SupportedReactions" id="1074107023%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-supported-reactions/index.html"><span>Supported</span><wbr><span><span>Reactions</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1074107023%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-supported-reactions/index.html">SupportedReactions</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>reactions<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="-supported-reactions/-reaction-drawable/index.html">SupportedReactions.ReactionDrawable</a><span class="token operator">&gt;</span><span class="token operator"> = </span>mapOf(
-        LOVE to loveDrawable(context),
-        THUMBS_UP to thumbsUpDrawable(context),
-        THUMBS_DOWN to thumbsDownDrawable(context),
-        LOL to lolDrawable(context),
-        WUT to wutDrawable(context),
-    )</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Class allowing to define set of supported reactions. You can customize reactions by providing your own implementation of this class to <a href="-chat-u-i/supported-reactions.html">ChatUI.supportedReactions</a>.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1181259674%2FClasslikes%2F-523872580" anchor-label="TransformStyle" id="-1181259674%2FClasslikes%2F-523872580" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-ui-components:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-ui-components:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-transform-style/index.html"><span>Transform</span><wbr><span><span>Style</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1181259674%2FClasslikes%2F-523872580"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-transform-style/index.html">TransformStyle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-ui-components:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-chat-u-i/index.html">ChatUI</a></div><div class="brief "><p class="paragraph">ChatUI handles any configuration for the Chat UI elements.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -181,6 +84,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>NotificationConfig</title>
 <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
-<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../../../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-client:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -37,89 +49,93 @@ if(savedDarkMode === true){
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.notifications.handler/NotificationConfig///PointingToDeclaration//-423410878">
-  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.client.notifications.handler</a><span class="delimiter">/</span><a href="index.html">NotificationConfig</a></div>
+<div class="main-content" data-page-type="classlike" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.notifications.handler/NotificationConfig///PointingToDeclaration//-423410878">
+  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.client.notifications.handler</a><span class="delimiter">/</span><span class="current">NotificationConfig</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Notification</span><wbr><span><span>Config</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">NotificationConfig</a>&nbsp;<span><span class="token annotation">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>pushNotificationsEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>pushDeviceGenerators<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-push-device-generator/index.html">PushDeviceGenerator</a><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>shouldShowNotificationOnPush<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>requestPermissionOnAppLaunch<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Push notifications configuration class</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">NotificationConfig</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>pushNotificationsEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pushDeviceGenerators<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><span data-unresolved-link="io.getstream.android.push/PushDeviceGenerator///PointingToDeclaration/">PushDeviceGenerator</span><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>shouldShowNotificationOnPush<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>requestPermissionOnAppLaunch<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }</span></span><span class="token punctuation">)</span></div><p class="paragraph">Push notifications configuration class</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="-1267668492%2FConstructors%2F-423410878" anchor-label="NotificationConfig" id="-1267668492%2FConstructors%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-notification-config.html"><span>Notification</span><wbr><span><span>Config</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1267668492%2FConstructors%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="-notification-config.html"><span class="token function">NotificationConfig</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;pushNotificationsEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;pushDeviceGenerators<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-push-device-generator/index.html">PushDeviceGenerator</a><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;shouldShowNotificationOnPush<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;requestPermissionOnAppLaunch<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="24872781%2FConstructors%2F-423410878" anchor-label="NotificationConfig" id="24872781%2FConstructors%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-notification-config.html"><span>Notification</span><wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="24872781%2FConstructors%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pushNotificationsEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">pushDeviceGenerators<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><span data-unresolved-link="io.getstream.android.push/PushDeviceGenerator///PointingToDeclaration/">PushDeviceGenerator</span><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf()<span class="token punctuation">, </span></span><span class="parameter ">shouldShowNotificationOnPush<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }<span class="token punctuation">, </span></span><span class="parameter ">requestPermissionOnAppLaunch<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>{ true }</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="-1305095132%2FProperties%2F-423410878" anchor-label="pushDeviceGenerators" id="-1305095132%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="push-device-generators.html"><span>push</span><wbr><span>Device</span><wbr><span><span>Generators</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-1305095132%2FProperties%2F-423410878" anchor-label="pushDeviceGenerators" id="-1305095132%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="push-device-generators.html"><span>push</span><wbr><span>Device</span><wbr><span><span>Generators</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1305095132%2FProperties%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><a data-name="-1305095132%2FProperties%2F-423410878" anchor-label="pushDeviceGenerators" id="-1305095132%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="push-device-generators.html">pushDeviceGenerators</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-push-device-generator/index.html">PushDeviceGenerator</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1305095132%2FProperties%2F-423410878" anchor-label="pushDeviceGenerators" id="-1305095132%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><p class="paragraph">A list of generators responsible for providing the information needed to register a device</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="push-device-generators.html">pushDeviceGenerators</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><span data-unresolved-link="io.getstream.android.push/PushDeviceGenerator///PointingToDeclaration/">PushDeviceGenerator</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A list of generators responsible for providing the information needed to register a device</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="160222401%2FProperties%2F-423410878" anchor-label="pushNotificationsEnabled" id="160222401%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="push-notifications-enabled.html"><span>push</span><wbr><span>Notifications</span><wbr><span><span>Enabled</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="push-notifications-enabled.html"><span>push</span><wbr><span>Notifications</span><wbr><span><span>Enabled</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="160222401%2FProperties%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><a data-name="160222401%2FProperties%2F-423410878" anchor-label="pushNotificationsEnabled" id="160222401%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="push-notifications-enabled.html">pushNotificationsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="160222401%2FProperties%2F-423410878" anchor-label="pushNotificationsEnabled" id="160222401%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><p class="paragraph">Enables/disables push notifications on the device. Device's token won't be registered if push notifications are disabled.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="push-notifications-enabled.html">pushNotificationsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Enables/disables push notifications on the device. Device's token won't be registered if push notifications are disabled.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-644792387%2FProperties%2F-423410878" anchor-label="requestPermissionOnAppLaunch" id="-644792387%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="request-permission-on-app-launch.html"><span>request</span><wbr><span>Permission</span><wbr><span>On</span><wbr><span>App</span><wbr><span><span>Launch</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="request-permission-on-app-launch.html"><span>request</span><wbr><span>Permission</span><wbr><span>On</span><wbr><span>App</span><wbr><span><span>Launch</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-644792387%2FProperties%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><a data-name="-644792387%2FProperties%2F-423410878" anchor-label="requestPermissionOnAppLaunch" id="-644792387%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="request-permission-on-app-launch.html">requestPermissionOnAppLaunch</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-644792387%2FProperties%2F-423410878" anchor-label="requestPermissionOnAppLaunch" id="-644792387%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><p class="paragraph">Allows SDK to request <a href="https://developer.android.com/reference/kotlin/android/Manifest.permission.html#post_notifications">android.Manifest.permission.POST_NOTIFICATIONS</a> permission for a connected user.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="request-permission-on-app-launch.html">requestPermissionOnAppLaunch</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Allows SDK to request <a href="https://developer.android.com/reference/kotlin/android/Manifest.permission.html#POST_NOTIFICATIONS--">android.Manifest.permission.POST_NOTIFICATIONS</a> permission for a connected user.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1010718208%2FProperties%2F-423410878" anchor-label="shouldShowNotificationOnPush" id="1010718208%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="should-show-notification-on-push.html"><span>should</span><wbr><span>Show</span><wbr><span>Notification</span><wbr><span>On</span><wbr><span><span>Push</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="should-show-notification-on-push.html"><span>should</span><wbr><span>Show</span><wbr><span>Notification</span><wbr><span>On</span><wbr><span><span>Push</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1010718208%2FProperties%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><a data-name="1010718208%2FProperties%2F-423410878" anchor-label="shouldShowNotificationOnPush" id="1010718208%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="should-show-notification-on-push.html">shouldShowNotificationOnPush</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1010718208%2FProperties%2F-423410878" anchor-label="shouldShowNotificationOnPush" id="1010718208%2FProperties%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a><p class="paragraph">Allows enabling/disabling showing notification after receiving a push message.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="should-show-notification-on-push.html">shouldShowNotificationOnPush</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Allows enabling/disabling showing notification after receiving a push message.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -133,6 +149,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

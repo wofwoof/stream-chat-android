@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>RepositoryFactory</title>
 <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
-<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../../../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-client:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -37,149 +49,153 @@ if(savedDarkMode === true){
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.persistance.repository.factory/RepositoryFactory///PointingToDeclaration//-423410878">
-  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.client.persistance.repository.factory</a><span class="delimiter">/</span><a href="index.html">RepositoryFactory</a></div>
+<div class="main-content" data-page-type="classlike" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.persistance.repository.factory/RepositoryFactory///PointingToDeclaration//-423410878">
+  <div class="breadcrumbs"><a href="../../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="../index.html">io.getstream.chat.android.client.persistance.repository.factory</a><span class="delimiter">/</span><span class="current">RepositoryFactory</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Repository</span><wbr><span><span>Factory</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">RepositoryFactory</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Factory that creates all repositories of SDK.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">RepositoryFactory</a></div><p class="paragraph">Factory that creates all repositories of SDK.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Types</h2>
-      <div class="table" data-togglable="Types"><a data-name="-29429598%2FClasslikes%2F-423410878" anchor-label="Provider" id="-29429598%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-provider/index.html"><span><span>Provider</span></span></a></div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-29429598%2FClasslikes%2F-423410878" anchor-label="Provider" id="-29429598%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-provider/index.html"><span><span>Provider</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-29429598%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-provider/index.html">Provider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Interface to delegate creation of <a href="index.html">RepositoryFactory</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-provider/index.html">Provider</a></div><div class="brief "><p class="paragraph">Interface to delegate creation of <a href="index.html">RepositoryFactory</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="2055008565%2FFunctions%2F-423410878" anchor-label="createAttachmentRepository" id="2055008565%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-attachment-repository.html"><span>create</span><wbr><span>Attachment</span><wbr><span><span>Repository</span></span></a></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="2055008565%2FFunctions%2F-423410878" anchor-label="createAttachmentRepository" id="2055008565%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-attachment-repository.html"><span>create</span><wbr><span>Attachment</span><wbr><span><span>Repository</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2055008565%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-attachment-repository.html"><span class="token function">createAttachmentRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-attachment-repository/index.html">AttachmentRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-attachment-repository/index.html">AttachmentRepository</a></p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-attachment-repository.html"><span class="token function">createAttachmentRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-attachment-repository/index.html">AttachmentRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-attachment-repository/index.html">AttachmentRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-12868727%2FFunctions%2F-423410878" anchor-label="createChannelConfigRepository" id="-12868727%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-channel-config-repository.html"><span>create</span><wbr><span>Channel</span><wbr><span>Config</span><wbr><span><span>Repository</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-channel-config-repository.html"><span>create</span><wbr><span>Channel</span><wbr><span>Config</span><wbr><span><span>Repository</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-12868727%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-channel-config-repository.html"><span class="token function">createChannelConfigRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-channel-config-repository/index.html">ChannelConfigRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-channel-config-repository/index.html">ChannelConfigRepository</a></p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-channel-config-repository.html"><span class="token function">createChannelConfigRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-channel-config-repository/index.html">ChannelConfigRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-channel-config-repository/index.html">ChannelConfigRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-<a data-name="-214229887%2FFunctions%2F-423410878" anchor-label="createChannelRepository" id="-214229887%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-channel-repository.html"><span>create</span><wbr><span>Channel</span><wbr><span><span>Repository</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-214229887%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-channel-repository.html"><span class="token function">createChannelRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../io.getstream.chat.android.client.models/-user/index.html">User</a><span class="token punctuation">, </span></span><span class="parameter ">getMessage<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>messageId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../io.getstream.chat.android.client.models/-message/index.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-channel-repository/index.html">ChannelRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-channel-repository/index.html">ChannelRepository</a></p></div></div></div>
+<a data-name="-629149227%2FFunctions%2F-423410878" anchor-label="createChannelRepository" id="-629149227%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-channel-repository.html"><span>create</span><wbr><span>Channel</span><wbr><span><span>Repository</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-629149227%2FFunctions%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-channel-repository.html"><span class="token function">createChannelRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-user/index.html">User</a><span class="token punctuation">, </span></span><span class="parameter ">getMessage<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>messageId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-message/index.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-channel-repository/index.html">ChannelRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-channel-repository/index.html">ChannelRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-<a data-name="2078165265%2FFunctions%2F-423410878" anchor-label="createMessageRepository" id="2078165265%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-message-repository.html"><span>create</span><wbr><span>Message</span><wbr><span><span>Repository</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2078165265%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-message-repository.html"><span class="token function">createMessageRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../io.getstream.chat.android.client.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-message-repository/index.html">MessageRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-message-repository/index.html">MessageRepository</a></p></div></div></div>
+<a data-name="1789066610%2FFunctions%2F-423410878" anchor-label="createMessageRepository" id="1789066610%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-message-repository.html"><span>create</span><wbr><span>Message</span><wbr><span><span>Repository</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1789066610%2FFunctions%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-message-repository.html"><span class="token function">createMessageRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-message-repository/index.html">MessageRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-message-repository/index.html">MessageRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1341437930%2FFunctions%2F-423410878" anchor-label="createQueryChannelsRepository" id="-1341437930%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-query-channels-repository.html"><span>create</span><wbr><span>Query</span><wbr><span>Channels</span><wbr><span><span>Repository</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-query-channels-repository.html"><span>create</span><wbr><span>Query</span><wbr><span>Channels</span><wbr><span><span>Repository</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1341437930%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-query-channels-repository.html"><span class="token function">createQueryChannelsRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-query-channels-repository/index.html">QueryChannelsRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-query-channels-repository/index.html">QueryChannelsRepository</a></p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-query-channels-repository.html"><span class="token function">createQueryChannelsRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-query-channels-repository/index.html">QueryChannelsRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-query-channels-repository/index.html">QueryChannelsRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-<a data-name="-47668199%2FFunctions%2F-423410878" anchor-label="createReactionRepository" id="-47668199%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-reaction-repository.html"><span>create</span><wbr><span>Reaction</span><wbr><span><span>Repository</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-47668199%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-reaction-repository.html"><span class="token function">createReactionRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../io.getstream.chat.android.client.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-reaction-repository/index.html">ReactionRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-reaction-repository/index.html">ReactionRepository</a></p></div></div></div>
+<a data-name="-1473938582%2FFunctions%2F-423410878" anchor-label="createReactionRepository" id="-1473938582%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-reaction-repository.html"><span>create</span><wbr><span>Reaction</span><wbr><span><span>Repository</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1473938582%2FFunctions%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-reaction-repository.html"><span class="token function">createReactionRepository</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getUser<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token keyword"></span>userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../../stream-chat-android-core/io.getstream.chat.android.models/-user/index.html">User</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-reaction-repository/index.html">ReactionRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-reaction-repository/index.html">ReactionRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="633152216%2FFunctions%2F-423410878" anchor-label="createSyncStateRepository" id="633152216%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-sync-state-repository.html"><span>create</span><wbr><span>Sync</span><wbr><span>State</span><wbr><span><span>Repository</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-sync-state-repository.html"><span>create</span><wbr><span>Sync</span><wbr><span>State</span><wbr><span><span>Repository</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="633152216%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-sync-state-repository.html"><span class="token function">createSyncStateRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-sync-state-repository/index.html">SyncStateRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-sync-state-repository/index.html">SyncStateRepository</a></p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-sync-state-repository.html"><span class="token function">createSyncStateRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-sync-state-repository/index.html">SyncStateRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-sync-state-repository/index.html">SyncStateRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="610630989%2FFunctions%2F-423410878" anchor-label="createUserRepository" id="610630989%2FFunctions%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="create-user-repository.html"><span>create</span><wbr><span>User</span><wbr><span><span>Repository</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-user-repository.html"><span>create</span><wbr><span>User</span><wbr><span><span>Repository</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="610630989%2FFunctions%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-user-repository.html"><span class="token function">createUserRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-user-repository/index.html">UserRepository</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-user-repository/index.html">UserRepository</a></p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="create-user-repository.html"><span class="token function">createUserRepository</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../io.getstream.chat.android.client.persistance.repository/-user-repository/index.html">UserRepository</a></div><div class="brief "><p class="paragraph">Creates <a href="../../io.getstream.chat.android.client.persistance.repository/-user-repository/index.html">UserRepository</a></p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -193,6 +209,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

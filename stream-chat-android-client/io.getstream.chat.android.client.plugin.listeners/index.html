@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>io.getstream.chat.android.client.plugin.listeners</title>
 <link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../scripts/main.js" defer></script>
-<script type="text/javascript" src="../../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-client:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -37,266 +49,298 @@ if(savedDarkMode === true){
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.plugin.listeners////PointingToDeclaration//-423410878">
-  <div class="breadcrumbs"><a href="../index.html">stream-chat-android-client</a><span class="delimiter">/</span><a href="index.html">io.getstream.chat.android.client.plugin.listeners</a></div>
+<div class="main-content" data-page-type="package" id="content" pageids="stream-chat-android-client::io.getstream.chat.android.client.plugin.listeners////PointingToDeclaration//-423410878">
+  <div class="breadcrumbs"><a href="../index.html">stream-chat-android-client</a><span class="delimiter">/</span><span class="current">io.getstream.chat.android.client.plugin.listeners</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>Package io.</span><wbr><span>getstream.</span><wbr><span>chat.</span><wbr><span>android.</span><wbr><span>client.</span><wbr><span>plugin.</span><wbr><span>listeners</span></h1>
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Types</h2>
-      <div class="table" data-togglable="Types"><a data-name="467908276%2FClasslikes%2F-423410878" anchor-label="ChannelMarkReadListener" id="467908276%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-channel-mark-read-listener/index.html"><span>Channel</span><wbr><span>Mark</span><wbr><span>Read</span><wbr><span><span>Listener</span></span></a></div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="467908276%2FClasslikes%2F-423410878" anchor-label="ChannelMarkReadListener" id="467908276%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-channel-mark-read-listener/index.html"><span>Channel</span><wbr><span>Mark</span><wbr><span>Read</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="467908276%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-channel-mark-read-listener/index.html">ChannelMarkReadListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/mark-read.html">ChatClient.markRead</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-channel-mark-read-listener/index.html">ChannelMarkReadListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/mark-read.html">ChatClient.markRead</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="530620883%2FClasslikes%2F-423410878" anchor-label="CreateChannelListener" id="530620883%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-create-channel-listener/index.html"><span>Create</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-create-channel-listener/index.html"><span>Create</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="530620883%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-create-channel-listener/index.html">CreateChannelListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/create-channel.html">io.getstream.chat.android.client.ChatClient.createChannel</a> calls.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-create-channel-listener/index.html">CreateChannelListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/create-channel.html">io.getstream.chat.android.client.ChatClient.createChannel</a> calls.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1766250750%2FClasslikes%2F-423410878" anchor-label="DeleteMessageListener" id="1766250750%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-delete-message-listener/index.html"><span>Delete</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-delete-message-listener/index.html"><span>Delete</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1766250750%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-delete-message-listener/index.html">DeleteMessageListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for requests of message deletion and for message deletion results.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-delete-message-listener/index.html">DeleteMessageListener</a></div><div class="brief "><p class="paragraph">Listener for requests of message deletion and for message deletion results.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1035756428%2FClasslikes%2F-423410878" anchor-label="DeleteReactionListener" id="1035756428%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-delete-reaction-listener/index.html"><span>Delete</span><wbr><span>Reaction</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-delete-reaction-listener/index.html"><span>Delete</span><wbr><span>Reaction</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1035756428%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-delete-reaction-listener/index.html">DeleteReactionListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/delete-reaction.html">io.getstream.chat.android.client.ChatClient.deleteReaction</a> calls.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-delete-reaction-listener/index.html">DeleteReactionListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/delete-reaction.html">io.getstream.chat.android.client.ChatClient.deleteReaction</a> calls.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-451350115%2FClasslikes%2F-423410878" anchor-label="EditMessageListener" id="-451350115%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-edit-message-listener/index.html"><span>Edit</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-edit-message-listener/index.html"><span>Edit</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-451350115%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-edit-message-listener/index.html">EditMessageListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for editions in messages.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-edit-message-listener/index.html">EditMessageListener</a></div><div class="brief "><p class="paragraph">Listener for editions in messages.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+<a data-name="582910134%2FClasslikes%2F-423410878" anchor-label="FetchCurrentUserListener" id="582910134%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-fetch-current-user-listener/index.html"><span>Fetch</span><wbr><span>Current</span><wbr><span>User</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="582910134%2FClasslikes%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-fetch-current-user-listener/index.html">FetchCurrentUserListener</a></div><div class="brief "><p class="paragraph">Listener used when fetching the current user from the backend.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="1036003791%2FClasslikes%2F-423410878" anchor-label="GetMessageListener" id="1036003791%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-get-message-listener/index.html"><span>Get</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-message-listener/index.html"><span>Get</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1036003791%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-get-message-listener/index.html">GetMessageListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener used when fetching a single new message from the backend.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-get-message-listener/index.html">GetMessageListener</a></div><div class="brief "><p class="paragraph">Listener used when fetching a single new message from the backend.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-991110311%2FClasslikes%2F-423410878" anchor-label="HideChannelListener" id="-991110311%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-hide-channel-listener/index.html"><span>Hide</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-hide-channel-listener/index.html"><span>Hide</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-991110311%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hide-channel-listener/index.html">HideChannelListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/hide-channel.html">ChatClient.hideChannel</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hide-channel-listener/index.html">HideChannelListener</a></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/hide-channel.html">ChatClient.hideChannel</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="2676368%2FClasslikes%2F-423410878" anchor-label="MarkAllReadListener" id="2676368%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-mark-all-read-listener/index.html"><span>Mark</span><wbr><span>All</span><wbr><span>Read</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mark-all-read-listener/index.html"><span>Mark</span><wbr><span>All</span><wbr><span>Read</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2676368%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-mark-all-read-listener/index.html">MarkAllReadListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/mark-all-read.html">ChatClient.markAllRead</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-mark-all-read-listener/index.html">MarkAllReadListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/mark-all-read.html">ChatClient.markAllRead</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1325560059%2FClasslikes%2F-423410878" anchor-label="QueryChannelListener" id="-1325560059%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-query-channel-listener/index.html"><span>Query</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-query-channel-listener/index.html"><span>Query</span><wbr><span>Channel</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1325560059%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-channel-listener/index.html">QueryChannelListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-channel.html">ChatClient.queryChannel</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-channel-listener/index.html">QueryChannelListener</a></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-channel.html">ChatClient.queryChannel</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="875231138%2FClasslikes%2F-423410878" anchor-label="QueryChannelsListener" id="875231138%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-query-channels-listener/index.html"><span>Query</span><wbr><span>Channels</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-query-channels-listener/index.html"><span>Query</span><wbr><span>Channels</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="875231138%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-channels-listener/index.html">QueryChannelsListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-channels.html">ChatClient.queryChannels</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-channels-listener/index.html">QueryChannelsListener</a></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-channels.html">ChatClient.queryChannels</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="802069935%2FClasslikes%2F-423410878" anchor-label="QueryMembersListener" id="802069935%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-query-members-listener/index.html"><span>Query</span><wbr><span>Members</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-query-members-listener/index.html"><span>Query</span><wbr><span>Members</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="802069935%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-members-listener/index.html">QueryMembersListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-members.html">ChatClient.queryMembers</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-query-members-listener/index.html">QueryMembersListener</a></div><div class="brief "><p class="paragraph">Listener of <a href="../io.getstream.chat.android.client/-chat-client/query-members.html">ChatClient.queryMembers</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+<a data-name="-874649451%2FClasslikes%2F-423410878" anchor-label="SendAttachmentListener" id="-874649451%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-send-attachment-listener/index.html"><span>Send</span><wbr><span>Attachment</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-874649451%2FClasslikes%2F-423410878"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-attachment-listener/index.html">SendAttachmentListener</a></div><div class="brief "><p class="paragraph">Listener that updates the SDK accordingly with the request to send attachments to the backend.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-1674642429%2FClasslikes%2F-423410878" anchor-label="SendGiphyListener" id="-1674642429%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-send-giphy-listener/index.html"><span>Send</span><wbr><span>Giphy</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-send-giphy-listener/index.html"><span>Send</span><wbr><span>Giphy</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1674642429%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-giphy-listener/index.html">SendGiphyListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-giphy.html">io.getstream.chat.android.client.ChatClient.sendGiphy</a> calls.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-giphy-listener/index.html">SendGiphyListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-giphy.html">io.getstream.chat.android.client.ChatClient.sendGiphy</a> calls.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-834700005%2FClasslikes%2F-423410878" anchor-label="SendMessageListener" id="-834700005%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-send-message-listener/index.html"><span>Send</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-send-message-listener/index.html"><span>Send</span><wbr><span>Message</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-834700005%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-message-listener/index.html">SendMessageListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-message.html">ChatClient.sendMessage</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-message-listener/index.html">SendMessageListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-message.html">ChatClient.sendMessage</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="2010661647%2FClasslikes%2F-423410878" anchor-label="SendReactionListener" id="2010661647%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-send-reaction-listener/index.html"><span>Send</span><wbr><span>Reaction</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-send-reaction-listener/index.html"><span>Send</span><wbr><span>Reaction</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2010661647%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-reaction-listener/index.html">SendReactionListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-reaction.html">io.getstream.chat.android.client.ChatClient.sendReaction</a> calls.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-send-reaction-listener/index.html">SendReactionListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/send-reaction.html">io.getstream.chat.android.client.ChatClient.sendReaction</a> calls.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="393626010%2FClasslikes%2F-423410878" anchor-label="ShuffleGiphyListener" id="393626010%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-shuffle-giphy-listener/index.html"><span>Shuffle</span><wbr><span>Giphy</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-shuffle-giphy-listener/index.html"><span>Shuffle</span><wbr><span>Giphy</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="393626010%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-shuffle-giphy-listener/index.html">ShuffleGiphyListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/shuffle-giphy.html">io.getstream.chat.android.client.ChatClient.shuffleGiphy</a> calls.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-shuffle-giphy-listener/index.html">ShuffleGiphyListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/shuffle-giphy.html">io.getstream.chat.android.client.ChatClient.shuffleGiphy</a> calls.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="765089660%2FClasslikes%2F-423410878" anchor-label="ThreadQueryListener" id="765089660%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-thread-query-listener/index.html"><span>Thread</span><wbr><span>Query</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-thread-query-listener/index.html"><span>Thread</span><wbr><span>Query</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="765089660%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-thread-query-listener/index.html">ThreadQueryListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for reply queries.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-thread-query-listener/index.html">ThreadQueryListener</a></div><div class="brief "><p class="paragraph">Listener for reply queries.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="150453655%2FClasslikes%2F-423410878" anchor-label="TypingEventListener" id="150453655%2FClasslikes%2F-423410878" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release"></a>
-        <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-typing-event-listener/index.html"><span>Typing</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
+          <div class="table-row" data-filterable-current=":stream-chat-android-client:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-client:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-typing-event-listener/index.html"><span>Typing</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="150453655%2FClasslikes%2F-423410878"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-typing-event-listener/index.html">TypingEventListener</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/keystroke.html">ChatClient.keystroke</a> and <a href="../io.getstream.chat.android.client/-chat-client/stop-typing.html">ChatClient.stopTyping</a> requests.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":stream-chat-android-client:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-typing-event-listener/index.html">TypingEventListener</a></div><div class="brief "><p class="paragraph">Listener for <a href="../io.getstream.chat.android.client/-chat-client/keystroke.html">ChatClient.keystroke</a> and <a href="../io.getstream.chat.android.client/-chat-client/stop-typing.html">ChatClient.stopTyping</a> requests.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -310,6 +354,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

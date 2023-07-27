@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>stream-chat-android-core</title>
 <link href="../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script>
 <link href="../styles/style.css" rel="Stylesheet">
 <link href="../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../scripts/main.js" defer></script>
-<script type="text/javascript" src="../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../scripts/prism.js" async></script>
+<script type="text/javascript" src="../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -52,21 +64,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-629550078%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-<a data-name="798060110%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.client.call" id="798060110%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-      <div>
-        <div class="main-subrow ">
-          <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.client.call/index.html">io.getstream.chat.android.client.call</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="798060110%2FPackages%2F-1733806941"></span>
-                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-              </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -80,21 +82,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1929580955%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-<a data-name="-2100028539%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.client.utils" id="-2100028539%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
-    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
-      <div>
-        <div class="main-subrow ">
-          <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.client.utils/index.html">io.getstream.chat.android.client.utils</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2100028539%2FPackages%2F-1733806941"></span>
-                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-              </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -108,7 +100,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-439193578%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -122,7 +118,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1713654439%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -136,7 +136,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1662612162%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -150,7 +154,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1382455828%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -164,7 +172,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-675220053%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -178,7 +190,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-674124264%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -192,7 +208,101 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1969398119%2FPackages%2F-1733806941"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-822771573%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.extensions" id="-822771573%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.extensions/index.html">io.getstream.chat.android.extensions</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-822771573%2FPackages%2F-1733806941"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1287926241%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.models" id="1287926241%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.models/index.html">io.getstream.chat.android.models</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1287926241%2FPackages%2F-1733806941"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="640153369%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.models.querysort" id="640153369%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.models.querysort/index.html">io.getstream.chat.android.models.querysort</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="640153369%2FPackages%2F-1733806941"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2136317514%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.models.querysort.internal" id="-2136317514%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.models.querysort.internal/index.html">io.getstream.chat.android.models.querysort.internal</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2136317514%2FPackages%2F-1733806941"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1173865421%2FPackages%2F-1733806941" anchor-label="io.getstream.chat.android.models.streamcdn.image" id="1173865421%2FPackages%2F-1733806941" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-core:dokkaHtmlPartial/main" data-filterable-set=":stream-chat-android-core:dokkaHtmlPartial/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.models.streamcdn.image/index.html">io.getstream.chat.android.models.streamcdn.image</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1173865421%2FPackages%2F-1733806941"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -204,6 +314,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

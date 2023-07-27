@@ -4,10 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>stream-chat-android-compose</title>
 <link href="../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script>
 <link href="../styles/style.css" rel="Stylesheet">
 <link href="../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -18,16 +26,20 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../scripts/main.js" defer></script>
-<script type="text/javascript" src="../scripts/prism.js" async></script></head>
+<script type="text/javascript" src="../scripts/prism.js" async></script>
+<script type="text/javascript" src="../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
     <div id="leftToggler"><span class="icon-toggler"></span></div>
     <div class="library-name">
 <a href="../index.html">
 <span>stream-chat-android</span>            </a>    </div>
-    <div>5.15.0
+    <div>6.0.0-beta3
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":stream-chat-android-compose:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -52,7 +64,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-48186180%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -66,7 +82,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1746734370%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -80,21 +100,29 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1633924560%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-1438588387%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.state.imagepreview" id="-1438588387%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+<a data-name="693243982%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.state.mediagallerypreview" id="693243982%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.compose.state.imagepreview/index.html">io.getstream.chat.android.compose.state.imagepreview</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1438588387%2FPackages%2F29477497"></span>
+              <div><a href="io.getstream.chat.android.compose.state.mediagallerypreview/index.html">io.getstream.chat.android.compose.state.mediagallerypreview</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="693243982%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -108,7 +136,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-286027577%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -122,7 +154,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-722723940%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -136,21 +172,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2147191006%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
-        </div>
-        <div></div>
-      </div>
-    </div>
-<a data-name="-871449292%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.state.messages.list" id="-871449292%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
-    <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
-      <div>
-        <div class="main-subrow ">
-          <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.compose.state.messages.list/index.html">io.getstream.chat.android.compose.state.messages.list</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-871449292%2FPackages%2F29477497"></span>
-                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-              </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -164,7 +190,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="205407433%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -178,7 +208,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2131388531%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -192,7 +226,29 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="93943465%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1499915311%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.ui.attachments.audio" id="-1499915311%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.compose.ui.attachments.audio/index.html">io.getstream.chat.android.compose.ui.attachments.audio</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1499915311%2FPackages%2F29477497"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -206,7 +262,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-821879692%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -220,7 +280,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1860081093%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -234,7 +298,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-359909629%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -248,7 +316,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1145123423%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -262,7 +334,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-436676101%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -276,7 +352,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-42795484%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -290,7 +370,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-792993211%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -304,7 +388,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1566908981%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -318,7 +406,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="893378433%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -332,7 +424,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="330665548%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -346,7 +442,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="636402183%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -360,7 +460,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2115531350%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -374,7 +478,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-95696479%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -388,7 +496,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1799971569%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -402,7 +514,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1454625928%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -416,7 +532,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1810463715%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -430,7 +550,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="493254775%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -444,7 +568,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1668908760%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -458,7 +586,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="198140872%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -472,7 +604,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-113062113%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -486,7 +622,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="536651714%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -500,7 +640,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1826106168%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -514,7 +658,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1760181959%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -528,7 +676,29 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-29218670%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="16594047%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.ui.composables" id="16594047%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.compose.ui.composables/index.html">io.getstream.chat.android.compose.ui.composables</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="16594047%2FPackages%2F29477497"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -542,7 +712,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2143523959%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -556,7 +730,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="360026425%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -570,7 +748,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1014964309%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -584,7 +766,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1505566021%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -598,7 +784,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1743470552%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -612,7 +802,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1965583047%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -626,7 +820,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1874944194%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -640,7 +838,29 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="509081645%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1835016811%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.util" id="-1835016811%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.getstream.chat.android.compose.util/index.html">io.getstream.chat.android.compose.util</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1835016811%2FPackages%2F29477497"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -654,7 +874,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1861890705%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -668,21 +892,29 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2126613331%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
     </div>
-<a data-name="-1386256598%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.viewmodel.imagepreview" id="-1386256598%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
+<a data-name="-883206719%2FPackages%2F29477497" anchor-label="io.getstream.chat.android.compose.viewmodel.mediapreview" id="-883206719%2FPackages%2F29477497" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release"></a>
     <div class="table-row" data-filterable-current=":stream-chat-android-compose:dokkaHtmlPartial/release" data-filterable-set=":stream-chat-android-compose:dokkaHtmlPartial/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
-              <div><a href="io.getstream.chat.android.compose.viewmodel.imagepreview/index.html">io.getstream.chat.android.compose.viewmodel.imagepreview</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1386256598%2FPackages%2F29477497"></span>
+              <div><a href="io.getstream.chat.android.compose.viewmodel.mediapreview/index.html">io.getstream.chat.android.compose.viewmodel.mediapreview</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-883206719%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -696,7 +928,11 @@ if(savedDarkMode === true){
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="453586729%2FPackages%2F29477497"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right"></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -708,6 +944,6 @@ if(savedDarkMode === true){
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 
