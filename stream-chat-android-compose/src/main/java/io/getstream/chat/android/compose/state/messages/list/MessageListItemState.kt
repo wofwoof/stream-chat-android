@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.state.messages.list
 
+import androidx.compose.runtime.Stable
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.common.state.DeletedMessageVisibility
@@ -31,6 +32,7 @@ public sealed class MessageListItemState
  *
  * @param date The date of the message that we're showing a separator for.
  */
+@Stable
 public data class DateSeparatorState(val date: Date) : MessageListItemState()
 
 /**
@@ -38,6 +40,7 @@ public data class DateSeparatorState(val date: Date) : MessageListItemState()
  *
  * @param replyCount The number of thread replies to the message.
  */
+@Stable
 public data class ThreadSeparatorState(val replyCount: Int) : MessageListItemState()
 
 /**
@@ -45,6 +48,7 @@ public data class ThreadSeparatorState(val replyCount: Int) : MessageListItemSta
  *
  * @param message The message to show.
  */
+@Stable
 public data class SystemMessageState(val message: Message) : MessageListItemState()
 
 /**
@@ -61,6 +65,7 @@ public data class SystemMessageState(val message: Message) : MessageListItemStat
  * @param shouldShowFooter If the message footer should be shown.
  * @param deletedMessageVisibility The deleted message visibility logic used to show or hide messages in the list.
  */
+@Stable
 public data class MessageItemState(
     val message: Message,
     val groupPosition: MessageItemGroupPosition = MessageItemGroupPosition.None,

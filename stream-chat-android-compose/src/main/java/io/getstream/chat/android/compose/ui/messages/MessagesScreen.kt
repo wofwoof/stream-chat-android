@@ -239,7 +239,7 @@ public fun MessagesScreen(
                     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
                     listViewModel.openMessageThread(message)
                 },
-                onImagePreviewResult = { result ->
+                onImagePreviewResult = remember(listViewModel) { { result ->
                     when (result?.resultType) {
                         ImagePreviewResultType.QUOTE -> {
                             val message = listViewModel.getMessageWithId(result.messageId)
@@ -261,7 +261,7 @@ public fun MessagesScreen(
                         }
                         null -> Unit
                     }
-                }
+                } }
             )
         }
 

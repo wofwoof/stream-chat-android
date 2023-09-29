@@ -29,6 +29,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -91,6 +92,7 @@ public fun Messages(
     loadingMoreContent: @Composable () -> Unit = { DefaultMessagesLoadingMoreIndicator() },
     itemContent: @Composable (MessageListItemState) -> Unit,
 ) {
+
     val (_, isLoadingMore, endOfMessages, messages) = messagesState
 
     var parentSize by remember { mutableStateOf(IntSize(0, 0)) }

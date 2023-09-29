@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.state.messages
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.IntSize
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.compose.state.messages.list.MessageListItemState
@@ -35,6 +36,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @param parentMessageId The id of the parent message - if we're in a thread.
  * @param unreadCount The count of messages we haven't read yet.
  */
+@Stable
 public data class MessagesState(
     val isLoading: Boolean = true,
     val isLoadingMore: Boolean = false,

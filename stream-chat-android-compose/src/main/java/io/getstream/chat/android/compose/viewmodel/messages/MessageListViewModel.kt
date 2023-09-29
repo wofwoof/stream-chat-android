@@ -18,6 +18,7 @@
 
 package io.getstream.chat.android.compose.viewmodel.messages
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -333,11 +334,13 @@ public class MessageListViewModel(
                         messagesState = if (hasNewMessage) {
                             val newMessageState = getNewMessageState(newLastMessage, lastLoadedMessage)
 
+                            //TODO: the lastLoadedMessage is a problem - it mutates the state too often
                             newState.copy(
                                 newMessageState = newMessageState,
                                 unreadCount = getUnreadMessageCount(newMessageState)
                             )
                         } else {
+                            Log.e("test3", "New state is same as old : ${newState == (messagesState)}")
                             newState
                         }
 

@@ -16,17 +16,22 @@
 
 package io.getstream.chat.android.compose.state.messages
 
+import androidx.compose.runtime.Stable
+
 /**
  * Represents the state when a new message arrives to the channel.
  */
+@Stable
 public sealed class NewMessageState
 
 /**
  * If the message is our own (we sent it), we scroll to the bottom of the list.
  */
+@Stable
 public object MyOwn : NewMessageState() { override fun toString(): String = "MyOwn" }
 
 /**
  * If the message is someone else's (we didn't send it), we show a "New message" bubble.
  */
+@Stable
 public object Other : NewMessageState() { override fun toString(): String = "Other" }

@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -81,19 +82,19 @@ public fun MessageList(
     lazyListState: LazyListState =
         rememberMessageListState(parentMessageId = viewModel.currentMessagesState.parentMessageId),
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
-    onThreadClick: (Message) -> Unit = { viewModel.openMessageThread(it) },
-    onLongItemClick: (Message) -> Unit = { viewModel.selectMessage(it) },
-    onReactionsClick: (Message) -> Unit = { viewModel.selectReactions(it) },
-    onMessagesStartReached: () -> Unit = { viewModel.loadMore() },
-    onLastVisibleMessageChanged: (Message) -> Unit = { viewModel.updateLastSeenMessage(it) },
-    onScrollToBottom: () -> Unit = { viewModel.clearNewMessageState() },
-    onGiphyActionClick: (GiphyAction) -> Unit = { viewModel.performGiphyAction(it) },
-    onQuotedMessageClick: (Message) -> Unit = { viewModel.scrollToSelectedMessage(it) },
-    onImagePreviewResult: (ImagePreviewResult?) -> Unit = {
+    onThreadClick: (Message) -> Unit = remember(viewModel) { { viewModel.openMessageThread(it) } },
+    onLongItemClick: (Message) -> Unit = remember(viewModel) { { viewModel.selectMessage(it) } },
+    onReactionsClick: (Message) -> Unit = remember(viewModel) { { viewModel.selectReactions(it) } },
+    onMessagesStartReached: () -> Unit = remember(viewModel) { { viewModel.loadMore() } },
+    onLastVisibleMessageChanged: (Message) -> Unit = remember(viewModel) { { viewModel.updateLastSeenMessage(it) } },
+    onScrollToBottom: () -> Unit = remember(viewModel) { { viewModel.clearNewMessageState() } },
+    onGiphyActionClick: (GiphyAction) -> Unit = remember(viewModel) { { viewModel.performGiphyAction(it) } },
+    onQuotedMessageClick: (Message) -> Unit = remember(viewModel) { { viewModel.scrollToSelectedMessage(it) } },
+    onImagePreviewResult: (ImagePreviewResult?) -> Unit = remember(viewModel) { {
         if (it?.resultType == ImagePreviewResultType.SHOW_IN_CHAT) {
             viewModel.focusMessage(it.messageId)
         }
-    },
+    } },
     loadingContent: @Composable () -> Unit = { DefaultMessageListLoadingIndicator(modifier) },
     emptyContent: @Composable () -> Unit = { DefaultMessageListEmptyContent(modifier) },
     helperContent: @Composable BoxScope.() -> Unit = {
@@ -115,10 +116,13 @@ public fun MessageList(
         )
     },
 ) {
+
+    val messageState = viewModel.currentMessagesState
+
     MessageList(
         modifier = modifier,
         contentPadding = contentPadding,
-        currentState = viewModel.currentMessagesState,
+        currentState = messageState,
         lazyListState = lazyListState,
         threadMessagesStart = threadMessagesStart,
         onMessagesStartReached = onMessagesStartReached,
