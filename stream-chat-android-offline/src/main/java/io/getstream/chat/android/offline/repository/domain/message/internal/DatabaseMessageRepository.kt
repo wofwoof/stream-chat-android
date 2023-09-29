@@ -71,13 +71,17 @@ internal class DatabaseMessageRepository(
      * @return A list of messages found in repository.
      */
     override suspend fun selectMessages(messageIds: List<String>, forceCache: Boolean): List<Message> {
-        return if (forceCache) {
-            fetchMessages(messageIds)
-        } else {
-            val missingMessageIds = messageIds.filter { messageCache.get(it) == null }
-            val cachedIds = messageIds - missingMessageIds
-            cachedIds.mapNotNull { messageCache[it] } + fetchMessages(missingMessageIds)
-        }
+        return messageIds.map { it to messageCache[it] }
+            .partition { it.second != null }
+            .let { (cachedMessages, missingMessages) ->
+                cachedMessages.mapNotNull { it.second } +
+                    (
+                        missingMessages.map { it.first }
+                            .takeUnless { it.isEmpty() }
+                            ?.let { fetchMessages(it) }
+                            ?: emptyList()
+                        )
+            }
     }
 
     /**
@@ -113,7 +117,7 @@ internal class DatabaseMessageRepository(
                         .filter { messageCache[it.messageInnerEntity.id]?.toEntity() != it }
             }
 
-        cacheMessage(messages)
+        cacheMessages(messages)
         logger.d {
             "[insertMessages] inserting ${messagesToInsert.size} entities on DB, updated ${allMessages.size} on cache"
         }
@@ -173,7 +177,7 @@ internal class DatabaseMessageRepository(
         return messageDao.selectBySyncStatus(syncStatus).map { it.toModel(getUser, ::selectMessage) }
     }
 
-    private fun cacheMessage(messages: Collection<Message>) {
+    private fun cacheMessages(messages: Collection<Message>) {
         messages.forEach { messageCache.put(it.id, it) }
     }
 
@@ -217,9 +221,8 @@ internal class DatabaseMessageRepository(
     /** Fetches messages from [MessageDao] and cache values in [LruCache]. */
     private suspend fun fetchMessages(messageIds: List<String>): List<Message> {
         return messageDao.select(messageIds)
-            .map { entity ->
-                entity.toModel(getUser, ::selectMessage).filterReactions().also { messageCache.put(it.id, it) }
-            }
+            .map { it.toModel(getUser, ::selectMessage).filterReactions() }
+            .also(::cacheMessages)
     }
 
     private fun List<Message>.filterReactions(): List<Message> = also {
