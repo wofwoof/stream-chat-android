@@ -132,7 +132,13 @@ internal class ChatNotificationsImpl constructor(
     }
 
     private fun handlePushMessage(message: PushMessage) {
-        obtainNotificationData(message.channelId, message.channelType, message.messageId)
+        if (ChatClient.isInitialized && ChatClient.instance().isSocketConnected()) {
+            // We ignore push messages if the WS is connected (this prevents unnecessary IO).
+            // Push notifications can also be fully disabled from the dashboard for users that are not connected.
+            logger.v { "[handlePushMessage] received push message while WS is connected - ignoring" }
+        } else {
+            obtainNotificationData(message.channelId, message.channelType, message.messageId)
+        }
     }
 
     private fun obtainNotificationData(channelId: String, channelType: String, messageId: String) {
