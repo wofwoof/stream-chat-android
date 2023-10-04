@@ -112,6 +112,7 @@ io.getstream.chat.android.core.internal.concurrency
 io.getstream.chat.android.core.internal.coroutines
 io.getstream.chat.android.core.internal.fsm
 io.getstream.chat.android.core.internal.fsm.builder
+io.getstream.chat.android.core.internal.lazy
 io.getstream.chat.android.core.utils
 io.getstream.chat.android.core.utils.date
 io.getstream.chat.android.extensions
