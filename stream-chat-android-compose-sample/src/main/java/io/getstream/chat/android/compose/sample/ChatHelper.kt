@@ -34,6 +34,9 @@ import io.getstream.chat.android.state.plugin.config.StatePluginConfig
 import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 import io.getstream.result.Error
 import kotlinx.coroutines.flow.transformWhile
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Response
 
 /**
  * A helper class that is responsible for initializing the SDK and connecting/disconnecting
@@ -76,9 +79,25 @@ object ChatHelper {
 
         val logLevel = if (BuildConfig.DEBUG) ChatLogLevel.ALL else ChatLogLevel.NOTHING
 
+        // Create your own custom OkHttpClient
+        val customOkHttpClient = OkHttpClient()
+
+        // Add an interceptor that will manipulate the headers
+        customOkHttpClient.newBuilder().addInterceptor(
+            Interceptor { chain ->
+                val request = chain.request()
+                    .newBuilder()
+                    .addHeader("some-header", "some-value")
+                    .build()
+                chain.proceed(request)
+            }
+        )
+
+        // Forward the custom instance to the SDK
         ChatClient.Builder(apiKey, context)
             .notifications(notificationConfig, notificationHandler)
             .withPlugins(offlinePlugin, statePluginFactory)
+            .okHttpClient(customOkHttpClient)
             .logLevel(logLevel)
             .uploadAttachmentsNetworkType(UploadAttachmentsNetworkType.NOT_ROAMING)
             .build()
