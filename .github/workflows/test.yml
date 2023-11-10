@@ -15,20 +15,60 @@ jobs:
         with:
           ref: jcrelease
           persist-credentials: false
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: adopt
-          java-version: 17
       - name: Commit changes
         run: |
           echo "Something" > something.txt
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add something.txt
-          git commit -m "AUTOMATION: Changelog update"
+          git commit -m "AUTOMATION: Something"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.STREAM_PUBLIC_BOT_TOKEN }}
           branch: jcrelease
+
+  release_to_main:
+    needs: publish
+    name: Sync main with release
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: jcmain
+          persist-credentials: false
+      - name: Sync main
+        run: |
+          git fetch origin jcrelease
+          git merge --ff-only origin/jcrelease
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.STREAM_PUBLIC_BOT_TOKEN }}
+          branch: jcmain
+  update_changelog:
+    needs: release_to_main
+    name: Update Changelog - Model
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: jcmain
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Commit CHANGELOG.md and merge to develop
+        run: |
+          echo "else" >> something.txt
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add something.txt
+          git commit -m "AUTOMATION: Something else"
+          git checkout -t origin/jcdevelop
+          git merge --ff jcmain -m "AUTOMATION: Merge main into develop"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.STREAM_PUBLIC_BOT_TOKEN }}
+          branch: jcdevelop
