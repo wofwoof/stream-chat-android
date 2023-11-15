@@ -32,6 +32,8 @@ import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.MessagesState
 import io.getstream.chat.android.models.TypingEvent
 import io.getstream.chat.android.models.User
+import io.getstream.chat.android.state.plugin.state.channel.internal.ChannelMutableState.Companion.stringify
+import io.getstream.log.taggedLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -44,6 +46,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import java.util.Date
+import kotlin.math.abs
 
 @Suppress("TooManyFunctions")
 /** State container with mutable data of a channel.*/
@@ -56,6 +59,8 @@ internal class ChannelMutableState(
 ) : ChannelState {
 
     override val cid: String = "%s:%s".format(channelType, channelId)
+
+    private val logger by taggedLogger("Chat:ChannelState-${cid.shortHashCode()}")
 
     private var _messages: MutableStateFlow<Map<String, Message>>? = MutableStateFlow(emptyMap())
     private var _countedMessage: MutableSet<String>? = mutableSetOf()
@@ -113,6 +118,8 @@ internal class ChannelMutableState(
 
     override val messagesState: StateFlow<MessagesState> =
         loading.combine(sortedVisibleMessages) { loading: Boolean, messages: List<Message> ->
+            logger.v { "[messagesState] loading: $loading, messages.size: ${messages.size}" +
+                ", messages.first: ${messages.firstOrNull()?.stringify()}" }
             when {
                 loading -> MessagesState.Loading
                 messages.isEmpty() -> MessagesState.OfflineNoResults
@@ -207,6 +214,10 @@ internal class ChannelMutableState(
     override val insideSearch: StateFlow<Boolean> = _insideSearch!!
 
     override val lastSentMessageDate: StateFlow<Date?> = _lastSentMessageDate!!
+
+    init {
+        logger.i { "<init> cid: $cid, this: $this" }
+    }
 
     override fun toChannel(): Channel {
         // recreate a channel object from the various observables.
@@ -419,6 +430,7 @@ internal class ChannelMutableState(
     }
 
     fun deleteMessage(message: Message, updateCount: Boolean = true) {
+        logger.v { "[deleteMessage] updateCount: $updateCount, message: ${message.stringify()}" }
         _messages?.apply { value = value - message.id }
 
         if (updateCount) {
@@ -439,6 +451,7 @@ internal class ChannelMutableState(
      * @param message message to be upserted.
      */
     fun upsertMessage(message: Message, updateCount: Boolean = true) {
+        logger.v { "[upsertMessage] updateCount: $updateCount, message: ${message.stringify()}" }
         _messages?.apply { value = value + (message.id to message) }
 
         if (updateCount) {
@@ -505,11 +518,18 @@ internal class ChannelMutableState(
         } ?: false
 
     fun removeMessagesBefore(date: Date) {
+        logger.v { "[removeMessagesBefore] date: $date" }
         _messages?.apply { value = value.filter { it.value.wasCreatedAfter(date) } }
     }
 
     fun upsertMessages(updatedMessages: Collection<Message>, updateCount: Boolean = true) {
+        logger.d { "[updatedMessages] updateCount: $updateCount, messages.size: ${updatedMessages.size}" +
+            ", messages.first: ${updatedMessages.firstOrNull()?.stringify()}" }
         _messages?.apply { value += updatedMessages.associateBy(Message::id) }
+        val size = _messages?.value?.size
+        val first = _messages?.value?.values?.firstOrNull()?.stringify()
+        val last = _messages?.value?.values?.lastOrNull()?.stringify()
+        logger.v { "[updatedMessages] size: $size, first: $first, last: $last" }
 
         if (updateCount) {
             _countedMessage?.addAll(updatedMessages.map { it.id })
@@ -517,7 +537,15 @@ internal class ChannelMutableState(
     }
 
     fun setMessages(messages: List<Message>) {
+        logger.d {
+            "[setMessages] messages.size: ${messages.size}, messages.first: ${messages.firstOrNull()?.stringify()}"
+        }
         _messages?.value = messages.associateBy(Message::id)
+
+        val size = _messages?.value?.size
+        val first = _messages?.value?.values?.firstOrNull()?.stringify()
+        val last = _messages?.value?.values?.lastOrNull()?.stringify()
+        logger.v { "[setMessages] size: $size, first: $first, last: $last" }
     }
 
     private fun cacheLatestMessages() {
@@ -571,5 +599,12 @@ internal class ChannelMutableState(
 
     private companion object {
         private const val OFFSET_EVENT_TIME = 5L
+
+        private fun Message.stringify(): String = "Message(id=$id, text=$text)"
+
+        private fun String.shortHashCode(): Short {
+            val positiveHash = abs(hashCode() % Short.MAX_VALUE + 1)
+            return positiveHash.toShort()
+        }
     }
 }

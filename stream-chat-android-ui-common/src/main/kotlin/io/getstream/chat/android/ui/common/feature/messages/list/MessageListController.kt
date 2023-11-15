@@ -116,8 +116,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.util.Date
+import kotlin.math.abs
 import io.getstream.chat.android.ui.common.state.messages.Flag as FlagMessage
 
 /**
@@ -165,7 +167,7 @@ public class MessageListController(
     /**
      * The logger used to print to errors, warnings, information and other things to log.
      */
-    private val logger: TaggedLogger by taggedLogger("MessageListController")
+    private val logger: TaggedLogger by taggedLogger("MessageListController-${cid.shortHashCode()}")
 
     /**
      * Creates a [CoroutineScope] that allows us to cancel the ongoing work when the parent ViewModel is disposed.
@@ -401,6 +403,15 @@ public class MessageListController(
     @Suppress("MagicNumber")
     private fun observeMessagesListState() {
         channelState.filterNotNull().flatMapLatest { channelState ->
+            logger.v { "[observeMessagesListState] #1; channelState: $channelState" }
+
+            combine(channelState.messagesState) { it[0] }
+                .onEach {
+                    val size = (it as? MessagesState.Result)?.messages?.size ?: -1
+                    logger.i { "[observeMessagesListState] #6; messages.size: $size, state: ${it.javaClass.name}" }
+                }
+                .launchIn(scope)
+
             combine(
                 channelState.messagesState,
                 channelState.reads,
@@ -424,38 +435,66 @@ public class MessageListController(
                 val focusedMessage = data[8] as Message?
                 val endOfNewerMessages = data[9] as Boolean
 
+                val size = (state as? MessagesState.Result)?.messages?.size ?: -1
+                logger.d { "[observeMessagesListState] #2; messages.size: $size, state: ${state.javaClass.name}" }
+
                 when (state) {
                     is MessagesState.Loading,
                     is MessagesState.NoQueryActive,
                     -> _messageListState.value.copy(isLoading = true)
                     is MessagesState.OfflineNoResults -> _messageListState.value.copy(isLoading = false)
-                    is MessagesState.Result -> _messageListState.value.copy(
-                        isLoading = false,
-                        messageItems = groupMessages(
-                            messages = filterMessagesToShow(
-                                messages = state.messages,
-                                showSystemMessages = showSystemMessages,
-                                deletedMessageVisibility = deletedMessageVisibility,
-                            ),
-                            isInThread = false,
-                            reads = reads,
-                            dateSeparatorHandler = dateSeparatorHandler,
+                    is MessagesState.Result -> {
+                        val filteredMessages = filterMessagesToShow(
+                            messages = state.messages,
+                            showSystemMessages = showSystemMessages,
                             deletedMessageVisibility = deletedMessageVisibility,
-                            messageFooterVisibility = messageFooterVisibility,
-                            messagePositionHandler = messagePositionHandler,
-                            typingUsers = typingUsers,
-                            focusedMessage = focusedMessage,
-                        ),
-                        endOfNewMessagesReached = endOfNewerMessages,
-                    )
+                        )
+                        val filteredSize = filteredMessages.size
+                        logger.d { "[observeMessagesListState] #3; messages.size: $filteredSize" }
+                        val newState = try {
+                            _messageListState.value.copy(
+                                isLoading = false,
+                                messageItems = groupMessages(
+                                    messages = filteredMessages,
+                                    isInThread = false,
+                                    reads = reads,
+                                    dateSeparatorHandler = dateSeparatorHandler,
+                                    deletedMessageVisibility = deletedMessageVisibility,
+                                    messageFooterVisibility = messageFooterVisibility,
+                                    messagePositionHandler = messagePositionHandler,
+                                    typingUsers = typingUsers,
+                                    focusedMessage = focusedMessage,
+                                ),
+                                endOfNewMessagesReached = endOfNewerMessages,
+                            )
+                        } catch (e: Throwable) {
+                            logger.e(e) { "[observeMessagesListState] #4; failed: $e" }
+                            throw e
+                        }
+                        newState.also {
+                            val newSize = it.messageItems.size
+                            logger.i { "[observeMessagesListState] #4; messages.size: $newSize, state: ${it.javaClass.name}" }
+                        }
+
+                    }
                 }
-            }.distinctUntilChanged()
+            }/*.distinctUntilChanged()*/
         }.catch {
             it.cause?.printStackTrace()
             showEmptyState()
         }.onEach { newState ->
+            val size = newState.messageItems.size
+            logger.w { "[observeMessagesListState] #5; messages.size: $size, state: ${newState.javaClass.name}" }
             updateMessageList(newState)
         }.launchIn(scope)
+
+        // channelState.filterNotNull()
+        //     .flatMapLatest { it.messagesState }
+        //     .onEach {
+        //         val size = (it as? MessagesState.Result)?.messages?.size ?: -1
+        //         logger.w { "[observeMessagesListState] #3; messages.size: $size, state: ${it.javaClass.name}" }
+        //     }
+        //     .launchIn(scope)
 
         channelState.filterNotNull().flatMapLatest { it.endOfOlderMessages }.onEach {
             updateEndOfOldMessagesReached(it)
@@ -487,10 +526,13 @@ public class MessageListController(
                 if (parentMessageId != null) {
                     enterThreadSequential(parentMessageId)
                 }
-
                 listState
                     .onCompletion {
-                        logger.v { "[processMessageId] mode: ${_mode.value}" }
+                        logger.v { "[processMessageId] mode: ${_mode.value}, isActive: $isActive, error: $it" }
+                        if (!isActive) {
+                            logger.w { "[processMessageId] rejected (scope is no longer active)" }
+                            return@onCompletion
+                        }
                         when {
                             _mode.value is MessageMode.Normal -> {
                                 focusChannelMessage(messageId)
@@ -1077,7 +1119,7 @@ public class MessageListController(
     private fun focusChannelMessage(messageId: String) {
         logger.v { "[focusChannelMessage] messageId: $messageId" }
         val message = getMessageFromListStateById(messageId)
-
+        // found 2 messages out of 30, so we don't load - BUG, we have more messages
         if (message != null) {
             focusedMessage.value = message
         } else {
@@ -1867,6 +1909,11 @@ public class MessageListController(
          * Time after which the focus from message will be removed
          */
         internal const val REMOVE_MESSAGE_FOCUS_DELAY: Long = 2000
+
+        private fun String.shortHashCode(): Short {
+            val positiveHash = abs(hashCode() % Short.MAX_VALUE + 1)
+            return positiveHash.toShort()
+        }
     }
 }
 
