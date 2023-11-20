@@ -16,6 +16,8 @@
 
 package io.getstream.chat.android.compose.state.channels.list
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import io.getstream.chat.android.models.Channel
 
 /**
@@ -24,7 +26,10 @@ import io.getstream.chat.android.models.Channel
  * @param channel The channel to show.
  * @param isMuted If the channel is muted for the current user.
  */
+@Immutable
+@Stable
 public data class ChannelItemState(
-    val channel: Channel,
+    val
+    channel: Channel,
     val isMuted: Boolean = false,
 )

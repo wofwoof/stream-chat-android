@@ -17,6 +17,7 @@
 package io.getstream.chat.android.models
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import io.getstream.chat.android.models.querysort.ComparableFieldProvider
 import java.util.Date
 
@@ -57,6 +58,7 @@ import java.util.Date
  * hopping to a quoted message a number pages away without retaining the newest messages in the list.
  */
 @Immutable
+@Stable
 public data class Channel(
     val id: String = "",
     val type: String = "",
