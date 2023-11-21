@@ -5,23 +5,16 @@
 ### ⬆️ Improved
 
 ### ✅ Added
-- Added `Message.moderationDetails` due to support of the new moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
-  - Added `MessageModerationDetails` class.
 
 ### ⚠️ Changed
 
 ### ❌ Removed
-- Removed `Message.syncDescription` due to removal of the old moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
-  - Removed `MessageSyncContent` class and its subclasses.
-  - Removed `MessageSyncType` class.
 
 ## stream-chat-android-client
 ### 🐞 Fixed
-- Fixed duplicate send message requests. [5039](https://github.com/GetStream/stream-chat-android/pull/5039)
+- Fixed audio recording not being uploaded [#5066](https://github.com/GetStream/stream-chat-android/pull/5066)
 
 ### ⬆️ Improved
-- Pass `message` with `result` in `SendMessageDebugger`. [#5037](https://github.com/GetStream/stream-chat-android/pull/5037)
-- Use shortService instead of dataSync for our workmanager job. [#5041](https://github.com/GetStream/stream-chat-android/pull/5041)
 
 ### ✅ Added
 
@@ -57,7 +50,6 @@
 ### ⬆️ Improved
 
 ### ✅ Added
-- Added `callback` param to `MessageComposerController.sendMessage` method. [#5038](https://github.com/GetStream/stream-chat-android/pull/5038)
 
 ### ⚠️ Changed
 
@@ -65,15 +57,31 @@
 
 ## stream-chat-android-ui-components
 ### 🐞 Fixed
-- Fixed channel title not being centered vertically when mo last message exists. [#5043](https://github.com/GetStream/stream-chat-android/pull/5043)
+- Fix channel title position when typing. [#5073](https://github.com/GetStream/stream-chat-android/pull/5073)
 
 ### ⬆️ Improved
 
 ### ✅ Added
-- Added `callback` param to `MessageComposerViewModel.sendMessage` method. [#5038](https://github.com/GetStream/stream-chat-android/pull/5038)
+- Added `MessageComposerViewModel.bindViewDefaults` which preserves the default view bindings. [#5060](https://github.com/GetStream/stream-chat-android/pull/5060)
+- Added UI customizations for message composer. [#5064](https://github.com/GetStream/stream-chat-android/pull/5064)
+  * `MessageComposerViewStyle.commandSuggestionsTitleIconDrawableTintColor`
+  * `MessageComposerViewStyle.mentionSuggestionItemIconDrawableTintColor`
+  * `MessageComposerViewStyle.attachmentsButtonIconTintList`
+  * `MessageComposerViewStyle.commandsButtonIconTintList`
+  * `MessageComposerViewStyle.sendMessageButtonIconTintList`
+  * `MessageComposerViewStyle.audioRecordingButtonIconTintList`
 
 ### ⚠️ Changed
-- Supported new moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
+- Made `MessageReplyView` publicly available. [#5058](https://github.com/GetStream/stream-chat-android/pull/5058)
+- Deprecated `MessageListItemStyle.textStyleMessageDeleted`. Use `MessageListItemStyle.textStyleMessageDeletedMine` and `MessageListItemStyle.textStyleMessageDeletedTheirs` instead.  [#5050](https://github.com/GetStream/stream-chat-android/pull/5050)
+- Deprecated `MessageListItemStyle.messageDeletedBackground`. Use `MessageListItemStyle.messageDeletedBackgroundMine` and `MessageListItemStyle.messageDeletedBackgroundTheirs` instead.  [#5050](https://github.com/GetStream/stream-chat-android/pull/5050)
+- Deprecated `MessageListItemStyle.buttonIconDrawableTintColor`. Use one of the params listed below instead. [#5064](https://github.com/GetStream/stream-chat-android/pull/5064)
+  * `MessageComposerViewStyle.commandSuggestionsTitleIconDrawableTintColor`
+  * `MessageComposerViewStyle.mentionSuggestionItemIconDrawableTintColor`
+  * `MessageComposerViewStyle.attachmentsButtonIconTintList`
+  * `MessageComposerViewStyle.commandsButtonIconTintList`
+  * `MessageComposerViewStyle.sendMessageButtonIconTintList`
+  * `MessageComposerViewStyle.audioRecordingButtonIconTintList`
 
 ### ❌ Removed
 
@@ -83,10 +91,8 @@
 ### ⬆️ Improved
 
 ### ✅ Added
-- Added `callback` param to `MessageComposerViewModel.sendMessage` method. [#5038](https://github.com/GetStream/stream-chat-android/pull/5038)
 
 ### ⚠️ Changed
-- Supported new moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
 
 ### ❌ Removed
 
@@ -101,7 +107,7 @@
 
 ### ❌ Removed
 
-# November 08th, 2023 - 6.0.7
+# November 09th, 2023 - 6.0.8
 ## Common changes for all artifacts
 ### ✅ Added
 - Added `Message.moderationDetails` due to support of the new moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
@@ -130,6 +136,11 @@
 
 ### ✅ Added
 - Added `callback` param to `MessageComposerViewModel.sendMessage` method. [#5038](https://github.com/GetStream/stream-chat-android/pull/5038)
+- Added UI customizations for deleted message. [#5050](https://github.com/GetStream/stream-chat-android/pull/5050)
+  * `MessageListItemStyle.textStyleMessageDeletedMine`
+  * `MessageListItemStyle.messageDeletedBackgroundMine`
+  * `MessageListItemStyle.textStyleMessageDeletedTheirs`
+  * `MessageListItemStyle.messageDeletedBackgroundTheirs`
 
 ### ⚠️ Changed
 - Supported new moderation API. [#5035](https://github.com/GetStream/stream-chat-android/pull/5035)
