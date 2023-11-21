@@ -96,6 +96,7 @@ dependencies {
     implementation Dependencies.composeCoil
     implementation Dependencies.coilGif
     implementation Dependencies.coilVideo
+    implementation 'com.google.accompanist:accompanist-drawablepainter:0.32.0'
 
     // Tests
     testImplementation project(':stream-chat-android-test')

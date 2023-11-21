@@ -16,9 +16,15 @@
 
 package io.getstream.chat.android.compose.ui.components.avatar
 
+import android.util.Log
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
@@ -65,18 +71,21 @@ public fun ChannelAvatar(
     contentDescription: String? = null,
     onClick: (() -> Unit)? = null,
 ) {
-    val members = channel.members
-    val memberCount = members.size
+    val members by remember { mutableStateOf(channel.members) }
+    val memberCount by remember { mutableIntStateOf(members.size) }
+    val url by remember { mutableStateOf(channel.image) }
+    val initials by remember { mutableStateOf(channel.initials) }
 
     when {
         /**
          * If the channel has an image we load that as a priority.
          */
         channel.image.isNotEmpty() -> {
+            Log.d("test-perf", "Leading: Avatar")
             Avatar(
                 modifier = modifier,
-                imageUrl = channel.image,
-                initials = channel.initials,
+                imageUrl = url,
+                initials = initials,
                 textStyle = textStyle,
                 shape = shape,
                 contentDescription = contentDescription,
@@ -89,7 +98,7 @@ public fun ChannelAvatar(
          */
         memberCount == 1 -> {
             val user = members.first().user
-
+            Log.d("test-perf", "Leading: User avatar (1)")
             UserAvatar(
                 modifier = modifier,
                 user = user,
@@ -107,7 +116,7 @@ public fun ChannelAvatar(
          */
         memberCount == 2 && members.any { it.user.id == currentUser?.id } -> {
             val user = members.first { it.user.id != currentUser?.id }.user
-
+            Log.d("test-perf", "Leading: User avatar (2)")
             UserAvatar(
                 modifier = modifier,
                 user = user,
@@ -123,8 +132,9 @@ public fun ChannelAvatar(
          * If the channel has more than two members - we load a matrix of their images or initials.
          */
         else -> {
-            val users = members.filter { it.user.id != currentUser?.id }.map { it.user }
-
+            val users by remember { derivedStateOf { members.filter { it.user.id != currentUser?.id }.map { it.user } } }
+            Log.d("test-perf", "Leading: Users size: ${users.size}")
+            Log.d("test-perf", "Leading: Group avatar")
             GroupAvatar(
                 users = users,
                 modifier = modifier,

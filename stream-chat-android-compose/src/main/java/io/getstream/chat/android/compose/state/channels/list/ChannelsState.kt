@@ -16,6 +16,8 @@
 
 package io.getstream.chat.android.compose.state.channels.list
 
+import androidx.compose.runtime.Stable
+
 /**
  * Represents the Channels screen state, used to render the required UI.
  *
@@ -25,6 +27,7 @@ package io.getstream.chat.android.compose.state.channels.list
  * @param channelItems The channel items to represent in the list.
  * @param searchQuery The current search query.
  */
+@Stable
 public data class ChannelsState(
     val isLoading: Boolean = true,
     val isLoadingMore: Boolean = false,

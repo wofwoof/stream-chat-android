@@ -18,6 +18,7 @@
 
 package io.getstream.chat.android.compose.ui.channels.list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,7 +28,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -77,7 +80,7 @@ public fun Channels(
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = contentPadding,
         ) {
-            item {
+            item("dummy") {
                 DummyFirstChannelItem()
             }
 
@@ -85,13 +88,18 @@ public fun Channels(
                 items = channelItems,
                 key = { it.channel.cid },
             ) { item ->
-                itemContent(item)
+                val start = System.currentTimeMillis()
+                val rememberedItem = remember {
+                    item
+                }
+                itemContent(rememberedItem)
+                Log.e("test-perf", "Time outside: ${System.currentTimeMillis() - start}")
 
                 divider()
             }
 
             if (isLoadingMore) {
-                item {
+                item(key = "load-more") {
                     loadingMoreContent()
                 }
             }

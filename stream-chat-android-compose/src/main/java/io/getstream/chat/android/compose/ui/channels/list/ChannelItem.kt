@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.ui.channels.list
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,7 +33,12 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -56,6 +62,7 @@ import io.getstream.chat.android.compose.ui.components.channels.UnreadCountIndic
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.getLastMessage
 import io.getstream.chat.android.models.Channel
+import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.User
 
 /**
@@ -81,27 +88,33 @@ public fun ChannelItem(
     onChannelClick: (Channel) -> Unit,
     onChannelLongClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
-    leadingContent: @Composable RowScope.(ChannelItemState) -> Unit = {
-        DefaultChannelItemLeadingContent(
-            channelItem = it,
-            currentUser = currentUser,
-        )
+    leadingContent: @Composable RowScope.(ChannelItemState) -> Unit = remember(channelItem) {
+        {
+          DefaultChannelItemLeadingContent(
+                channelItem = it,
+                currentUser = currentUser,
+            )
+        }
     },
-    centerContent: @Composable RowScope.(ChannelItemState) -> Unit = {
+    centerContent: @Composable RowScope.(ChannelItemState) -> Unit = remember(channelItem) {{
         DefaultChannelItemCenterContent(
             channel = it.channel,
             isMuted = it.isMuted,
             currentUser = currentUser,
         )
-    },
-    trailingContent: @Composable RowScope.(ChannelItemState) -> Unit = {
+    } },
+    trailingContent: @Composable RowScope.(ChannelItemState) -> Unit = remember(channelItem) {{
         DefaultChannelItemTrailingContent(
             channel = it.channel,
             currentUser = currentUser,
         )
-    },
+    } },
 ) {
-    val channel = channelItem.channel
+    val start = System.currentTimeMillis()
+    var start1: Long = 0
+    var start2: Long = 0
+    var start3: Long = 0
+    val channel = remember { channelItem.channel }
     val description = stringResource(id = R.string.stream_compose_cd_channel_item)
 
     Column(
@@ -121,13 +134,22 @@ public fun ChannelItem(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            start1 = System.currentTimeMillis()
             leadingContent(channelItem)
 
+            start2 = System.currentTimeMillis()
             centerContent(channelItem)
 
+            start3 = System.currentTimeMillis()
             trailingContent(channelItem)
         }
     }
+
+    val end = System.currentTimeMillis()
+    Log.e("test-perf", "Time leading: ${end - start1}")
+    Log.e("test-perf", "Time center: ${end - start2}")
+    Log.e("test-perf", "Time trailing: ${end - start3}")
+    Log.e("test-perf", "Time: ${end - start}")
 }
 
 /**
@@ -141,6 +163,7 @@ internal fun DefaultChannelItemLeadingContent(
     channelItem: ChannelItemState,
     currentUser: User?,
 ) {
+    val channel by remember { mutableStateOf(channelItem.channel) }
     ChannelAvatar(
         modifier = Modifier
             .padding(
@@ -150,7 +173,7 @@ internal fun DefaultChannelItemLeadingContent(
                 bottom = ChatTheme.dimens.channelItemVerticalPadding,
             )
             .size(ChatTheme.dimens.channelAvatarSize),
-        channel = channelItem.channel,
+        channel = channel,
         currentUser = currentUser,
     )
 }
@@ -205,19 +228,27 @@ internal fun RowScope.DefaultChannelItemCenterContent(
             channelName(Modifier)
         }
 
-        val lastMessageText = channel.getLastMessage(currentUser)?.let { lastMessage ->
-            ChatTheme.messagePreviewFormatter.formatMessagePreview(lastMessage, currentUser)
+        var loadedMessage by remember {
+            mutableStateOf<Message?>(null)
+        }
+        LaunchedEffect(key1 = channelName, block = {
+            loadedMessage = channel.getLastMessage(currentUser)
+        })
+        val lastMessageText = loadedMessage?.let { lastMessage ->
+            val start = System.currentTimeMillis()
+            val formatted = ChatTheme.messagePreviewFormatter.formatMessagePreview(lastMessage, currentUser)
+            Log.e("test-perf", "Format last message time: ${System.currentTimeMillis() - start}")
+            formatted
         } ?: AnnotatedString("")
 
-        if (lastMessageText.isNotEmpty()) {
-            Text(
-                text = lastMessageText,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = ChatTheme.typography.body,
-                color = ChatTheme.colors.textLowEmphasis,
-            )
-        }
+        Text(
+            text = lastMessageText,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = ChatTheme.typography.body,
+            color = ChatTheme.colors.textLowEmphasis,
+        )
+
     }
 }
 

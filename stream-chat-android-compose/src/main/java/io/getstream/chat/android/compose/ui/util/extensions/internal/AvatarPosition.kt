@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.ui.util.extensions.internal
 
+import android.util.Log
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.StreamDimens

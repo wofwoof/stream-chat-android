@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.ui.components.avatar
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,7 @@ public fun GroupAvatar(
     textStyle: TextStyle = ChatTheme.typography.captionBold,
     onClick: (() -> Unit)? = null,
 ) {
+    val start1 = System.currentTimeMillis()
     val avatarUsers = users.take(DefaultNumberOfAvatars)
     val imageCount = avatarUsers.size
 
@@ -69,12 +71,15 @@ public fun GroupAvatar(
         modifier
     }
 
+    Log.d("test-perf", "Group avatar: Init ${System.currentTimeMillis() - start1}")
+    Log.d("test-perf", "Group avatar: Image count $imageCount")
     Row(clickableModifier.clip(shape)) {
         Column(
             modifier = Modifier
                 .weight(1f, fill = false)
                 .fillMaxHeight(),
         ) {
+            val start = System.currentTimeMillis()
             for (imageIndex in 0 until imageCount step 2) {
                 if (imageIndex < imageCount) {
                     UserAvatar(
@@ -93,6 +98,8 @@ public fun GroupAvatar(
                     )
                 }
             }
+
+            Log.d("test-perf", "Group avatar: Row 1 ${System.currentTimeMillis() - start}")
         }
 
         Column(
@@ -100,6 +107,8 @@ public fun GroupAvatar(
                 .weight(1f, fill = false)
                 .fillMaxHeight(),
         ) {
+
+            val start = System.currentTimeMillis()
             for (imageIndex in 1 until imageCount step 2) {
                 if (imageIndex < imageCount) {
                     UserAvatar(
@@ -118,6 +127,8 @@ public fun GroupAvatar(
                     )
                 }
             }
+
+            Log.d("test-perf", "Group avatar: Row 2 ${System.currentTimeMillis() - start}")
         }
     }
 }

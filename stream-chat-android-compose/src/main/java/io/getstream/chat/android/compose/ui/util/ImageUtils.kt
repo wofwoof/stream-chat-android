@@ -32,6 +32,8 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import io.getstream.chat.android.compose.R
+import io.getstream.chat.android.compose.ui.components.avatar.internal.StreamAsyncImagePainter
+import io.getstream.chat.android.compose.ui.components.avatar.internal.rememberStream2AsyncImagePainter
 import io.getstream.chat.android.uiutils.util.adjustColorBrightness
 import kotlin.math.abs
 
@@ -116,6 +118,33 @@ public fun rememberStreamImagePainter(
     )
 }
 
+@Composable
+public fun rememberStreamImagePainter2(
+    data: Any?,
+    placeholderPainter: Painter? = null,
+    errorPainter: Painter? = null,
+    fallbackPainter: Painter? = errorPainter,
+    onLoading: ((StreamAsyncImagePainter.State.Loading) -> Unit)? = null,
+    onSuccess: ((StreamAsyncImagePainter.State.Success) -> Unit)? = null,
+    onError: ((StreamAsyncImagePainter.State.Error) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Fit,
+    filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
+): StreamAsyncImagePainter {
+    return rememberStream2AsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(data)
+            .build(),
+        imageLoader = LocalStreamImageLoader.current,
+        placeholder = placeholderPainter,
+        error = errorPainter,
+        fallback = fallbackPainter,
+        contentScale = contentScale,
+        onSuccess = onSuccess,
+        onError = onError,
+        onLoading = onLoading,
+        filterQuality = filterQuality,
+    )
+}
 /**
  * Wrapper around the [coil.compose.rememberAsyncImagePainter] that plugs in our [LocalStreamImageLoader] singleton
  * that can be used to customize all image loading requests, like adding headers, interceptors and similar.

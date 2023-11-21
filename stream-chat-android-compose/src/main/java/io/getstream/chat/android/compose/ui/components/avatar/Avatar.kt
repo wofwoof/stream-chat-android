@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.ui.components.avatar
 
+import android.util.Log
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,8 +30,10 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import io.getstream.chat.android.compose.R
+import io.getstream.chat.android.compose.ui.components.avatar.internal.StreamAsyncImagePainter
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.rememberStreamImagePainter
+import io.getstream.chat.android.compose.ui.util.rememberStreamImagePainter2
 import io.getstream.chat.android.ui.common.images.resizing.applyStreamCdnImageResizingIfEnabled
 
 /**
@@ -60,6 +63,7 @@ public fun Avatar(
     onClick: (() -> Unit)? = null,
 ) {
     if (LocalInspectionMode.current && imageUrl.isNotBlank()) {
+        val start = System.currentTimeMillis()
         // Show hardcoded avatar from resources when rendering previews
         ImageAvatar(
             modifier = modifier,
@@ -68,9 +72,13 @@ public fun Avatar(
             contentDescription = contentDescription,
             onClick = onClick,
         )
+
+        val end = System.currentTimeMillis()
+        Log.d("test-perf", "Avatar image, ${end - start}")
         return
     }
     if (imageUrl.isBlank()) {
+        val start = System.currentTimeMillis()
         InitialsAvatar(
             modifier = modifier,
             initials = initials,
@@ -79,15 +87,18 @@ public fun Avatar(
             onClick = onClick,
             avatarOffset = initialsAvatarOffset,
         )
+
+        val end = System.currentTimeMillis()
+        Log.d("test-perf", "Avatar initials, ${end - start}")
         return
     }
 
-    val painter = rememberStreamImagePainter(
+    val painter = rememberStreamImagePainter2(
         data = imageUrl.applyStreamCdnImageResizingIfEnabled(ChatTheme.streamCdnImageResizing),
         placeholderPainter = painterResource(id = R.drawable.stream_compose_preview_avatar),
     )
-
-    if (painter.state is AsyncImagePainter.State.Error) {
+    if (painter.state is StreamAsyncImagePainter.State.Error) {
+        val  start = System.currentTimeMillis()
         InitialsAvatar(
             modifier = modifier,
             initials = initials,
@@ -96,7 +107,11 @@ public fun Avatar(
             onClick = onClick,
             avatarOffset = initialsAvatarOffset,
         )
-    } else if (painter.state is AsyncImagePainter.State.Loading && placeholderPainter != null) {
+
+        val end = System.currentTimeMillis()
+        Log.d("test-perf", "Avatar error, ${end - start}")
+    } else if (painter.state is StreamAsyncImagePainter.State.Loading && placeholderPainter != null) {
+        val start = System.currentTimeMillis()
         ImageAvatar(
             modifier = modifier,
             shape = shape,
@@ -104,7 +119,11 @@ public fun Avatar(
             contentDescription = contentDescription,
             onClick = onClick,
         )
+
+        val end = System.currentTimeMillis()
+        Log.d("test-perf", "Avatar placeholder, ${end - start}")
     } else {
+        val start = System.currentTimeMillis()
         ImageAvatar(
             modifier = modifier,
             shape = shape,
@@ -112,6 +131,8 @@ public fun Avatar(
             contentDescription = contentDescription,
             onClick = onClick,
         )
+        val end = System.currentTimeMillis()
+        Log.d("test-perf", "Avatar painter, ${end - start}")
     }
 }
 

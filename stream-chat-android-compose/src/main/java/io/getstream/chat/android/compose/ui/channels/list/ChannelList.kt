@@ -16,6 +16,7 @@
 
 package io.getstream.chat.android.compose.ui.channels.list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,6 +28,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -91,17 +93,17 @@ public fun ChannelList(
     onLastItemReached: () -> Unit = remember(viewModel) { { viewModel.loadMore() } },
     onChannelClick: (Channel) -> Unit = {},
     onChannelLongClick: (Channel) -> Unit = remember(viewModel) { { viewModel.selectChannel(it) } },
-    loadingContent: @Composable () -> Unit = { LoadingIndicator(modifier) },
+    loadingContent: @Composable () -> Unit = remember(modifier) { { LoadingIndicator(modifier) } },
     emptyContent: @Composable () -> Unit = { DefaultChannelListEmptyContent(modifier) },
-    emptySearchContent: @Composable (String) -> Unit = { searchQuery ->
+    emptySearchContent: @Composable (String) -> Unit = remember(viewModel) {{ searchQuery ->
         DefaultChannelSearchEmptyContent(
             searchQuery = searchQuery,
             modifier = modifier,
         )
-    },
+    } },
     helperContent: @Composable BoxScope.() -> Unit = {},
-    loadingMoreContent: @Composable () -> Unit = { DefaultChannelsLoadingMoreIndicator() },
-    itemContent: @Composable (ChannelItemState) -> Unit = { channelItem ->
+    loadingMoreContent: @Composable () -> Unit = remember(viewModel) { { DefaultChannelsLoadingMoreIndicator() } },
+    itemContent: @Composable (ChannelItemState) -> Unit = remember(viewModel) { { channelItem ->
         val user by viewModel.user.collectAsState()
 
         DefaultChannelItem(
@@ -110,15 +112,21 @@ public fun ChannelList(
             onChannelClick = onChannelClick,
             onChannelLongClick = onChannelLongClick,
         )
-    },
-    divider: @Composable () -> Unit = { DefaultChannelItemDivider() },
+    } },
+    divider: @Composable () -> Unit = remember { { DefaultChannelItemDivider() } },
 ) {
     val user by viewModel.user.collectAsState()
+
+    val channelState by remember {
+        derivedStateOf {
+            viewModel.channelsState
+        }
+    }
 
     ChannelList(
         modifier = modifier,
         contentPadding = contentPadding,
-        channelsState = viewModel.channelsState,
+        channelsState = channelState,
         currentUser = user,
         lazyListState = lazyListState,
         onLastItemReached = onLastItemReached,
@@ -174,28 +182,29 @@ public fun ChannelList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     lazyListState: LazyListState = rememberLazyListState(),
-    onLastItemReached: () -> Unit = {},
+    onLastItemReached: () -> Unit = remember(channelsState) { { } },
     onChannelClick: (Channel) -> Unit = {},
     onChannelLongClick: (Channel) -> Unit = {},
-    loadingContent: @Composable () -> Unit = { DefaultChannelListLoadingIndicator(modifier) },
-    emptyContent: @Composable () -> Unit = { DefaultChannelListEmptyContent(modifier) },
-    emptySearchContent: @Composable (String) -> Unit = { searchQuery ->
+    loadingContent: @Composable () -> Unit = remember(key1 = modifier) { { DefaultChannelListLoadingIndicator(modifier) } },
+    emptyContent: @Composable () -> Unit = remember(key1 = modifier) { { DefaultChannelListEmptyContent(modifier) } },
+    emptySearchContent: @Composable (String) -> Unit = remember(channelsState) { { searchQuery ->
         DefaultChannelSearchEmptyContent(
             searchQuery = searchQuery,
             modifier = modifier,
         )
-    },
+    } },
     helperContent: @Composable BoxScope.() -> Unit = {},
-    loadingMoreContent: @Composable () -> Unit = { DefaultChannelsLoadingMoreIndicator() },
-    itemContent: @Composable (ChannelItemState) -> Unit = { channelItem ->
+    loadingMoreContent: @Composable () -> Unit = remember { { DefaultChannelsLoadingMoreIndicator() } },
+    itemContent: @Composable (ChannelItemState) -> Unit = remember(channelsState) { { channelItem ->
+        val user = remember { currentUser }
         DefaultChannelItem(
             channelItem = channelItem,
-            currentUser = currentUser,
+            currentUser = user,
             onChannelClick = onChannelClick,
             onChannelLongClick = onChannelLongClick,
         )
-    },
-    divider: @Composable () -> Unit = { DefaultChannelItemDivider() },
+    } },
+    divider: @Composable () -> Unit = remember { { DefaultChannelItemDivider() } },
 ) {
     val (isLoading, _, _, channels, searchQuery) = channelsState
 
@@ -232,11 +241,21 @@ internal fun DefaultChannelItem(
     onChannelClick: (Channel) -> Unit,
     onChannelLongClick: (Channel) -> Unit,
 ) {
+    val rememberedChannelItem = remember(key1 = channelItem, key2 = currentUser) { channelItem }
+    val user = remember {
+        currentUser
+    }
+    val click = remember(channelItem) {
+        onChannelClick
+    }
+    val longClick = remember(channelItem) {
+        onChannelLongClick
+    }
     ChannelItem(
-        channelItem = channelItem,
-        currentUser = currentUser,
-        onChannelClick = onChannelClick,
-        onChannelLongClick = onChannelLongClick,
+        channelItem = rememberedChannelItem,
+        currentUser = user,
+        onChannelClick = click,
+        onChannelLongClick = longClick,
     )
 }
 
