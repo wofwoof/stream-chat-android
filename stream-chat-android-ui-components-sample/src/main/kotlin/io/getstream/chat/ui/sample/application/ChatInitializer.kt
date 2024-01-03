@@ -17,6 +17,7 @@
 package io.getstream.chat.ui.sample.application
 
 import android.content.Context
+import androidx.annotation.WorkerThread
 import com.google.firebase.FirebaseApp
 import io.getstream.android.push.firebase.FirebasePushDeviceGenerator
 import io.getstream.android.push.huawei.HuaweiPushDeviceGenerator
@@ -25,10 +26,14 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.notifications.handler.NotificationConfig
 import io.getstream.chat.android.client.notifications.handler.NotificationHandlerFactory
+import io.getstream.chat.android.client.uploader.FileUploader
+import io.getstream.chat.android.client.utils.ProgressCallback
 import io.getstream.chat.android.markdown.MarkdownTextTransformer
 import io.getstream.chat.android.models.Channel
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.UploadAttachmentsNetworkType
+import io.getstream.chat.android.models.UploadedFile
+import io.getstream.chat.android.models.UploadedImage
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 import io.getstream.chat.android.state.plugin.config.StatePluginConfig
 import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
@@ -36,6 +41,9 @@ import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.ui.sample.BuildConfig
 import io.getstream.chat.ui.sample.debugger.CustomChatClientDebugger
 import io.getstream.chat.ui.sample.feature.HostActivity
+import java.io.File
+
+typealias ChatResult<T> = io.getstream.result.Result<T>
 
 class ChatInitializer(
     private val context: Context,
@@ -96,7 +104,8 @@ class ChatInitializer(
             .notifications(notificationConfig, notificationHandler)
             .logLevel(logLevel)
             .withPlugins(offlinePlugin, statePluginFactory)
-            .uploadAttachmentsNetworkType(UploadAttachmentsNetworkType.NOT_ROAMING)
+            .uploadAttachmentsNetworkType(UploadAttachmentsNetworkType.CONNECTED)
+            .fileUploader(ChatFileUploader())
             .apply {
                 if (BuildConfig.DEBUG) {
                     this.debugRequests(true)
@@ -123,5 +132,93 @@ class ChatInitializer(
         //         audioRecordingSlideToCancelText = "Wash to cancel",
         //     )
         // }
+    }
+}
+
+private class ChatFileUploader : FileUploader {
+    override fun sendFile(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+        callback: ProgressCallback,
+    ): io.getstream.result.Result<UploadedFile> {
+        TODO("Not yet implemented")
+    }
+
+    override fun sendFile(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+    ): io.getstream.result.Result<UploadedFile> {
+        TODO("Not yet implemented")
+    }
+
+    override fun sendImage(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+        callback: ProgressCallback,
+    ): ChatResult<UploadedImage> = uploadImage(
+        channelId = channelId,
+        file = file,
+        callback = callback,
+    )
+
+    override fun sendImage(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        file: File,
+    ): io.getstream.result.Result<UploadedImage> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteFile(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        url: String,
+    ): io.getstream.result.Result<Unit> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteImage(
+        channelType: String,
+        channelId: String,
+        userId: String,
+        url: String,
+    ): io.getstream.result.Result<Unit> {
+        TODO("Not yet implemented")
+    }
+
+    private fun uploadImage(
+        channelId: String,
+        file: File,
+        callback: ProgressCallback? = null,
+    ): ChatResult<UploadedImage> = uploadAttachment(channelId = channelId, file = file, callback = callback).let { uploadResult ->
+        when (uploadResult.isSuccess) {
+            true -> io.getstream.result.Result.Success(
+                UploadedImage(file = uploadResult.getOrThrow()) // file is a signed gs: schemed URL
+            )
+            else -> io.getstream.result.Result.Failure(
+                io.getstream.result.Error.ThrowableError(
+                    uploadResult.exceptionOrNull()?.message!!,
+                    uploadResult.exceptionOrNull()?.cause!!,
+                )
+            )
+        }
+    }
+
+    @WorkerThread
+    private fun uploadAttachment(
+        channelId: String,
+        file: File,
+        callback: ProgressCallback?,
+    ): Result<String> {
+        Thread.sleep(5000)
+        return Result.success("gs://$channelId/${file.name}")
     }
 }

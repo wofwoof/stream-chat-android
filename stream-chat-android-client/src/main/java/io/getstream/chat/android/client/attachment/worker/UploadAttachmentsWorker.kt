@@ -89,6 +89,12 @@ public class UploadAttachmentsWorker(
             Result.Success(Unit)
         } else {
             val attachments = uploadAttachments(message)
+            attachments.forEach {
+                logger.d {
+                    "[sendAttachments] #uploader; attachment ${it.uploadId} for message ${message.id} uploaded" +
+                    "with url: ${it.url} and upload state: ${it.uploadState}"
+                }
+            }
             updateMessages(message.copy(attachments = attachments))
 
             if (attachments.all { it.uploadState == Attachment.UploadState.Success }) {
