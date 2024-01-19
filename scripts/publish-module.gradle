@@ -129,3 +129,16 @@ void sign(Project project) {
         sign publishing.publications
     }
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "local"
+
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+        }
+    }
+}
