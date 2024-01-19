@@ -1,8 +1,5 @@
 import io.getstream.chat.android.Configuration
 
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
-
 // Create variables with empty default values
 ext["snapshot"] = ''
 

@@ -19,7 +19,8 @@ apply plugin: VersionBumpPlugin
 apply plugin: MinorBumpPlugin
 apply plugin: VersionPrintPlugin
 apply plugin: ChangelogAddModelSectionPlugin
-
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 buildscript {
     repositories {
