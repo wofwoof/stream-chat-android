@@ -39,9 +39,9 @@ android {
     targetProjectPath = ":stream-chat-android-compose-sample"
 
     testOptions.managedDevices.devices {
-        maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6api31").apply {
-            device = "Pixel 6"
-            apiLevel = 31
+        maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel3aapi34").apply {
+            device = "Pixel 3a"
+            apiLevel = 34
             systemImageSource = "aosp"
         }
     }
@@ -53,7 +53,7 @@ baselineProfile {
 
     // This specifies the managed devices to use that you run the tests on. The default
     // is none.
-    managedDevices += "pixel6api31"
+    managedDevices += "pixel3aapi34"
 
     // This enables using connected devices to generate profiles. The default is true.
     // When using connected devices, they must be rooted or API 33 and higher.
