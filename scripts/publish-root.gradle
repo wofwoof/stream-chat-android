@@ -1,5 +1,8 @@
 import io.getstream.chat.android.Configuration
 
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
 // Create variables with empty default values
 ext["snapshot"] = ''
 
@@ -7,6 +10,25 @@ if (snapshot) {
     ext["rootVersionName"] = Configuration.snapshotVersionName
 } else {
     ext["rootVersionName"] = Configuration.versionName
+}
+
+def hasSigningKey = project.hasProperty("signingKeyId") || project.hasProperty("signingKey")
+if(hasSigningKey) {
+    sign(project)
+}
+void sign(Project project) {
+    project.signing {
+        required { project.gradle.taskGraph.hasTask("publish") }
+        def signingKeyId = project.findProperty("signingKeyId")
+        def signingKey = project.findProperty("signingKey")
+        def signingPassword = project.findProperty("signingPassword")
+        if (signingKeyId) {
+            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        } else if (signingKey) {
+            useInMemoryPgpKeys(signingKey, signingPassword)
+        }
+        sign publishing.publications
+    }
 }
 
 // Set up Sonatype repository
@@ -27,6 +49,19 @@ nexusPublishing {
     // If you get the error "java.net.SocketTimeoutException: timeout", these lines will help.
     connectTimeout = Duration.ofMinutes(3)
     clientTimeout = Duration.ofMinutes(3)
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "local"
+
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+        }
+    }
 }
 
 tasks.withType(dokkaHtmlMultiModule.getClass()) {
