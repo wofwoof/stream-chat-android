@@ -12,11 +12,21 @@ if (snapshot) {
 // Set up Sonatype repository
 nexusPublishing {
     repositories {
+        //sonatype()
         sonatype {
-            stagingProfileId = sonatypeStagingProfileId
-            version = rootVersionName
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            packageGroup = "io.gitcoins"
+            stagingProfileId = System.getenv('SONATYPE_STAGING_PROFILE_ID')
+            username =  System.getenv('ORG_GRADLE_PROJECT_sonatypeUsername')
+            password =  System.getenv('ORG_GRADLE_PROJECT_sonatypePassword')
         }
     }
+
+    // these are not strictly required. The default timeouts are set to 1 minute. But Sonatype can be really slow.
+    // If you get the error "java.net.SocketTimeoutException: timeout", these lines will help.
+    connectTimeout = Duration.ofMinutes(3)
+    clientTimeout = Duration.ofMinutes(3)
 }
 
 publishing {
