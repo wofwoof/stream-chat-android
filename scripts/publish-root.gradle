@@ -32,18 +32,6 @@ if (snapshot) {
     ext["rootVersionName"] = Configuration.versionName
 }
 
-// Set up Sonatype repository
-nexusPublishing {
-    repositories {
-        sonatype {
-            stagingProfileId = sonatypeStagingProfileId
-            username = ossrhUsername
-            password = ossrhPassword
-            version = rootVersionName
-        }
-    }
-}
-
 // The following makes the key available for publishing to Nexus
 // export ORG_GRADLE_PROJECT_sonatypeUsername=${token name}
 // export ORG_GRADLE_PROJECT_sonatypePassword=${token password}
