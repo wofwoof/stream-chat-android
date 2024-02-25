@@ -51,9 +51,11 @@ internal class SocketFactory(
     @Throws(UnsupportedEncodingException::class)
     private fun buildUrl(connectionConf: ConnectionConf): String {
         var json = buildUserDetailJson(connectionConf)
+        logger.i { "connectionConf endpoint: ${connectionConf.endpoint}" }
         return try {
             json = URLEncoder.encode(json, StandardCharsets.UTF_8.name())
             val baseWsUrl = "${connectionConf.endpoint}connect?json=$json&api_key=${connectionConf.apiKey}"
+            logger.i { "baseWsUrl : ${baseWsUrl}" }
             when (connectionConf) {
                 is ConnectionConf.AnonymousConnectionConf -> "$baseWsUrl&stream-auth-type=anonymous"
                 is ConnectionConf.UserConnectionConf -> {
