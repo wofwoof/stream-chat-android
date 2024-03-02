@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
+import io.getstream.log.taggedLogger
 
 private const val EVENTS_BUFFER_SIZE = 100
 private const val CLOSE_SOCKET_CODE = 1000
@@ -40,13 +41,20 @@ internal class StreamWebSocket(
     socketCreator: (WebSocketListener) -> WebSocket,
 ) {
     private val eventFlow = MutableSharedFlow<StreamWebSocketEvent>(extraBufferCapacity = EVENTS_BUFFER_SIZE)
+    private val logger by taggedLogger("Chat:StreamWebSocket")
 
     private val webSocket = socketCreator(object : WebSocketListener() {
+        override fun onOpen(webSocket: WebSocket, response: Response) {
+            logger.i { "onOpen: WebSocket $webSocket, Response $response" }
+            super.onOpen(webSocket, response)
+        }
         override fun onMessage(webSocket: WebSocket, text: String) {
+            logger.i { "onMessage: $text" }
             eventFlow.tryEmit(parseMessage(text))
         }
 
         override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+            logger.i { "onFailure: $response" }
             eventFlow.tryEmit(
                 StreamWebSocketEvent.Error(
                     Error.NetworkError.fromChatErrorCode(
@@ -58,6 +66,7 @@ internal class StreamWebSocket(
         }
 
         override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+            logger.i { "onClosed: code $code, reason $reason" }
             if (code != CLOSE_SOCKET_CODE) {
                 // Treat as failure and reconnect, socket shouldn't be closed by server
                 eventFlow.tryEmit(
