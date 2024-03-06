@@ -136,6 +136,9 @@ internal class HttpLoggingInterceptor : Interceptor {
             }
         }
 
+        logger.i { "<-- END HTTP RESPONSE Headers: ${response.headers}" }
+        logger.i { "<-- END HTTP RESPONSE Code: ${response.code}" }
+        logger.i { "<-- END HTTP RESPONSE Body: ${response.body}" }
         return response
     }
 
